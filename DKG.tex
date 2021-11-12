@@ -1,0 +1,180 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[pdfborder={0 0 0.5 [3 2]}, plainpages=false]{hyperref}%
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}%
+\usepackage[citation-order]{amsrefs}%
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{amssymb}                
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{cool}
+\usepackage{graphicx,epsfig}
+
+\usepackage[capitalize,nameinlink]{cleveref}
+% Per SIAM Style Manual, "section" should be lowercase
+\crefname{section}{section}{sections}
+\crefname{subsection}{subsection}{subsections}
+\Crefname{section}{Section}{Sections}
+\Crefname{subsection}{Subsection}{Subsections}
+
+% Per SIAM Style Manual, "Figure" should be spelled out in references
+\Crefname{figure}{Figure}{Figures}
+
+% Per SIAM Style Manual, don't say equation in front on an equation.
+\crefformat{equation}{\textup{#2(#1)#3}}
+\crefrangeformat{equation}{\textup{#3(#1)#4--#5(#2)#6}}
+\crefmultiformat{equation}{\textup{#2(#1)#3}}{ and \textup{#2(#1)#3}}
+{, \textup{#2(#1)#3}}{, and \textup{#2(#1)#3}}
+\crefrangemultiformat{equation}{\textup{#3(#1)#4--#5(#2)#6}}%
+{ and \textup{#3(#1)#4--#5(#2)#6}}{, \textup{#3(#1)#4--#5(#2)#6}}{, and \textup{#3(#1)#4--#5(#2)#6}}
+
+% But spell it out at the beginning of a sentence.
+\Crefformat{equation}{#2Equation~\textup{(#1)}#3}
+\Crefrangeformat{equation}{Equations~\textup{#3(#1)#4--#5(#2)#6}}
+\Crefmultiformat{equation}{Equations~\textup{#2(#1)#3}}{ and \textup{#2(#1)#3}}
+{, \textup{#2(#1)#3}}{, and \textup{#2(#1)#3}}
+\Crefrangemultiformat{equation}{Equations~\textup{#3(#1)#4--#5(#2)#6}}%
+{ and \textup{#3(#1)#4--#5(#2)#6}}{, \textup{#3(#1)#4--#5(#2)#6}}{, and \textup{#3(#1)#4--#5(#2)#6}}
+
+% Make number non-italic in any environment.
+\crefdefaultlabelformat{#2\textup{#1}#3}
+
+\def\noi{\noindent}
+\def\T{{\mathbb T}}
+\def\R{{\mathbb R}}
+\def\N{{\mathbb N}}
+\def\C{{\mathbb C}}
+\def\Z{{\mathbb Z}}
+\def\P{{\mathbb P}}
+\def\E{{\mathbb E}}
+\def\Q{\mathbb{Q}}
+\def\ind{{\mathbb I}}
+\def\id{{\mathcal I}}
+\def\per{\textrm{per}}
+
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\ran}{range}
+
+\graphicspath{ {images/} }
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{remark}{Remark}
+
+\newcommand{\revised}[1]{ \textcolor{red}{#1} }
+\newcommand{\revisedd}[2]{ \textcolor{blue}{#1} }
+
+\begin{document}
+
+\title{Multi-breathers in the discrete sine-Gordon equation}
+
+\author{Ross Parker}
+\address{Department of Mathematics, Southern Methodist University, 
+Dallas, TX 75275, USA}
+\email{rhparker@smu.edu}
+
+\author{P.\,G. Kevrekidis} 
+\address{Department of Mathematics and Statistics, University of Massachusetts, Amherst MA 01003, USA}
+\email{kevrekid@math.umass.edu}
+
+\author{Alejandro Aceves}
+\address{Department of Mathematics, Southern Methodist University, 
+Dallas, TX 75275, USA}
+\email{aaceves@smu.edu}
+
+\begin{abstract}
+	We consider the existence and spectral stability of multi-site breathers in the discrete Klein-Gordon equation.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Mathematical background}\label{sec:bg}
+
+We will consider the discrete Klein-Gordon equation with on-site nonlinearity $f(u)$
+\begin{equation}\label{eq:KG}
+\ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
+\end{equation}
+where $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = P'(u)$ for a smooth potential function $P(u)$. 
+
+\section{Exponential dichotomy}
+
+CAPITAL LETTER CONVENTION?
+
+\begin{equation}\label{eq:A0}
+A_0 = \begin{pmatrix}
+\dfrac{1}{d}\partial_t^2 + \dfrac{V''(0)}{d} + 2 & -\id \\ \id & 0
+\end{pmatrix}
+\end{equation}
+
+\begin{lemma}\label{lemma:A0eigs}
+The eigenvalues and corresponding eigenfunctions of $A_0$ are given by [INSERT HERE].
+\end{lemma}
+\begin{proof}
+Consider the eigenvalue problem $A_0 u(t) = \lambda u(t)$ on [SPACE], where $u(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
+\begin{align}\label{eq:A0EVPsystem}
+\left( \frac{1}{d}\partial_t^2 + \frac{V''(0)}{d} + 2 \right) v(t) = \left( \lambda + \frac{1}{\lambda} \right) v(t), \quad
+w = \frac{1}{\lambda} v(t).
+\end{align}
+Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions, the set of solutions to \cref{eq:A0EVPsystem} is given by
+\begin{align}
+v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{V''(0)}{d} + 2 && k \in \Z,
+\end{align}
+where the functions $v_k(t)$ have been normalized. The eigenvalues of $A_0$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where
+\begin{equation}\label{eq:A0lambdak}
+\lambda_k = \frac{1}{2}\left( r_k + \sqrt{r_k^2 - 4} \right),
+\end{equation}
+and the corresponding eigenfunctions are
+\begin{align}
+u_k(t) &= \begin{pmatrix}v_k(t) \\ \lambda_k^{-1}  v_k(t) \end{pmatrix}, \quad
+u_k^{-1}(t) = \begin{pmatrix}v_k(t) \\ \lambda_k w_k(t) \end{pmatrix} & k \in \Z.
+\end{align}
+\end{proof}
+
+It follows from \cref{lemma:A0eigs} that the spectrum of $A_0$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$. [MAYBE SOMETHING HERE ABOUT HOW THIS IS ALWAYS POSSIBLE FOR SUFFICIENTLY SMALL $d$]
+
+\begin{lemma}\label{eq:A0basis}
+[HYPERBOLICITY ASSUMPTION]
+The set of eigenfunctions $\{ u_k(t), u_k(t) : k \in \Z \}$ of $A_0$ are a Riesz basis for [HILBERT SPACE], i.e. every function $y(t)$ can be written uniquely as
+\begin{equation}\label{eq:yinA0basis}
+y(t) = \sum_{k \in \Z} a_k u_k(t) + \sum_{k \in \Z} b_k u^{-1}_k(t),
+\end{equation}
+where $a_k, b_k \in \C$ and the sum converges.
+\begin{proof}
+Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, we note that the set $\{ z^1_k(t), z^2_k(t) : k \in \Z \}$, where $z^1_k(t) = (v_k(t), 0)^T$ and $z^2_k(t) = (0, v_k(t))^T$ is an orthonormal basis for [HILBERT SPACE]. Therefore, there exist unique scalars $c_k, d_k \in \C$ such that
+\begin{equation*}
+y(t) = \sum_{k \in \Z} c_k z^1_k(t) + \sum_{k \in \Z} d_k z^2_k(t),
+\end{equation*}
+and the sum converges. Then \cref{eq:yinA0basis} follows by taking
+\[
+a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
+b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
+\]
+where $\lambda_k$ is defined in \cref{eq:A0lambdak}, and $\lambda_k^2 \neq 1$ by [HYPERBOLICITY ASSUMPTION].
+\end{proof}
+\end{lemma}
+
+\begin{theorem}The equation $u(n+1) = A_0 u(n)$ has exponential dichotomies on $\Z^+$ and $Z^-$.
+\end{theorem}
+
+
+
+
+\paragraph{Acknowledgments}
+
+This material is based upon work supported by the U.S. National Science Foundation under the RTG grant DMS-1840260 (R.P. and A.A.)
+and DMS-1809074 (P.G.K.).
+
+\bibliographystyle{amsplain}
+\bibliography{DKG.bib}
+
+\end{document}
