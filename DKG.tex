@@ -108,36 +108,105 @@ where $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second differ
 
 \section{Exponential dichotomy}
 
-CAPITAL LETTER CONVENTION?
+Let $Y$ be a Hilbert space with inner product $\langle \cdot, \cdot \rangle$. For each $n \in \Z$, let $A(n)$ be an invertible linear operator defined on $Y$ (or on a dense subset $X$ of $Y$). $A(n)$ is not necessarily bounded. Consider the linear difference equation
+\begin{align}\label{eq:diffeq1}
+U(n+1) &= A(n) U(n) && U(n) \in X, n \in \Z
+\end{align}
+together with its adjoint
+\begin{align}\label{eq:adjdiffeq1}
+Z(n+1) &= [A(n)^{-1}]^* Z(n) && Z(n) \in X, n \in \Z.
+\end{align}
+The discrete evolution operator $\Phi(m,n)$ for \cref{eq:diffeq1} is defined by
+\begin{equation}\label{eq:evoldiffeq1}
+\Phi(m,n) = \begin{cases}
+A(m-1) \cdots A(n+1)A(n) & m > n \\
+\id & m = n \\
+A^{-1}(m) \cdots A^{-1}(n-2) A^{-1}(n-1) & m < n.
+\end{cases}
+\end{equation}
+The evolution operator has the following properties \cites{Palmer1988,Parker2020}:
+\begin{enumerate}[(i)]
+	\item $\Phi(m,k)\Phi(k,n) = \Phi(m,n)$.
+	\item $\Phi(m,n) = \Phi(n,m)^{-1}$.
+	\item If $\Psi(m,n)$ is the discrete evolution operator for the adjoint equation \cref{eq:adjdiffeq1}, then $\Psi(m,n) = \Phi(n,m)^*$.
+	\item If $U(n)$ is a solution to \cref{eq:diffeq1} and $Z(n)$ is a solution to \cref{eq:adjdiffeq1}, then $\langle U(n), Z(n) \rangle$ is constant in $n$.
+\end{enumerate}
 
+We can now define an exponential dichotomy for the linear difference equation \cref{eq:diffeq1}.
+
+\begin{definition}\label{def:ED}
+The linear difference equation \cref{eq:diffeq1} on a Hilbert space $X$ with evolution operator \cref{eq:evoldiffeq1} has exponential dichotomies on $\Z^\pm$ if there are constants $K>0$ and $r>1$ and a family of projections $P_\pm^s$ and $P_\pm^u$ defined on $\Z^\pm$ such that the following are true:
+\begin{enumerate}[(i)]
+	\item $P_\pm^u(n) = \id - P_\pm^s(n)$.
+	\item The projections commute with the evolution operator in the following way:
+	\begin{equation}\label{projcommute}
+	P_\pm^{s/u}(m) \Phi(m, n) =  \Phi(m, n) P_\pm^{s/u}(n).
+	\end{equation}
+	\item We have the estimates 
+	\begin{equation}\label{eq:dichotomyest}
+	\begin{aligned}
+	|\Phi(m, n)P_+^s(n)| &\leq K r^{m - n} && \qquad 0 \leq n \leq m \\
+	|\Phi(m, n)P_+^u(n)| &\leq K r^{n - m} && \qquad 0 \leq m \leq n \\
+	|\Phi(m, n)P_-^s(n)| &\leq K r^{m - n} && \qquad n \leq m \leq 0 \\
+	|\Phi(m, n)P_-^u(n)| &\leq K r^{n - m} && \qquad m \leq n \leq 0 \:.
+	\end{aligned}
+	\end{equation}
+\end{enumerate}
+\end{definition}
+
+For $d>0$, let $u_n(t)$ be the primary breather solution to \cref{eq:KG} with period $T$. Let $X = H^2_\per([0,T],\R^2)$ and $Y = L^2_\per([0,T],\R^2)$. Define the linear operator $A(n): X \subset Y \rightarrow Y$ by
+\begin{equation}\label{eq:An}
+A(n) = \begin{pmatrix}
+\dfrac{1}{d}\partial_t^2 + \dfrac{V''(u(n))}{d} + 2 & -\id \\ \id & 0
+\end{pmatrix}.
+\end{equation}
+For all $n \in \Z$, $A(n)$ is invertible, with inverse 
+\begin{equation}\label{eq:Aninv}
+A(n)^{-1} = \begin{pmatrix}
+0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{V''(u(n))}{d} + 2
+\end{pmatrix}.
+\end{equation}
+
+In addition, we consider the invertible linear operator $A_0: X \subset Y \rightarrow Y$, which is independent of $n$.
 \begin{equation}\label{eq:A0}
 A_0 = \begin{pmatrix}
 \dfrac{1}{d}\partial_t^2 + \dfrac{V''(0)}{d} + 2 & -\id \\ \id & 0
+\end{pmatrix}, \qquad
+A_0^{-1} = \begin{pmatrix}
+0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{V''(0)}{d} + 2
 \end{pmatrix}
 \end{equation}
+First, we show in a series of lemmas that, under suitable conditions, the linear difference equation
+\begin{align}\label{eq:diffeq0}
+U(n+1) &= A_0 U(n) && U(n) \in X, n \in \Z
+\end{align}
+has exponential dichotomies on $\Z^\pm$. First, we compute the eigenvalues and eigenfunctions of $A_0$.
 
 \begin{lemma}\label{lemma:A0eigs}
-The eigenvalues and corresponding eigenfunctions of $A_0$ are given by [INSERT HERE].
+The set of eigenvalues of $A_0$ is given by $\begin{aligned}\bigcup_{k \in \Z} \{\lambda_k, \lambda_k^{-1} \}\end{aligned}$, where 
+\begin{equation}\label{eq:A0lambdak}
+\lambda_k = \frac{1}{2}\left( r_k + \sqrt{r_k^2 - 4} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{V''(0)}{d} + 2.
+\end{equation}
+The eigenfunctions corresponding to $\left\{ \lambda_k, \lambda_k^{-1} \right\}$ are $\left\{ U_k(t), U_k^{-1}(t) \right\}$, which are defined by 
+\begin{equation}\label{eq:A0eigenfns}
+\begin{aligned}
+U_k(t) &= \begin{pmatrix}v_k(t) \\ \lambda_k^{-1}  v_k(t) \end{pmatrix}, \quad
+U_k^{-1}(t) = \begin{pmatrix}v_k(t) \\ \lambda_k v_k(t) \end{pmatrix}, \quad
+v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
+\end{aligned}
+\end{equation}
 \end{lemma}
 \begin{proof}
-Consider the eigenvalue problem $A_0 u(t) = \lambda u(t)$ on [SPACE], where $u(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
+Consider the eigenvalue problem $A_0 U(t) = \lambda U(t)$ on $L^2_\per([0,T],\R^2)$, where $U(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
 \begin{align}\label{eq:A0EVPsystem}
 \left( \frac{1}{d}\partial_t^2 + \frac{V''(0)}{d} + 2 \right) v(t) = \left( \lambda + \frac{1}{\lambda} \right) v(t), \quad
 w = \frac{1}{\lambda} v(t).
 \end{align}
-Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions, the set of solutions to \cref{eq:A0EVPsystem} is given by
+Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions $v(T) = v(0)$, the set of solutions to \cref{eq:A0EVPsystem} is given by
 \begin{align}
 v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{V''(0)}{d} + 2 && k \in \Z,
 \end{align}
-where the functions $v_k(t)$ have been normalized. The eigenvalues of $A_0$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where
-\begin{equation}\label{eq:A0lambdak}
-\lambda_k = \frac{1}{2}\left( r_k + \sqrt{r_k^2 - 4} \right),
-\end{equation}
-and the corresponding eigenfunctions are
-\begin{align}
-u_k(t) &= \begin{pmatrix}v_k(t) \\ \lambda_k^{-1}  v_k(t) \end{pmatrix}, \quad
-u_k^{-1}(t) = \begin{pmatrix}v_k(t) \\ \lambda_k w_k(t) \end{pmatrix} & k \in \Z.
-\end{align}
+where the functions $v_k(t)$ have been normalized. The corresponding eigenvalues of $A_0$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where $\lambda_k$ is defined by \cref{eq:A0lambdak}, and the corresponding eigenfunctions are given by \cref{eq:A0eigenfns}.
 \end{proof}
 
 It follows from \cref{lemma:A0eigs} that the spectrum of $A_0$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$. [MAYBE SOMETHING HERE ABOUT HOW THIS IS ALWAYS POSSIBLE FOR SUFFICIENTLY SMALL $d$]
