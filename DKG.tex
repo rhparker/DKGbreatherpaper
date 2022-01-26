@@ -122,29 +122,47 @@ Common nonlinearities $f(u) = \sin u$, which is the discrete sine-Gordon equatio
 	\mathcal{H}(u) = \sum_{n=-\infty}^\infty 
 	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + P(u_n) \right).
 \end{equation}
-We are interested in breather solutions to \cref{eq:DKG}, which are periodic in time and spatially localized on the lattice. Specifically, a breather solution $\uvec$ with fundamental period $T>0$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$.
+We are interested in breather solutions to \cref{eq:DKG}, which are periodic in time and spatially localized on the lattice. Specifically, a breather solution $\uvec$ with fundamental period $T>0$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$. The components of $\uvec$ are denoted $u_n$, for $n \in \Z$.
 
 To study spectral stability of a breather solution $\uvec$, we linearize equation \cref{eq:DKG} by substituting the perturbation ansatz $u_n + \epsilon v_n$ into \cref{eq:DKG} and keeping terms of order $\epsilon$ to obtain
 \begin{equation}\label{eq:DKGlinear}
 \ddot{v}_n = d (\Delta_2 v)_n - f'(u_n)v_n.
 \end{equation}
-Since $\uvec$ has period $T$, it follows from Floquet theory that spectral stability depends on the Floquet multipliers, which are the eigenvalues of the monodromy operator $\mathcal{M}$. If $\mu$ is a Floquet multiplier, then the corresponding Floquet exponent $\lambda$ (which is not unique) is related to $\mu$ by $\mu = e^{\lambda T}$. It follows (see, for example, \cite[Lemma 2.1.29]{Kapitula2013}) that for every Flouquet multiplier $\mu$, there is a corresponding solution $v_n(t) = e^{\lambda t} w_n(t)$ to the linearized equation \cref{eq:DKGlinear}, where $w_n$ is periodic with period $T$. Substituting this ansatz into \cref{eq:DKGlinear}, we obtain the eigenvalue problem
+Since $\uvec$ has period $T$, it follows from Floquet theory that spectral stability depends on the Floquet multipliers, which are the eigenvalues of the monodromy operator $\mathcal{M}$. If $\mu$ is a Floquet multiplier, then the corresponding Floquet exponent $\lambda$ (which is not unique) is related to $\mu$ by $\mu = e^{\lambda T}$. It follows (see, for example, \cite[Lemma 2.1.29]{Kapitula2013}) that for every Floquet multiplier $\mu$, there is a corresponding solution $v_n(t) = e^{\lambda t} w_n(t)$ to the linearized equation \cref{eq:DKGlinear}, where $w_n$ is periodic with period $T$. Substituting this ansatz into \cref{eq:DKGlinear}, we obtain the eigenvalue problem
 \begin{equation}\label{eq:DKGeig}
 d (\Delta_2 w)_n - f'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
 \end{equation}
 where $\wvec \in \ell^2(\Z, H^2_\per[0,T]) \subset \ell^2(\Z, L^2_\per[0,T])$. We can write this as $\calL(\uvec)\wvec = 2 \lambda \dot{\wvec} + \lambda^2 \wvec$, where the linear operator $\calL(\uvec)$ is defined by the LHS of \cref{eq:DKGeig}. When $\lambda = 0$ (which corresponds to the Floquet multiplier $\mu = 1$), $\dot{\uvec}$ is a solution to \cref{eq:DKGeig}, i.e. $\calL(\uvec)\dot{\uvec}=0$, which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\zvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves $\calL(\uvec)\zvec = 2 \ddot{\uvec}$ (see \cite[Section 3]{Pelinovsky2012}).
 
-Using a spatial dynamics approach as in \cites{Parker2020,Parker2021}, let $u_n(t)$ be a breather solution to \cref{eq:DKG}, and define $U(n) \in X$ by $U(n) = (u(n), \tilde{u}(n)) = (u_n(t), u_{n-1}(t) )$. Then equation \cref{eq:DKG} is equivalent to the lattice dynamical system
+\subsection{Spatial dynamics}
+
+Using a spatial dynamics approach as in \cites{Parker2020,Parker2021}, let $\uvec$ be a breather solution to \cref{eq:DKG}, and define $U(n) \in H^2_\per([0,T], \R^2)$ by $U(n) = (u(n), \tilde{u}(n)) = ( u_n, u_{n-1} )$. Then equation \cref{eq:DKG} is equivalent to the lattice dynamical system
 \begin{equation}\label{eq:dynEq}
 U(n+1) = F(U(n)),
 \end{equation}
 where
 \begin{equation}\label{eq:F}
 F\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} = 
-\begin{pmatrix}2u  + \frac{1}{d}f(u) + \frac{1}{d} \partial_t^2 u - \tilde{u} \\
+\begin{pmatrix}2u  + \dfrac{1}{d}f(u) + \dfrac{1}{d} \partial_t^2 u - \tilde{u} \\
 u
 \end{pmatrix}.
 \end{equation}
+The eigenvalue problem \cref{eq:DKGeig} can similarly be written as 
+\begin{equation}\label{eq:dynEVP}
+W(n+1) = \left[ DF(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
+\end{equation}
+where
+\begin{equation}\label{eq:DF0}
+DF(U(n)) = \begin{pmatrix}
+2 + \dfrac{f'(u(n))}{d} + \dfrac{1}{d}\partial_t^2  & -1 \\ 1 & 0
+\end{pmatrix}, \qquad
+B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
+\end{equation}
+The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cite{Parker2021,Parker2020,Sandstede1998}) is to consider the breather solution $\uvec$ to be a homoclinic orbit of the equilibrium at 0. The complication is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties.
+
+As an alternative, we will state and prove results for multi-breathers on finite dimensional subspaces of $C_\per^\infty([0,T],\R^2)$. First, we prove spectral results about $DF(0)$.
+
+\subsection{Spectrum of \textorpdfstring{$DF(0)$}{DF(0)}}
 
 The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. Linearizing about this fixed point, we obtain the invertible linear operator $DF(0): X \subset Y \rightarrow Y$, which is independent of $n$.
 \begin{equation}\label{eq:DF0}
