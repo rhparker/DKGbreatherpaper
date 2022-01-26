@@ -55,6 +55,13 @@
 \def\ind{{\mathbb I}}
 \def\id{{\mathcal I}}
 \def\per{\textrm{per}}
+\def\calL{\mathcal{L}}
+\def\calI{\mathcal{I}}
+
+\newcommand{\uvec}{\mathbf{u}}
+\newcommand{\vvec}{\mathbf{v}}
+\newcommand{\wvec}{\mathbf{w}}
+\newcommand{\zvec}{\mathbf{z}}
 
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\ran}{range}
@@ -101,10 +108,187 @@ Dallas, TX 75275, USA}
 \section{Mathematical background}\label{sec:bg}
 
 We will consider the discrete Klein-Gordon equation with on-site nonlinearity $f(u)$
-\begin{equation}\label{eq:KG}
+\begin{equation}\label{eq:DKG}
 \ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
 \end{equation}
-where $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = P'(u)$ for a smooth potential function $P(u)$. 
+on the integer lattice $\Z$, where $u_n(t) \in \R$, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = P'(u)$ for a smooth potential function $P(u)$. We make the following assumptions on the nonlinearity $f$. 
+\begin{enumerate}[(i)]
+	\item $f(u)$ is an odd function with $f(0) = 0$ and $f'(0) > 0$.
+	\item There is a pair of nonzero equilibria $\pm u^*$ with $f(\pm u^*) = 0$ and $f'(\pm u^*) < 0$.
+	\item There are no other equilibria in the interval $[-u^*, u^*]$.
+\end{enumerate}
+Common nonlinearities $f(u) = \sin u$, which is the discrete sine-Gordon equation, and $f(u) = u - u^3$, which is the discrete $\phi^4$ model. Equation \cref{eq:DKG} is Hamiltonian, with energy given by \cite{KevrekidisWeinstein2000}
+\begin{equation}\label{eq:H}
+	\mathcal{H}(u) = \sum_{n=-\infty}^\infty 
+	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + P(u_n) \right).
+\end{equation}
+We are interested in breather solutions to \cref{eq:DKG}, which are periodic in time and spatially localized on the lattice. Specifically, a breather solution $\uvec$ with fundamental period $T>0$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$.
+
+To study spectral stability of a breather solution $\uvec$, we linearize equation \cref{eq:DKG} by substituting the perturbation ansatz $u_n + \epsilon v_n$ into \cref{eq:DKG} and keeping terms of order $\epsilon$ to obtain
+\begin{equation}\label{eq:DKGlinear}
+\ddot{v}_n = d (\Delta_2 v)_n - f'(u_n)v_n.
+\end{equation}
+Since $\uvec$ has period $T$, it follows from Floquet theory that spectral stability depends on the Floquet multipliers, which are the eigenvalues of the monodromy operator $\mathcal{M}$. If $\mu$ is a Floquet multiplier, then the corresponding Floquet exponent $\lambda$ (which is not unique) is related to $\mu$ by $\mu = e^{\lambda T}$. It follows (see, for example, \cite[Lemma 2.1.29]{Kapitula2013}) that for every Flouquet multiplier $\mu$, there is a corresponding solution $v_n(t) = e^{\lambda t} w_n(t)$ to the linearized equation \cref{eq:DKGlinear}, where $w_n$ is periodic with period $T$. Substituting this ansatz into \cref{eq:DKGlinear}, we obtain the eigenvalue problem
+\begin{equation}\label{eq:DKGeig}
+d (\Delta_2 w)_n - f'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
+\end{equation}
+where $\wvec \in \ell^2(\Z, H^2_\per[0,T]) \subset \ell^2(\Z, L^2_\per[0,T])$. We can write this as $\calL(\uvec)\wvec = 2 \lambda \dot{\wvec} + \lambda^2 \wvec$, where the linear operator $\calL(\uvec)$ is defined by the LHS of \cref{eq:DKGeig}. When $\lambda = 0$ (which corresponds to the Floquet multiplier $\mu = 1$), $\dot{\uvec}$ is a solution to \cref{eq:DKGeig}, i.e. $\calL(\uvec)\dot{\uvec}=0$, which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\zvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves $\calL(\uvec)\zvec = 2 \ddot{\uvec}$ (see \cite[Section 3]{Pelinovsky2012}).
+
+Using a spatial dynamics approach as in \cites{Parker2020,Parker2021}, let $u_n(t)$ be a breather solution to \cref{eq:DKG}, and define $U(n) \in X$ by $U(n) = (u(n), \tilde{u}(n)) = (u_n(t), u_{n-1}(t) )$. Then equation \cref{eq:DKG} is equivalent to the lattice dynamical system
+\begin{equation}\label{eq:dynEq}
+U(n+1) = F(U(n)),
+\end{equation}
+where
+\begin{equation}\label{eq:F}
+F\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} = 
+\begin{pmatrix}2u  + \frac{1}{d}f(u) + \frac{1}{d} \partial_t^2 u - \tilde{u} \\
+u
+\end{pmatrix}.
+\end{equation}
+
+The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. Linearizing about this fixed point, we obtain the invertible linear operator $DF(0): X \subset Y \rightarrow Y$, which is independent of $n$.
+\begin{equation}\label{eq:DF0}
+DF(0) = \begin{pmatrix}
+\dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2 & -\id \\ \id & 0
+\end{pmatrix}, \qquad
+DF(0)^{-1} = \begin{pmatrix}
+0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2
+\end{pmatrix}
+\end{equation}
+
+\begin{definition}\label{def:hyp}
+Let $X$ be a Banach space. An invertible linear operator $T$ on $H$ is hyperbolic if there exists a decomposition $X = E^s \oplus E^u$ such that 
+\begin{enumerate}[(i)]
+\item $P^s$ and $P^u$ commute with $T$, where $P^s$ and $P^u$ are the projections on $E^s$ and $E^u$, respectively.
+\item There exist a constant constants $r > 1$ such that $\| T P^s \| \leq r^{-1}$ and $\| T^{-1} P^u \| \leq r^{-1}$.
+\end{enumerate}
+\end{definition}
+
+We note that condition (i) implies that $E^s$ and $E^u$ are invariant for $T$, i.e. $T(E^s) \subset E^s$ and $T(E^u) \subset E^u$.
+
+\begin{lemma}\label{lemma:DF0eigs}
+The set of eigenvalues of $DF(0)$ is given by $\bigcup_{k \in \Z} \{\lambda_k, \lambda_k^{-1} \}$, where 
+\begin{equation}\label{eq:DF0lambdak}
+\lambda_k = \frac{1}{2}\left( r_k + \sqrt{r_k^2 - 4} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{f'(0)}{d} + 2.
+\end{equation}
+The eigenfunctions corresponding to $\left\{ \lambda_k, \lambda_k^{-1} \right\}$ are $\left\{ U_k(t), U_k^{-1}(t) \right\}$, which are defined by 
+\begin{equation}\label{eq:DF0eigenfns}
+\begin{aligned}
+U_k(t) &= \begin{pmatrix}v_k(t) \\ \lambda_k^{-1}  v_k(t) \end{pmatrix}, \quad
+U_k^{-1}(t) = \begin{pmatrix}v_k(t) \\ \lambda_k v_k(t) \end{pmatrix}, \quad
+v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
+\end{aligned}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Consider the eigenvalue problem $DF(0) U(t) = \lambda U(t)$ on $L^2_\per([0,T],\R^2)$, where $U(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
+\begin{align}\label{eq:DF0EVPsystem}
+\left( \frac{1}{d}\partial_t^2 + \frac{f'(0)}{d} + 2 \right) v(t) = \left( \lambda + \frac{1}{\lambda} \right) v(t), \quad
+w = \frac{1}{\lambda} v(t).
+\end{align}
+Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions $v(T) = v(0)$, the set of solutions to \cref{eq:DF0EVPsystem} is given by
+\begin{align}
+v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{f(0)}{d} + 2 && k \in \Z,
+\end{align}
+where the functions $v_k(t)$ have been normalized. The corresponding eigenvalues of $DF(0)$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where $\lambda_k$ is defined by \cref{eq:DF0lambdak}, and the corresponding eigenfunctions are given by \cref{eq:DF0eigenfns}.
+\end{proof}
+
+We note that the spectrum of $DF(0)$ depends on both the coupling parameter $d$ and the period $T$. It follows from \cref{lemma:DF0eigs} that the spectrum of $DF(0)$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$.
+
+\begin{lemma}\label{lemma:DF0hyp}
+The spectrum of $DF(0)$ is bounded away from the unit circle if $r_k > 2$ and $r_{k+1} < -2$ for a specific $k$. Some specific values of $d$ and $T$ for which this occurs are [CHECK FOR A PATTERN].
+\begin{equation}\label{eq:dTpairs}
+\begin{aligned}
+&d < \left( \frac{\pi^2}{T^2} - \frac{f'(0)}{4} \right), \qquad 0 < T < \frac{2 \pi}{\sqrt{f'(0)}} \\
+&d < \left( \frac{4 \pi^2}{T^2} - \frac{f'(0)}{4} \right), \qquad \frac{2 \pi}{\sqrt{f'(0)}} < T < \frac{4 \pi}{\sqrt{f'(0)}}.
+\end{aligned} 
+\end{equation}
+\begin{proof}
+We note that since $f'(0) > 0$, $r_0 = 2 + \frac{1}{d}f'(0) > 2$, and $r_k$ is strictly decreasing in $k$, with $r_k \rightarrow -\infty$ as $k \rightarrow \infty$. Thus $|r_k| > 2$ for all $k$ if $r_k > 2$ and $r_{k+1} < -2$ for a specific $k$. The equations in \cref{eq:dTpairs} follow from this condition for $k=0$ and $k=1$, respectively.
+\end{proof}
+\end{lemma}
+
+\begin{hypothesis}\label{hyp:hyp}
+The coupling constant $d$ and period $T$ are chosen so that the spectrum of $DF(0)$ is bounded away from the unit circle.
+\end{hypothesis}
+
+\begin{lemma}\label{lemma:DF0basis}
+Assume \cref{hyp:hyp}. The set of eigenfunctions $\bigcup_{k \in \Z} \{U_k(t) , U_k^{-1}(t) \}$ of $DF(0)$ is a Hilbert basis for $X = L^2_\per([0,T],\R^2)$, i.e. every function $Y(t) \in X$ can be written uniquely as
+\begin{equation}\label{eq:yinDF0basis}
+Y(t) = \sum_{k \in \Z} a_k U_k(t) + \sum_{k \in \Z} b_k U^{-1}_k(t),
+\end{equation}
+where $a_k, b_k \in \C$ and the sum converges for all $Y(t)$.
+\begin{proof}
+Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, the set $\{ v_k(t) : k \in \Z \}$ is an orthonormal basis for $L^2_\per([0,T],\R)$. It follows that the set $\bigcup_{k \in \Z} \{Z^1_k(t) , Z^2_k(t) \}$ is an orthonormal basis for $L^2_\per([0,T],\R^2)$, where $Z^1_k(t) = (v_k(t), 0)^T$ and $Z^2_k(t) = (0, v_k(t))^T$. Therefore, there exist unique scalars $c_k, d_k \in \C$ such that
+\begin{equation*}
+Y(t) = \sum_{k \in \Z} c_k Z^1_k(t) + \sum_{k \in \Z} d_k Z^2_k(t),
+\end{equation*}
+and the sum converges for all $Y(t)$. Then \cref{eq:yinDF0basis} follows by taking
+\[
+a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
+b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
+\]
+where $\lambda_k$ is defined in \cref{eq:DF0lambdak}, and $\lambda_k^2 \neq 1$ by \cref{hyp:hyp}.
+\end{proof}
+\end{lemma}
+
+\begin{proposition}\label{prop:DF0hyp}
+Assume \cref{hyp:hyp}. Then the linear operator $DF(0)$ on $X$ is hyperbolic according to \cref{def:hyp}.
+\begin{proof}
+By \cref{lemma:DF0hyp}, the spectrum of $DF(0)$ is bounded away from the unit circle. Since the eigenvalues come in pairs $\{\lambda, 1/\lambda\}$, we can group the eigenvalues into two sets $\{\lambda_k^s\}$ and $\lambda_k^u\}$, where $|\lambda_k^s| > r$ and $|\lambda_k^u| < 1/r$ for some $r>1$. By \cref{lemma:DF0basis}, the corresponding eigenfunctions are a basis for $X$, which we similarly group into two sets $\{U_k^s\}$ and $\{U_k^u\}$. Let $E^s$ and $E^u$ be the closed linear span of the eigenfunctions $\{U_k^s\}$ and $\{U_k^u\}$, respectively, which are invariant under $DF(0)$ since they are eigenspaces. Then $X = E^s \oplus E^u$, and $DF(0)$ is hyperbolic with constant $r>1$.
+\end{proof}
+\end{proposition}
+
+\begin{theorem}[Stable manifold theorem]\label{th:stabman}
+Let $T$ be an invertible linear operator on a Banach space $X$. Assume $T$ is hyperbolic according to \cref{def:hyp} with constant $r>1$, and consider the dynamical system on $\Z$
+\begin{equation}\label{eq:stabmaneq}
+U(n+1) = T U(n) + G(U(n)),
+\end{equation}
+where $G: X \rightarrow X$ is $C^1$, with $G(0) = 0$ and $DG(0) = 0$.
+Then there exists constants $M$ and a $C^1$ map $g: E^s \cap B_\delta(0) \rightarrow E^u$ such that the local stable manifold is given by
+\[
+W^s_{loc}(0) = \left\{ (x, g(x)) : x \in E^s, \|x\|\leq \delta \right\}.
+\]
+Furthermore, if $U_0 \in W^s_{loc}(0)$ and $U(n)$ is the solution to \cref{eq:stabmaneq} with $U(0) = U_0$, then for $n \geq 0$, $U(n) \in W^s_{loc}(0)$ and
+\[
+\| U(n) \| \leq C r^{-n}.
+\]
+\end{theorem}
+
+\begin{hypothesis}\label{hyp:breatherexists}
+There exists a homoclinic orbit solution 
+\[
+U_1(n) = (u_1(n),\tilde{u}_1(n))^T = (u_1(n),u_1(n-1))^T
+\]
+to \cref{eq:dynEq} which connects the unstable manifold $W^u(0)$ to the stable manifold $W^s(0)$. Futhermore, the tangent spaces $T_{U_1(n)}W^u(0)$ and $T_{U_1(n)}W^s(0)$ to the unstable and stable manifolds have a one-dimensional intersection spanned by $\partial_t U_1(n)$.
+\end{hypothesis}
+
+It follows from the stable manifold theorem that
+\begin{equation}\label{eq:U1decayest}
+\|U_1(n)\| \leq C r^{-|n|}.
+\end{equation}
+
+The variational equation is the linearization of \cref{eq:dynEq} about the homoclinic orbit solution $U_1(n)$, given by
+\begin{equation}\label{eq:vareq}
+V(n+1) = DF(U_1(n)) V(n).
+\end{equation}
+It follows from \cref{hyp:breatherexists} that $\partial_t U_1(n) = (\partial_t u_1(n),\partial_t \tilde{u}_1(n))^T$ is the unique, bounded solution to \cref{eq:vareq}, up to scalar multiples. We can thus decompose the tangent spaces to $W^u(0)$ and $W^s(0)$ at $U_1(0)$ as
+\begin{equation}\label{eq:TWdecomp}
+T_{U_1(n)}W^u(0) = \R \partial_t U_1(0) \oplus Y^-, \qquad  
+T_{U_1(n)}W^s(0) = \R \partial_t U_1(0) \oplus Y^+.
+\end{equation}
+It follows that the adjoint variational equation
+\begin{equation}\label{eq:adjvareq}
+Z(n) = DF(U_1(n))^* Z(n+1)
+\end{equation}
+has a unique bounded solution, which is given by
+\begin{equation}\label{eq:Z1}
+Z_1(n) = (\partial_t u_1(n-1),\partial_t u_1(n))^T,
+\end{equation}
+and that $Z_1(0) \perp \R \partial_t U_1(0) \oplus Y^- \oplus Y^+$ by \cite{Parker2020}*{Lemma 1}. Furthermore, $\R Z_1(0) = (\R \partial_t U_1(0) \oplus Y^- \oplus Y^+)^\perp$, otherwise there would be another bounded solution to \cref{eq:adjvareq} which is linearly independent from $Z_1(n)$. We can then decompose $X$ as
+\begin{equation}\label{eq:Xdecomp}
+X = \R \partial_t U_1(0) \oplus Y^- \oplus Y^+ \oplus \R Z_1(0).
+\end{equation}
 
 \section{Exponential dichotomy}
 
@@ -154,7 +338,7 @@ The linear difference equation \cref{eq:diffeq1} on a Hilbert space $X$ with evo
 \end{enumerate}
 \end{definition}
 
-For $d>0$, let $u_n(t)$ be the primary breather solution to \cref{eq:KG} with period $T$. Let $X = H^2_\per([0,T],\R^2)$ and $Y = L^2_\per([0,T],\R^2)$. Define the linear operator $A(n): X \subset Y \rightarrow Y$ by
+For $d>0$, let $u_n(t)$ be the primary breather solution to \cref{eq:DKG} with period $T$. Let $X = H^2_\per([0,T],\R^2)$ and $Y = L^2_\per([0,T],\R^2)$. Define the linear operator $A(n): X \subset Y \rightarrow Y$ by
 \begin{equation}\label{eq:An}
 A(n) = \begin{pmatrix}
 \dfrac{1}{d}\partial_t^2 + \dfrac{V''(u(n))}{d} + 2 & -\id \\ \id & 0
@@ -182,60 +366,10 @@ U(n+1) &= A_0 U(n) && U(n) \in X, n \in \Z
 \end{align}
 has exponential dichotomies on $\Z^\pm$. First, we compute the eigenvalues and eigenfunctions of $A_0$.
 
-\begin{lemma}\label{lemma:A0eigs}
-The set of eigenvalues of $A_0$ is given by $\begin{aligned}\bigcup_{k \in \Z} \{\lambda_k, \lambda_k^{-1} \}\end{aligned}$, where 
-\begin{equation}\label{eq:A0lambdak}
-\lambda_k = \frac{1}{2}\left( r_k + \sqrt{r_k^2 - 4} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{V''(0)}{d} + 2.
-\end{equation}
-The eigenfunctions corresponding to $\left\{ \lambda_k, \lambda_k^{-1} \right\}$ are $\left\{ U_k(t), U_k^{-1}(t) \right\}$, which are defined by 
-\begin{equation}\label{eq:A0eigenfns}
-\begin{aligned}
-U_k(t) &= \begin{pmatrix}v_k(t) \\ \lambda_k^{-1}  v_k(t) \end{pmatrix}, \quad
-U_k^{-1}(t) = \begin{pmatrix}v_k(t) \\ \lambda_k v_k(t) \end{pmatrix}, \quad
-v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
-\end{aligned}
-\end{equation}
-\end{lemma}
-\begin{proof}
-Consider the eigenvalue problem $A_0 U(t) = \lambda U(t)$ on $L^2_\per([0,T],\R^2)$, where $U(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
-\begin{align}\label{eq:A0EVPsystem}
-\left( \frac{1}{d}\partial_t^2 + \frac{V''(0)}{d} + 2 \right) v(t) = \left( \lambda + \frac{1}{\lambda} \right) v(t), \quad
-w = \frac{1}{\lambda} v(t).
-\end{align}
-Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions $v(T) = v(0)$, the set of solutions to \cref{eq:A0EVPsystem} is given by
-\begin{align}
-v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{V''(0)}{d} + 2 && k \in \Z,
-\end{align}
-where the functions $v_k(t)$ have been normalized. The corresponding eigenvalues of $A_0$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where $\lambda_k$ is defined by \cref{eq:A0lambdak}, and the corresponding eigenfunctions are given by \cref{eq:A0eigenfns}.
-\end{proof}
 
-It follows from \cref{lemma:A0eigs} that the spectrum of $A_0$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$. [MAYBE SOMETHING HERE ABOUT HOW THIS IS ALWAYS POSSIBLE FOR SUFFICIENTLY SMALL $d$]
 
-\begin{lemma}\label{eq:A0basis}
-[HYPERBOLICITY ASSUMPTION]
-The set of eigenfunctions $\{ u_k(t), u_k(t) : k \in \Z \}$ of $A_0$ are a Riesz basis for [HILBERT SPACE], i.e. every function $y(t)$ can be written uniquely as
-\begin{equation}\label{eq:yinA0basis}
-y(t) = \sum_{k \in \Z} a_k u_k(t) + \sum_{k \in \Z} b_k u^{-1}_k(t),
-\end{equation}
-where $a_k, b_k \in \C$ and the sum converges.
-\begin{proof}
-Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, we note that the set $\{ z^1_k(t), z^2_k(t) : k \in \Z \}$, where $z^1_k(t) = (v_k(t), 0)^T$ and $z^2_k(t) = (0, v_k(t))^T$ is an orthonormal basis for [HILBERT SPACE]. Therefore, there exist unique scalars $c_k, d_k \in \C$ such that
-\begin{equation*}
-y(t) = \sum_{k \in \Z} c_k z^1_k(t) + \sum_{k \in \Z} d_k z^2_k(t),
-\end{equation*}
-and the sum converges. Then \cref{eq:yinA0basis} follows by taking
-\[
-a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
-b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
-\]
-where $\lambda_k$ is defined in \cref{eq:A0lambdak}, and $\lambda_k^2 \neq 1$ by [HYPERBOLICITY ASSUMPTION].
-\end{proof}
-\end{lemma}
-
-\begin{theorem}The equation $u(n+1) = A_0 u(n)$ has exponential dichotomies on $\Z^+$ and $Z^-$.
+\begin{theorem}The equation $U(n+1) = A_0 U(n)$ has exponential dichotomies on $\Z^\pm$.
 \end{theorem}
-
-
 
 
 \paragraph{Acknowledgments}
