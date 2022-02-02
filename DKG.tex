@@ -117,7 +117,7 @@ on the integer lattice $\Z$, where $u_n(t) \in \R$, $(\Delta_2 u)_n = u_{n+1} - 
 	\item There is a pair of nonzero equilibria $\pm u^*$ with $f(\pm u^*) = 0$ and $f'(\pm u^*) < 0$.
 	\item There are no other equilibria in the interval $[-u^*, u^*]$.
 \end{enumerate}
-Common nonlinearities $f(u) = \sin u$, which is the discrete sine-Gordon equation, and $f(u) = u - u^3$, which is the discrete $\phi^4$ model. Equation \cref{eq:DKG} is Hamiltonian, with energy given by \cite{KevrekidisWeinstein2000}
+Common nonlinearities $f(u) = \sin u$, which is the discrete sine-Gordon equation, and $f(u) = u - u^3$, which is the discrete $\phi^4$ model. Equation \cref{eq:DKG} is Hamiltonian \cite{KevrekidisWeinstein2000}, with energy given by
 \begin{equation}\label{eq:H}
 	\mathcal{H}(u) = \sum_{n=-\infty}^\infty 
 	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + P(u_n) \right).
@@ -158,31 +158,23 @@ DF(U(n)) = \begin{pmatrix}
 \end{pmatrix}, \qquad
 B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
 \end{equation}
-The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cite{Parker2021,Parker2020,Sandstede1998}) is to consider the breather solution $\uvec$ to be a homoclinic orbit of the equilibrium at 0. The complication is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties.
+The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider the breather solution $\uvec$ to be a homoclinic orbit of the equilibrium at 0. The complication is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Before we do that, we prove some results about the spectrum of $DF(0)$.
 
-As an alternative, we will state and prove results for multi-breathers on finite dimensional subspaces of $C_\per^\infty([0,T],\R^2)$. First, we prove spectral results about $DF(0)$.
+\subsection{Spectrum of \texorpdfstring{$DF(0)$}{DF(0)}}
 
-\subsection{Spectrum of \textorpdfstring{$DF(0)$}{DF(0)}}
-
-The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. Linearizing about this fixed point, we obtain the invertible linear operator $DF(0): X \subset Y \rightarrow Y$, which is independent of $n$.
+The linearization of \cref{eq:dynEq} about the equilibrium at 0 is the constant coefficient linear operator 
 \begin{equation}\label{eq:DF0}
 DF(0) = \begin{pmatrix}
-\dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2 & -\id \\ \id & 0
-\end{pmatrix}, \qquad
+\dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2 & -1 \\ 1 & 0
+\end{pmatrix},
+\end{equation}
+which is invertible with inverse
+\begin{equation}\label{eq:DF0inv}
 DF(0)^{-1} = \begin{pmatrix}
-0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2
+0 & 1 \\ -1 & \dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2
 \end{pmatrix}
 \end{equation}
-
-\begin{definition}\label{def:hyp}
-Let $X$ be a Banach space. An invertible linear operator $T$ on $H$ is hyperbolic if there exists a decomposition $X = E^s \oplus E^u$ such that 
-\begin{enumerate}[(i)]
-\item $P^s$ and $P^u$ commute with $T$, where $P^s$ and $P^u$ are the projections on $E^s$ and $E^u$, respectively.
-\item There exist a constant constants $r > 1$ such that $\| T P^s \| \leq r^{-1}$ and $\| T^{-1} P^u \| \leq r^{-1}$.
-\end{enumerate}
-\end{definition}
-
-We note that condition (i) implies that $E^s$ and $E^u$ are invariant for $T$, i.e. $T(E^s) \subset E^s$ and $T(E^u) \subset E^u$.
+First, we determine the eigenvalues and eigenfunctions of $DF(0)$.
 
 \begin{lemma}\label{lemma:DF0eigs}
 The set of eigenvalues of $DF(0)$ is given by $\bigcup_{k \in \Z} \{\lambda_k, \lambda_k^{-1} \}$, where 
@@ -199,39 +191,40 @@ v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
 \end{equation}
 \end{lemma}
 \begin{proof}
-Consider the eigenvalue problem $DF(0) U(t) = \lambda U(t)$ on $L^2_\per([0,T],\R^2)$, where $U(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
+Consider the eigenvalue problem $DF(0) U(t) = \lambda U(t)$ on $H^2_\per([0,T],\R^2)$, where $U(t) = (v(t), w(t))^T$. We note that $\lambda = 0$ is not an eigenvalue, since that implies $v = w = 0$. The eigenvalue problem then reduces to the system of equations
 \begin{align}\label{eq:DF0EVPsystem}
 \left( \frac{1}{d}\partial_t^2 + \frac{f'(0)}{d} + 2 \right) v(t) = \left( \lambda + \frac{1}{\lambda} \right) v(t), \quad
 w = \frac{1}{\lambda} v(t).
 \end{align}
 Letting $r = \lambda + \frac{1}{\lambda}$ and using the periodic boundary conditions $v(T) = v(0)$, the set of solutions to \cref{eq:DF0EVPsystem} is given by
 \begin{align}
-v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{f(0)}{d} + 2 && k \in \Z,
+v_k(t) &= \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right), \quad r_k = -\frac{4 k^2 \pi^2}{d T^2} + \frac{f'(0)}{d} + 2 && k \in \Z,
 \end{align}
 where the functions $v_k(t)$ have been normalized. The corresponding eigenvalues of $DF(0)$ are then given by $\left\{ \lambda_k, \lambda_k^{-1} \right\}$, where $\lambda_k$ is defined by \cref{eq:DF0lambdak}, and the corresponding eigenfunctions are given by \cref{eq:DF0eigenfns}.
 \end{proof}
 
-We note that the spectrum of $DF(0)$ depends on both the coupling parameter $d$ and the period $T$. It follows from \cref{lemma:DF0eigs} that the spectrum of $DF(0)$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$.
+We note that the spectrum of $DF(0)$ depends on both the coupling parameter $d$ and the period $T$. It follows from \cref{lemma:DF0eigs} that the spectrum of $DF(0)$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$. The following lemma gives some conditions on $T$ and $d$ to guarantee that this is the case.
 
 \begin{lemma}\label{lemma:DF0hyp}
-The spectrum of $DF(0)$ is bounded away from the unit circle if $r_k > 2$ and $r_{k+1} < -2$ for a specific $k$. Some specific values of $d$ and $T$ for which this occurs are [CHECK FOR A PATTERN].
-\begin{equation}\label{eq:dTpairs}
-\begin{aligned}
-&d < \left( \frac{\pi^2}{T^2} - \frac{f'(0)}{4} \right), \qquad 0 < T < \frac{2 \pi}{\sqrt{f'(0)}} \\
-&d < \left( \frac{4 \pi^2}{T^2} - \frac{f'(0)}{4} \right), \qquad \frac{2 \pi}{\sqrt{f'(0)}} < T < \frac{4 \pi}{\sqrt{f'(0)}}.
-\end{aligned} 
+The spectrum of $DF(0)$ is bounded away from the unit circle if for a specific nonnegative integer $k$, $T$ and $d$ are chosen so that
+\begin{equation}\label{eq:Tdpair}
+\frac{2 k \pi}{\sqrt{f'(0)}} < T < \frac{2 (k+1) \pi}{\sqrt{f'(0)}} , \qquad 0 < d < \frac{(k+1)^2\pi^2}{T^2} - \frac{f'(0)}{4}.
 \end{equation}
 \begin{proof}
-We note that since $f'(0) > 0$, $r_0 = 2 + \frac{1}{d}f'(0) > 2$, and $r_k$ is strictly decreasing in $k$, with $r_k \rightarrow -\infty$ as $k \rightarrow \infty$. Thus $|r_k| > 2$ for all $k$ if $r_k > 2$ and $r_{k+1} < -2$ for a specific $k$. The equations in \cref{eq:dTpairs} follow from this condition for $k=0$ and $k=1$, respectively.
+Since $f'(0) > 0$, $r_0 = 2 + \frac{1}{d}f'(0) > 2$, and $r_k$ is strictly decreasing in $k$, with $r_k \rightarrow -\infty$ as $k \rightarrow \infty$. Thus $|r_k| > 2$ for all $k$ if $r_k > 2$ and $r_{k+1} < -2$ for some nonnegative integer $k$, from which the conditions \cref{eq:Tdpair} follow.
 \end{proof}
 \end{lemma}
+
+We take the following assumption on the spectrum of $DF(0)$, which is the analogue to hyperbolicity in the finite-dimensional case.
 
 \begin{hypothesis}\label{hyp:hyp}
 The coupling constant $d$ and period $T$ are chosen so that the spectrum of $DF(0)$ is bounded away from the unit circle.
 \end{hypothesis}
 
+Finally, we show that the eigenfunctions of $DF(0)$ are a Hilbert basis for $L^2_\per([0,T],\R^2)$.
+
 \begin{lemma}\label{lemma:DF0basis}
-Assume \cref{hyp:hyp}. The set of eigenfunctions $\bigcup_{k \in \Z} \{U_k(t) , U_k^{-1}(t) \}$ of $DF(0)$ is a Hilbert basis for $X = L^2_\per([0,T],\R^2)$, i.e. every function $Y(t) \in X$ can be written uniquely as
+Assume \cref{hyp:hyp}. The set of eigenfunctions $\bigcup_{k \in \Z} \{U_k(t) , U_k^{-1}(t) \}$ of $DF(0)$ is a Hilbert basis for $L^2_\per([0,T],\R^2)$, i.e. every function $Y(t) \in L^2_\per([0,T],\R^2)$ can be written uniquely as
 \begin{equation}\label{eq:yinDF0basis}
 Y(t) = \sum_{k \in \Z} a_k U_k(t) + \sum_{k \in \Z} b_k U^{-1}_k(t),
 \end{equation}
@@ -241,7 +234,7 @@ Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, the set
 \begin{equation*}
 Y(t) = \sum_{k \in \Z} c_k Z^1_k(t) + \sum_{k \in \Z} d_k Z^2_k(t),
 \end{equation*}
-and the sum converges for all $Y(t)$. Then \cref{eq:yinDF0basis} follows by taking
+and the sum converges for all $Y(t)$. Equation \cref{eq:yinDF0basis} follows by taking
 \[
 a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
 b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
@@ -250,12 +243,42 @@ where $\lambda_k$ is defined in \cref{eq:DF0lambdak}, and $\lambda_k^2 \neq 1$ b
 \end{proof}
 \end{lemma}
 
-\begin{proposition}\label{prop:DF0hyp}
-Assume \cref{hyp:hyp}. Then the linear operator $DF(0)$ on $X$ is hyperbolic according to \cref{def:hyp}.
-\begin{proof}
-By \cref{lemma:DF0hyp}, the spectrum of $DF(0)$ is bounded away from the unit circle. Since the eigenvalues come in pairs $\{\lambda, 1/\lambda\}$, we can group the eigenvalues into two sets $\{\lambda_k^s\}$ and $\lambda_k^u\}$, where $|\lambda_k^s| > r$ and $|\lambda_k^u| < 1/r$ for some $r>1$. By \cref{lemma:DF0basis}, the corresponding eigenfunctions are a basis for $X$, which we similarly group into two sets $\{U_k^s\}$ and $\{U_k^u\}$. Let $E^s$ and $E^u$ be the closed linear span of the eigenfunctions $\{U_k^s\}$ and $\{U_k^u\}$, respectively, which are invariant under $DF(0)$ since they are eigenspaces. Then $X = E^s \oplus E^u$, and $DF(0)$ is hyperbolic with constant $r>1$.
-\end{proof}
-\end{proposition}
+\subsection{Finite dimensional approximation}
+
+For $m \geq 2$, let 
+\begin{equation}\label{eq:XM}
+X_M = \spn\left\{ \bigcup_{k = -M}^M v_k(t) \right\}, \qquad
+v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
+\end{equation}
+be the subspace of $L_\per^2([0,T])$ spanned by the Fourier basis functions with wavenumber $|k| \leq M$, and let $P_M: L_\per^2([0,T]) \rightarrow X_M$, defined by
+\begin{equation}\label{eq:PM}
+P_m u = \sum_{k=-M}^M \langle u, v_k \rangle_{L^2([0,T])}
+\end{equation}
+be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Let $P_M^2: L_\per^2([0,T],\R^2) \rightarrow X_M^2$ be the corresponding projection on $L_\per^2([0,T],\R^2)$. Projecting onto $X_M^2$, equation \cref{eq:F} becomes 
+\begin{align}\label{eq:dynEqM}
+U(n+1) &= F_M(U(n)) && U(n) \in X_M^2,
+\end{align}
+where
+\begin{equation}\label{eq:FM}
+F_M\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} = 
+\begin{pmatrix}2u  + \dfrac{1}{d}P_M f(u) + \dfrac{1}{d} \partial_t^2 u - \tilde{u} \\
+u
+\end{pmatrix}.
+\end{equation}
+We note that if $U(n)$ is a solution to \cref{eq:dynEq}, then $P_M^2 U(n)$ is a solution to \cref{eq:dynEqM}, but the converse is not true. 
+
+\subsection{Finite dimensional approximation}
+
+For $n > 0$, define the finite dimensional Hilbert spaces $X_n \subset L^2_\per([0,T],\R^2)$ by 
+\begin{equation}
+X_n = \spn\left\{ \bigcup_{k=0}^n \{U_k(t) , U_k^{-1}(t) \} \right\}.
+\end{equation}
+Choose $d$ and $T$ such that \cref{hyp:hyp} holds, and consider the existence problem \cref{eq:dynEq} and the eigenvalue problem \cref{eq:dynEVP} posed on $X_n$. Then by \cref{hyp:hyp}, 0 is a hyperbolic equilibrium point of \cref{eq:dynEq}. Since we are now in a finite dimensional setting, the stable manifold theorem applies, and we define $W_n^s(0)$ and $W_n^u(0)$ to be the stable and unstable manifolds of 0 for the problem posed on $X_n$. 
+
+We then take the following assumption concerning the existence of a primary, single site breather solution.
+\begin{hypothesis}\label{hyp:breather}
+Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. Then there exists a single site breather solution $\uvec \in \ell^2(\Z,H^2_\per[0,T]$. Writing $U(n) = (u_n, u_{n-1})$, 
+\end{hypothesis}
 
 \begin{theorem}[Stable manifold theorem]\label{th:stabman}
 Let $T$ be an invertible linear operator on a Banach space $X$. Assume $T$ is hyperbolic according to \cref{def:hyp} with constant $r>1$, and consider the dynamical system on $\Z$
@@ -384,10 +407,49 @@ U(n+1) &= A_0 U(n) && U(n) \in X, n \in \Z
 \end{align}
 has exponential dichotomies on $\Z^\pm$. First, we compute the eigenvalues and eigenfunctions of $A_0$.
 
-
-
 \begin{theorem}The equation $U(n+1) = A_0 U(n)$ has exponential dichotomies on $\Z^\pm$.
 \end{theorem}
+
+\section{Numerical results}
+
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{cc}
+	\includegraphics[width=7.5cm]{singleun0.eps} &
+	\includegraphics[width=7.5cm]{singlespec.eps} \\ 
+	\includegraphics[width=7.5cm]{singledecay.eps} &
+	\includegraphics[width=7.5cm]{singledecayerror.eps}
+	\end{tabular}
+	\end{center}
+	\caption{Single}
+	\label{fig:single}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=5.5cm]{doubleun0.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doublespec.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doubleinteig.eps} 
+	\includegraphics[width=5.5cm]{doubleppun0.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doubleppspec.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doubleppinteig.eps} 
+	% \end{tabular}
+	\end{center}
+	\caption{Double}
+	\label{fig:double}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=5.5cm]{doubleeigerrord.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doubleppeigerrord.eps} \hspace{-0.5cm}
+	\includegraphics[width=5.5cm]{doubleeigerrorN.eps} 
+	% \end{tabular}
+	\end{center}
+	\caption{Eigenvalue error plots}
+	\label{fig:eigerror}
+\end{figure}
+
 
 
 \paragraph{Acknowledgments}
