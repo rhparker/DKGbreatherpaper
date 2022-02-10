@@ -12,6 +12,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{cool}
+\usepackage{booktabs}
 \usepackage{graphicx,epsfig}
 
 \usepackage[capitalize,nameinlink]{cleveref}
@@ -58,6 +59,7 @@
 \def\calL{\mathcal{L}}
 \def\calI{\mathcal{I}}
 
+\newcommand{\evec}{\mathbf{e}}
 \newcommand{\uvec}{\mathbf{u}}
 \newcommand{\vvec}{\mathbf{v}}
 \newcommand{\wvec}{\mathbf{w}}
@@ -88,6 +90,12 @@
 Dallas, TX 75275, USA}
 \email{rhparker@smu.edu}
 
+\author{Jes\'us Cuevas-Maraver}
+\address{Grupo de F\'{\i}sica No Lineal, Departamento de F\'{\i}sica Aplicada I,
+Universidad de Sevilla. Escuela Polit\'{e}cnica Superior, C/ Virgen de Africa, 7, 41011-Sevilla, Spain}
+\address{Instituto de Matem\'{a}ticas de la Universidad de Sevilla (IMUS). Edificio
+Celestino Mutis. Avda. Reina Mercedes s/n, 41012-Sevilla, Spain, Avda Reina Mercedes s/n, E-41012 Sevilla, Spain}
+
 \author{P.\,G. Kevrekidis} 
 \address{Department of Mathematics and Statistics, University of Massachusetts, Amherst MA 01003, USA}
 \email{kevrekid@math.umass.edu}
@@ -107,36 +115,113 @@ Dallas, TX 75275, USA}
 
 \section{Mathematical background}\label{sec:bg}
 
-We will consider the discrete Klein-Gordon equation with on-site nonlinearity $f(u)$
+We will consider the discrete Klein-Gordon (DKG) equation with on-site nonlinearity $f(u)$
 \begin{equation}\label{eq:DKG}
 \ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
 \end{equation}
-on the integer lattice $\Z$, where $u_n(t) \in \R$, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = P'(u)$ for a smooth potential function $P(u)$. We make the following assumptions on the nonlinearity $f$. 
-\begin{enumerate}[(i)]
-	\item $f(u)$ is an odd function with $f(0) = 0$ and $f'(0) > 0$.
-	\item There is a pair of nonzero equilibria $\pm u^*$ with $f(\pm u^*) = 0$ and $f'(\pm u^*) < 0$.
-	\item There are no other equilibria in the interval $[-u^*, u^*]$.
-\end{enumerate}
-Common nonlinearities $f(u) = \sin u$, which is the discrete sine-Gordon equation, and $f(u) = u - u^3$, which is the discrete $\phi^4$ model. Equation \cref{eq:DKG} is Hamiltonian \cite{KevrekidisWeinstein2000}, with energy given by
+on the integer lattice $\Z$, where $t \in \R$ is the evolution time $u_n(t) \in \R$ is the displacement of the $n$th particle in the lattice, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = V'(u)$ for a smooth, on-site potential function $V(u)$. For the potential function, we assume that $V(0) = V'(0) = 0$ and $V''(0) > 0$. Some common nonlinearities for DKG are listed in \cref{table:V}. For any time $t$, we take the displacements $\{U_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, with conserved energy given by
 \begin{equation}\label{eq:H}
 	\mathcal{H}(u) = \sum_{n=-\infty}^\infty 
-	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + P(u_n) \right).
+	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + V(u_n) \right).
 \end{equation}
-We are interested in breather solutions to \cref{eq:DKG}, which are periodic in time and spatially localized on the lattice. Specifically, a breather solution $\uvec$ with fundamental period $T>0$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$. The components of $\uvec$ are denoted $u_n$, for $n \in \Z$.
 
-To study spectral stability of a breather solution $\uvec$, we linearize equation \cref{eq:DKG} by substituting the perturbation ansatz $u_n + \epsilon v_n$ into \cref{eq:DKG} and keeping terms of order $\epsilon$ to obtain
+\begin{table}
+\begin{tabular}{lll}\toprule
+Equation & $V(u)$ & $f(u)$ \\ \midrule
+sine-Gordon & $1 - \cos u$ & $\sin u$ \\
+$\phi^4$ (soft) & $\frac{1}{2}u^2 - \frac{1}{4}u^4$ & $u(1-u^2)$ \\
+$\phi^4$ (hard) & $\frac{1}{2}u^2 + \frac{1}{4}u^4$ & $u(1+u^2)$ \\
+Morse & $\frac{1}{2}(1 - e^{-u})^2$ & $e^{-u}(1 - e^{-u})$ \\ \bottomrule
+\end{tabular}
+\caption{Common nonlinearities for the discrete Klein-Gordon equation.}
+\label{table:V}
+\end{table}
+
+\subsection{Breathers}
+
+We consider here breather solutions to \cref{eq:DKG}, which are periodic in time and exponentially localized on the lattice. Specifically, a breather solution $\uvec$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$. 
+The fundamental period $T$ is the smallest positive real number for which $\uvec(t+T) = \uvec(t)$ for all $t$. At the anti-continuum (AC) limit, where $d = 0$, the individual sites in the lattice are decoupled. Each site $u_n(t)$ is a $T$-periodic solution to the nonlinear oscillator equation
+\begin{equation}\label{eq:singlesiteAC}
+\ddot{\phi} + V'(\phi) = 0,
+\end{equation}
+which has conserved energy $E = \frac{1}{2}\dot{\phi}^2 + V(\phi)$. For fixed energy $E$, equation \cref{eq:singlesiteAC} has a unique, even solution $\phi(t)$, which we will call the fundamental AC breather; this solution satisfies the initial conditions $\phi(0) = a$ and $\dot{\phi}(0) = 0$, where $a$ is the smallest, positive root of $V(a) = E$ \cite{Pelinovsky2012}. The fundamental period $T$ of $\phi(t)$ is a function of the energy $E$, and is given by
+\begin{equation}
+T = \sqrt{2}\int_{-a}^a \frac{du}{\sqrt{E - V(u)}}.
+\end{equation}
+In \cite{Pelinovsky2012}, Pelinovsky and Sakovich prove the existence of multi-site breathers close to the AC limit, i.e. for $d$ small. Specifically, for a finite set of lattice sites $S = \{ k_1, \dots, k_N \}$, with $k_i < k_{i+1}$, they start with a solution
+\begin{equation}
+\uvec^{(0)}(t) = \sum_{i=1}^N \sigma_i \phi(t) \evec_{k_i}
+\end{equation}
+at the AC limit, where $\phi(t)$ is the fundamental AC breather, $\evec_{k_i}$ is the unit vector for site $k_i$ in the integer lattice, and $\sigma_i \pm 1$ is the phase factor for the oscillator at site $k_i$. Adjacent oscillators are in-phase if $\sigma_i \sigma_{i+1} = 1$ and out-of-phase if $\sigma_i \sigma_{i+1} = 1$. They then use the implicit function theorem to prove the existence of a multi-site breather $\uvec^{(d)}(t)$ to \cref{eq:DKG} for $d$ sufficiently small \cite[Theorem 1]{Pelinovsky2012}. Although other configurations of multi-site breathers, in which adjacent oscillators are neither in-phase nor out-of-phase, may be possible for $d > 0$, we will not consider this possibility here (see also \cite[Remark 2]{Pelinovsky2012}).
+
+\subsection{Linearization}
+
+For a specific coupling constant $d$ and fundamental period $T$, let $\uvec(t)$ be a breather solution to \cref{eq:DKG}. To study spectral stability of a breather solution $\uvec(t)$, we substitute the perturbation ansatz $\uvec(t) + \epsilon \vvec(t)$ into \cref{eq:DKG} and keep terms of order $\epsilon$ to obtain the linearized equation.
 \begin{equation}\label{eq:DKGlinear}
 \ddot{v}_n = d (\Delta_2 v)_n - f'(u_n)v_n.
 \end{equation}
-Since $\uvec$ has period $T$, it follows from Floquet theory that spectral stability depends on the Floquet multipliers, which are the eigenvalues of the monodromy operator $\mathcal{M}$. If $\mu$ is a Floquet multiplier, then the corresponding Floquet exponent $\lambda$ (which is not unique) is related to $\mu$ by $\mu = e^{\lambda T}$. It follows (see, for example, \cite[Lemma 2.1.29]{Kapitula2013}) that for every Floquet multiplier $\mu$, there is a corresponding solution $v_n(t) = e^{\lambda t} w_n(t)$ to the linearized equation \cref{eq:DKGlinear}, where $w_n$ is periodic with period $T$. Substituting this ansatz into \cref{eq:DKGlinear}, we obtain the eigenvalue problem
+Since $\uvec(t)$ has period $T$, it follows from Floquet theory that spectral stability depends on the Floquet multipliers, which are the elements of the spectrum of the monodromy operator $\mathcal{M}$. If $\mu$ is a Floquet multiplier, then the corresponding Floquet exponent $\lambda$ (which is not unique) is related to $\mu$ by $\mu = e^{\lambda T}$. It follows (see, for example, \cite[Lemma 2.1.29]{Kapitula2013}) that for every Floquet multiplier $\mu$, there is a corresponding solution $\vvec(t) = e^{\lambda t} \wvec(t)$ to the linearized equation \cref{eq:DKGlinear}, where $\wvec(t)$ is periodic with period $T$. Substituting this ansatz into \cref{eq:DKGlinear}, we obtain the eigenvalue problem
 \begin{equation}\label{eq:DKGeig}
 d (\Delta_2 w)_n - f'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
 \end{equation}
-where $\wvec \in \ell^2(\Z, H^2_\per[0,T]) \subset \ell^2(\Z, L^2_\per[0,T])$. We can write this as $\calL(\uvec)\wvec = 2 \lambda \dot{\wvec} + \lambda^2 \wvec$, where the linear operator $\calL(\uvec)$ is defined by the LHS of \cref{eq:DKGeig}. When $\lambda = 0$ (which corresponds to the Floquet multiplier $\mu = 1$), $\dot{\uvec}$ is a solution to \cref{eq:DKGeig}, i.e. $\calL(\uvec)\dot{\uvec}=0$, which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\zvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves $\calL(\uvec)\zvec = 2 \ddot{\uvec}$ (see \cite[Section 3]{Pelinovsky2012}).
+where $\wvec \in \ell^2(\Z, H^2_\per[0,T]) \subset \ell^2(\Z, L^2_\per[0,T])$, and we use the inner product
+\begin{equation}\label{eq:IP1}
+\langle \uvec, \vvec \rangle_{(\ell^2(\Z, L^2_\per[0,T]))} = \sum_{n=-\infty}^\infty \int_0^T u_n(s) \overline{v_n(s)} ds
+\end{equation}
+on $\ell^2(\Z, L^2_\per[0,T])$. We can write equation \cref{eq:DKGeig} as 
+\begin{equation}\label{eq:DKGeigL}
+\calL(\uvec)\wvec = (2 \lambda \partial_t + \lambda^2 )\wvec,
+\end{equation}
+where the linear operator $\calL(\uvec)$ is defined by the LHS of \cref{eq:DKGeig}. Since \cref{eq:DKG} is Hamiltonian, the Floquet exponents must come in quartets $\lambda = \pm \alpha \pm \beta$. Thus the Floquet multipliers $\mu$ can only occur in one of three patterns: a pair $\{ \mu, \overline{\mu} \}$ on the unit circle; a pair $\{ \mu, \mu^{-1} \}$ on the real axis; or a quartet $\{ \mu, \overline{\mu}, \mu^{-1}, \overline{\mu}^{-1} \}$ off of the unit circle. Therefore, the breather solution $\uvec(u)$ is spectrally unstable unless all Floquet multipliers lie on the unit circle.
+
+There is always a Floquet exponent at 0 (corresponding to the Floquet multiplier $\mu = 1$), since $\dot{\uvec}$ is a solution to \cref{eq:DKGeig}, i.e.
+\begin{equation}\label{eq:Lkernel1}
+\calL(\uvec)\dot{\uvec} = 0,
+\end{equation}
+which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\zvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves 
+\begin{equation}
+\calL(\uvec)\zvec = 2 \ddot{\uvec},
+\end{equation}
+and can be constrained to be perpendicular to $\dot{\uvec}$ with respect to the inner product \cref{eq:IP1} (see \cite[Section 3]{Pelinovsky2012}).
+
+\subsection{Continuous spectrum}
+
+The continuous spectrum of $\calL(\uvec)$ is the set of all $\lambda$ for which the limiting problem 
+\begin{equation}\label{eq:DKGeigcont}
+d (\Delta_2 w)_n - f'(0)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
+\end{equation}
+has a solution. Following the procedure in \cite[Section 2.1]{cuevas-maraver2016}, the continuous spectrum comprise the bands
+\begin{equation}
+\begin{aligned}
+\lambda &= i\left( \pm \omega(\theta) - \frac{2 \pi m}{T} \omega_0 \right) && m \in \Z \\
+\omega(\theta) &= \sqrt{ f'(0) + 4 d \sin^2\left( \frac{\theta}{2} \right) } && \theta \in [-\pi, \pi].
+\end{aligned}
+\end{equation}
+The corresponding Floquet multipliers comprise two bands on the unit circle which are symmetric about the real axis. Let $m_0$ be largest nonnegative integer such that $T - 2 \pi m_0 > 0$. Then the two bands are given by
+\begin{equation}
+\begin{aligned}
+\mu = e^{\pm i \left( \sqrt{f'(0) + 4 d \sin^2 \left(\frac{\theta}{2}\right) }T - 2 \pi m_0 \right) } && \theta \in [0, \pi].
+\end{aligned}
+\end{equation}
+At the AC limit, the bands consist of the two points $\mu = e^{\pm i \theta_0}$, where $\theta_0 =  T - 2 \pi m_0$. For $d>0$, the bands stretch from $\mu = e^{\pm i \theta_0}$ to $e^{\pm i \theta_1}$, where $\theta_1 = \sqrt{f'(0) + 4 d \sin^2 \left(\frac{\theta}{2}\right) }T - 2 \pi m_0$. 
+
+Following the analysis in \cite[Section 2.2]{cuevas-maraver2016}, if $T \in (n \pi, (n+1)\pi)$ for $n$ even, the upper band has positive Krein signature and the lower band has negative Krein signature. As $d$ is increased, the bands grow towards -1 (see \cref{fig:bands}, left). The ends of the bands meet when $\theta_1 = \pi$, which occurs when $d = \frac{1}{4} \left( \frac{(1 + 2 m_0)^2 \pi^2}{T^2} - 1\right)$, at which point they merge into a single band. They meet again when $\theta_1 = 0$, which occurs when $d = \frac{1}{4} \left( \frac{(2 + 2 m_0)^2 \pi^2}{T^2} - 1\right)$, at which point they comprise the entire unit circle.
+Conversely, if $T \in (n \pi, (n+1)\pi)$ for $n$ odd, the upper band has negative Krein signature and the lower band has positive Krein signature. The bands grow towards 1 as $d$ is increased (see \cref{fig:bands}, right).
+
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{cc}
+	\includegraphics[width=7.5cm]{contspeccartoon1.eps} &
+	\includegraphics[width=7.5cm]{contspeccartoon2.eps}
+	\end{tabular}
+	\end{center}
+	\caption{Cartoon showing continuous spectrum bands on the unit circle for $T \in (n \pi, (n+1)\pi)$ with $n$ even (left) and $n$ odd (right). Krein signature of bands is indicated, and bands grow in the direction of the arrow with increasing $d$.}
+	\label{fig:bands}
+\end{figure}
 
 \subsection{Spatial dynamics}
 
-Using a spatial dynamics approach as in \cites{Parker2020,Parker2021}, let $\uvec$ be a breather solution to \cref{eq:DKG}, and define $U(n) \in H^2_\per([0,T], \R^2)$ by $U(n) = (u(n), \tilde{u}(n)) = ( u_n, u_{n-1} )$. Then equation \cref{eq:DKG} is equivalent to the lattice dynamical system
+We now reformulate both the DKG equation \cref{eq:DKG} and the eigenvalue problem \cref{eq:DKGeig} using a spatial dynamics approach, as in \cites{Parker2020,Parker2021}. Let $\uvec(t)$ be a breather solution to \cref{eq:DKG}, and define $U(n)$ by $U(n) = (u(n), \tilde{u}(n)) = ( u_n, u_{n-1} )$. Then equation \cref{eq:DKG} is equivalent to the lattice dynamical system
 \begin{equation}\label{eq:dynEq}
 U(n+1) = F(U(n)),
 \end{equation}
@@ -158,7 +243,7 @@ DF(U(n)) = \begin{pmatrix}
 \end{pmatrix}, \qquad
 B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
 \end{equation}
-The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider the breather solution $\uvec$ to be a homoclinic orbit of the equilibrium at 0. The complication is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Before we do that, we prove some results about the spectrum of $DF(0)$.
+The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider $U(n)$ to be a homoclinic orbit of the equilibrium at 0. The complication here is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, rather than just $H^2_\per([0,T], \R^2)$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Roughly, this subspace consists of the first $N$ Fourier modes of the standard basis for $L_\per^2([0,T])$. Although this is a limited result, we note that since $U(n)$ is smooth, it Fourier coefficients decay exponentially. Since we can take $N$ as large as we like, this is a very good approximation. In addition, since the numerical simulations are performed using Fourier spectral methods, this theory applies directly to the numerical discretization. Before we formulate our approximation, we prove some important results about the spectrum of $DF(0)$.
 
 \subsection{Spectrum of \texorpdfstring{$DF(0)$}{DF(0)}}
 
@@ -206,7 +291,7 @@ where the functions $v_k(t)$ have been normalized. The corresponding eigenvalues
 We note that the spectrum of $DF(0)$ depends on both the coupling parameter $d$ and the period $T$. It follows from \cref{lemma:DF0eigs} that the spectrum of $DF(0)$ is bounded away from the unit circle provided $|r_k| > 2$ for all $k$. The following lemma gives some conditions on $T$ and $d$ to guarantee that this is the case.
 
 \begin{lemma}\label{lemma:DF0hyp}
-The spectrum of $DF(0)$ is bounded away from the unit circle if for a specific nonnegative integer $k$, $T$ and $d$ are chosen so that
+The spectrum of $DF(0)$ is bounded away from the unit circle if, for a specific nonnegative integer $k$, $T$ and $d$ are chosen so that
 \begin{equation}\label{eq:Tdpair}
 \frac{2 k \pi}{\sqrt{f'(0)}} < T < \frac{2 (k+1) \pi}{\sqrt{f'(0)}} , \qquad 0 < d < \frac{(k+1)^2\pi^2}{T^2} - \frac{f'(0)}{4}.
 \end{equation}
@@ -245,35 +330,67 @@ where $\lambda_k$ is defined in \cref{eq:DF0lambdak}, and $\lambda_k^2 \neq 1$ b
 
 \subsection{Finite dimensional approximation}
 
-For $m \geq 2$, let 
+We now define our finite dimensional approximation for \cref{eq:dynEq}. For $M \geq 1$, let 
 \begin{equation}\label{eq:XM}
 X_M = \spn\left\{ \bigcup_{k = -M}^M v_k(t) \right\}, \qquad
 v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
 \end{equation}
-be the subspace of $L_\per^2([0,T])$ spanned by the Fourier basis functions with wavenumber $|k| \leq M$, and let $P_M: L_\per^2([0,T]) \rightarrow X_M$, defined by
+be the $(2M+1)$-dimensional subspace of $L_\per^2([0,T])$ spanned by the Fourier basis functions with wavenumber $|k| \leq M$, and let $P_M: L_\per^2([0,T]) \rightarrow X_M$, defined by
 \begin{equation}\label{eq:PM}
-P_m u = \sum_{k=-M}^M \langle u, v_k \rangle_{L^2([0,T])}
+P_M u(t) = \sum_{k=-M}^M \langle u, v_k \rangle_{L^2([0,T])} v_k(t)
+= \sum_{k=-M}^M \left( \int_0^T u(s) \overline{v_k(s)} ds \right) v_k(t)
 \end{equation}
-be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Let $P_M^2: L_\per^2([0,T],\R^2) \rightarrow X_M^2$ be the corresponding projection on $L_\per^2([0,T],\R^2)$. Projecting onto $X_M^2$, equation \cref{eq:F} becomes 
+be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Applying the projection $P_M$ to both components of \cref{eq:dynEq}, i.e. projecting onto $X_M^2$, we obtain
+\begin{equation}
+\begin{pmatrix}P_M u(n+1) \\ P_M \tilde{u}(n+1) \end{pmatrix} = 
+\begin{pmatrix}2 P_M u  + \dfrac{1}{d}P_M f(u) + \dfrac{1}{d} P_M \partial_t^2 u - P_M \tilde{u} \\
+P_M u
+\end{pmatrix}.
+\end{equation}
+The operators $P_M$ and $\partial_t$ commute, since 
+\begin{align*}
+\langle \dot{u}, v_k \rangle v_k &= -\langle u, \dot{v}_k \rangle v_k
+= -\left\langle u, \frac{2 \pi i k}{T} v_k \right\rangle v_k \\
+&= -\left( -\frac{2 \pi i k}{T} \right) \langle u, v_k \rangle v_k
+= \langle u, v_k \rangle \left( \frac{2 \pi i k}{T} \right) v_k 
+= \langle u, v_k \rangle \dot{v}_k,
+\end{align*}
+where we used the fact that the differentiation operator is anti-self-adjoint, and the inner product is conjugate linear in the second component. It follows that $P_M$ and $\partial_t^2$ commute. Since $u$ is smooth, $(I-P_M)u$ will be small for sufficiently large $M$, thus we expand $f(u)$ as
+\[
+f(u) = f( P_M u + (I-P_M)u) = f(P_M u) + \mathcal{O}((I-P_M)u)
+\]
+and keep only the first term to get the approximate system on $X_M^2$
 \begin{align}\label{eq:dynEqM}
 U(n+1) &= F_M(U(n)) && U(n) \in X_M^2,
 \end{align}
 where
 \begin{equation}\label{eq:FM}
 F_M\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} = 
-\begin{pmatrix}2u  + \dfrac{1}{d}P_M f(u) + \dfrac{1}{d} \partial_t^2 u - \tilde{u} \\
+\begin{pmatrix}2u  + \dfrac{1}{d}g(u) + \dfrac{1}{d} \partial_t^2 u - \tilde{u} \\
 u
+\end{pmatrix}
+\end{equation}
+and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. We note that if $u = 0$, then $g(u) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. From here on, we will work with this approximate system. 
+
+Fix $d$ and $T$ such that \cref{hyp:hyp} holds. Since $g'(0) = f'(0)$, the linear operator $DF_M(0)$ on $X_M^2$ is given by
+\begin{equation}\label{eq:DFM0}
+DF_M(0) = \begin{pmatrix}
+\dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2 & -1 \\ 1 & 0
 \end{pmatrix}.
 \end{equation}
-We note that if $U(n)$ is a solution to \cref{eq:dynEq}, then $P_M^2 U(n)$ is a solution to \cref{eq:dynEqM}, but the converse is not true. 
+By \cref{lemma:DF0eigs}, the $4M+2$ eigenvalues of $DF_M(0)$ are given by $S = \bigcup_{k=-M}^M \{\lambda_k, \lambda_k^{-1} \}$, where these are defined in the statement of \cref{lemma:DF0eigs}. By our choice of $d$ and $T$ in \cref{hyp:hyp}, the spectrum of $DF_M(0)$ is real and does not intersect the unit circle, thus $DF_M(0)$ is a hyperbolic linear operator. Define the two sets of eigenvalues
+\[
+S^s = \{ \lambda \in S : |\lambda| < 1\}, \qquad S^u = \{ \lambda \in S : |\lambda| > 1\}
+\]
+By symmetry, $|S^s| = |S^u| = 2M+1$. Let $r = \min_{\lambda \in S^u} |\lambda| > 1$.
 
-\subsection{Finite dimensional approximation}
+Since $X_M^2$ is finite-dimensional, the stable manifold holds. For each $M \geq 1$, let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds. 
 
-For $n > 0$, define the finite dimensional Hilbert spaces $X_n \subset L^2_\per([0,T],\R^2)$ by 
-\begin{equation}
-X_n = \spn\left\{ \bigcup_{k=0}^n \{U_k(t) , U_k^{-1}(t) \} \right\}.
-\end{equation}
-Choose $d$ and $T$ such that \cref{hyp:hyp} holds, and consider the existence problem \cref{eq:dynEq} and the eigenvalue problem \cref{eq:dynEVP} posed on $X_n$. Then by \cref{hyp:hyp}, 0 is a hyperbolic equilibrium point of \cref{eq:dynEq}. Since we are now in a finite dimensional setting, the stable manifold theorem applies, and we define $W_n^s(0)$ and $W_n^u(0)$ to be the stable and unstable manifolds of 0 for the problem posed on $X_n$. 
+
+A breather solution to 
+
+
+and consider the existence problem \cref{eq:dynEq} and the eigenvalue problem \cref{eq:dynEVP} posed on $X_n$. Then by \cref{hyp:hyp}, 0 is a hyperbolic equilibrium point of \cref{eq:dynEq}. Since we are now in a finite dimensional setting, the stable manifold theorem applies, and we define $W_n^s(0)$ and $W_n^u(0)$ to be the stable and unstable manifolds of 0 for the problem posed on $X_n$. 
 
 We then take the following assumption concerning the existence of a primary, single site breather solution.
 \begin{hypothesis}\label{hyp:breather}
@@ -448,6 +565,19 @@ has exponential dichotomies on $\Z^\pm$. First, we compute the eigenvalues and e
 	\end{center}
 	\caption{Eigenvalue error plots}
 	\label{fig:eigerror}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\begin{tabular}{cc}
+	\includegraphics[width=7.5cm]{timestepN6.eps} &
+	\includegraphics[width=7.5cm]{timestepN6pks.eps} \\ 
+	\includegraphics[width=7.5cm]{timestepN6pp.eps} &
+	\includegraphics[width=7.5cm]{timestepN6growth.eps}
+	\end{tabular}
+	\end{center}
+	\caption{Timestepping}
+	\label{fig:timestepSG}
 \end{figure}
 
 
