@@ -119,7 +119,12 @@ We will consider the discrete Klein-Gordon (DKG) equation with on-site nonlinear
 \begin{equation}\label{eq:DKG}
 \ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
 \end{equation}
-on the integer lattice $\Z$, where $t \in \R$ is the evolution time $u_n(t) \in \R$ is the displacement of the $n$th particle in the lattice, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = V'(u)$ for a smooth, on-site potential function $V(u)$. For the potential function, we assume that $V(0) = V'(0) = 0$ and $V''(0) > 0$. Some common nonlinearities for DKG are listed in \cref{table:V}. For any time $t$, we take the displacements $\{U_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, with conserved energy given by
+on the integer lattice $\Z$, where $t \in \R$ is the evolution time $u_n(t) \in \R$ is the displacement of the $n$th particle in the lattice, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = V'(u)$ for a smooth, on-site potential function $V(u)$. Some common nonlinearities for DKG are listed in \cref{table:V}. We take the following assumptions for the potential $V$:
+\begin{enumerate}[(a)]
+\item $V$ is an even function, and $V(0) = 0$. This implies $V'(0) = 0$.
+\item $V''(0)>0$.
+\end{enumerate}
+We note that the Morse potential in \cref{table:V} does not satisfy the second assumption. For any time $t$, we take the displacements $\{U_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Since $f(u)$ is an odd function, if $\uvec(t)$ is a solution to \cref{eq:DKG}, then $-\uvec(t)$ is as well. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, with conserved energy given by
 \begin{equation}\label{eq:H}
 	\mathcal{H}(u) = \sum_{n=-\infty}^\infty 
 	\left( \frac{1}{2} (\dot{u}_n)^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + V(u_n) \right).
@@ -148,7 +153,7 @@ which has conserved energy $E = \frac{1}{2}\dot{\phi}^2 + V(\phi)$. For fixed en
 \begin{equation}
 T = \sqrt{2}\int_{-a}^a \frac{du}{\sqrt{E - V(u)}}.
 \end{equation}
-In \cite{Pelinovsky2012}, Pelinovsky and Sakovich prove the existence of multi-site breathers close to the AC limit, i.e. for $d$ small. Specifically, for a finite set of lattice sites $S = \{ k_1, \dots, k_N \}$, with $k_i < k_{i+1}$, they start with a solution
+In \cite{Pelinovsky2012}, Pelinovsky and Sakovich prove the existence of multi-site breathers close to the AC limit, i.e. for $d$ small, which are even functions of $t$. Specifically, for a finite set of lattice sites $S = \{ k_1, \dots, k_N \}$, with $k_i < k_{i+1}$, they start with a solution
 \begin{equation}
 \uvec^{(0)}(t) = \sum_{i=1}^N \sigma_i \phi(t) \evec_{k_i}
 \end{equation}
@@ -182,7 +187,17 @@ which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furt
 \begin{equation}
 \calL(\uvec)\zvec = 2 \ddot{\uvec},
 \end{equation}
-and can be constrained to be perpendicular to $\dot{\uvec}$ with respect to the inner product \cref{eq:IP1} (see \cite[Section 3]{Pelinovsky2012}).
+and can be constrained to be perpendicular to $\dot{\uvec}$ with respect to the inner product \cref{eq:IP1} (see \cite[Section 3]{Pelinovsky2012}). In fact, we can actually compute $\zvec(t)$. 
+Letting $\omega = \frac{2 \pi}{T}$ be the frequency of the breather and normalizing the period of the breather to $2 \pi$ by rescaling the time variable to $\tau = \omega T$, as in \cite{kevrekidis2016}, equation \cref{eq:DKG} becomes
+\begin{equation}\label{eq:DKGomega}
+\omega^2 \partial_\tau^2 u_n = d (\Delta_2 u)_n - f(u_n).
+\end{equation}
+Differentiating with respect to $\omega$, this becomes
+\begin{equation}\label{eq:DKGdiffw}
+d (\Delta_2 \partial_\omega u)_n - f'(u_n)\partial_\omega u_n 
+- \omega^2 \partial_\tau^2 ( \partial_\omega u_n) = 2 \omega \partial_\tau^2 u_n.
+\end{equation}
+Changing variables back to $t$, this becomes $\calL(\uvec)\partial_\omega \uvec = \frac{2}\omega \ddot{\uvec}$, thus $\zvec = \omega \partial_\omega \uvec$.
 
 \subsection{Continuous spectrum}
 
@@ -232,7 +247,7 @@ F\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} =
 u
 \end{pmatrix}.
 \end{equation}
-The eigenvalue problem \cref{eq:DKGeig} can similarly be written as 
+We note that since $f$ is a odd function, if $U(n)$ is a solution to \cref{eq:dynEq}, then $-U(n)$ is as well. The eigenvalue problem \cref{eq:DKGeig} can similarly be written as 
 \begin{equation}\label{eq:dynEVP}
 W(n+1) = \left[ DF(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
 \end{equation}
@@ -340,7 +355,18 @@ be the $(2M+1)$-dimensional subspace of $L_\per^2([0,T])$ spanned by the Fourier
 P_M u(t) = \sum_{k=-M}^M \langle u, v_k \rangle_{L^2([0,T])} v_k(t)
 = \sum_{k=-M}^M \left( \int_0^T u(s) \overline{v_k(s)} ds \right) v_k(t)
 \end{equation}
-be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Applying the projection $P_M$ to both components of \cref{eq:dynEq}, i.e. projecting onto $X_M^2$, we obtain
+be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Let $X_{M,e}$ be the $(M+1)$-dimensional subspace of $X_M$ comprising functions which are even in $t$, i.e.
+\begin{equation}
+X_{M,e} = \left\{ f \in X_M : f(-t) = f(t) \text{ for all }t \in \R \right\}.
+\end{equation}
+An orthonormal basis for $X_{M,e}$ is $\left\{ \tilde{v}_k(t) \right\}_{k=0}^M$, where
+\begin{equation}\label{eq:vktilde}
+\tilde{v}_k(t) = \begin{cases}
+\frac{1}{T} & k = 0 \\
+\frac{2}{T} \cos\left( \frac{2 \pi k t}{T} \right) & k = 1, \dots, M.
+\end{cases}
+\end{equation}
+Applying the projection $P_M$ to both components of \cref{eq:dynEq}, i.e. projecting onto $X_M^2$, we obtain
 \begin{equation}
 \begin{pmatrix}P_M u(n+1) \\ P_M \tilde{u}(n+1) \end{pmatrix} = 
 \begin{pmatrix}2 P_M u  + \dfrac{1}{d}P_M f(u) + \dfrac{1}{d} P_M \partial_t^2 u - P_M \tilde{u} \\
@@ -370,83 +396,116 @@ F_M\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} =
 u
 \end{pmatrix}
 \end{equation}
-and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. We note that if $u = 0$, then $g(u) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. From here on, we will work with this approximate system. 
+and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. We note that if $u = 0$, then $g(u) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. Furthermore, since $f$ is an odd function, so is $g$, thus $F_M(-U) = -F_M(U)$. It follows that if $U(n)$ is a solution to \cref{eq:dynEqM}, so is $-U(n)$. From here on, we will work with this approximate system.
 
-Fix $d$ and $T$ such that \cref{hyp:hyp} holds. Since $g'(0) = f'(0)$, the linear operator $DF_M(0)$ on $X_M^2$ is given by
-\begin{equation}\label{eq:DFM0}
-DF_M(0) = \begin{pmatrix}
-\dfrac{1}{d}\partial_t^2 + \dfrac{f'(0)}{d} + 2 & -1 \\ 1 & 0
-\end{pmatrix}.
-\end{equation}
-By \cref{lemma:DF0eigs}, the $4M+2$ eigenvalues of $DF_M(0)$ are given by $S = \bigcup_{k=-M}^M \{\lambda_k, \lambda_k^{-1} \}$, where these are defined in the statement of \cref{lemma:DF0eigs}. By our choice of $d$ and $T$ in \cref{hyp:hyp}, the spectrum of $DF_M(0)$ is real and does not intersect the unit circle, thus $DF_M(0)$ is a hyperbolic linear operator. Define the two sets of eigenvalues
+Let $\{\tau(s) : s \in \R\}$ be the one-parameter group of unitary translation operators on $X_M^2$, defined by $[\tau(s)]U(\cdot) = U(\cdot - s)$, which has infinitesimal generator $\tau'(0) = \partial_t$. We note that this group is well-defined on $X_M^2$, since 
 \[
-S^s = \{ \lambda \in S : |\lambda| < 1\}, \qquad S^u = \{ \lambda \in S : |\lambda| > 1\}
+\tau(s) v_k(t) 
+\frac{1}{T} \exp\left( i \frac{2 \pi k (t-s)}{T}\right) 
+= \exp\left( -i \frac{2 \pi k s}{T} \right) \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T}\right) 
+= \exp\left( -i \frac{2 \pi k s}{T} \right) v_k(t),
 \]
-By symmetry, $|S^s| = |S^u| = 2M+1$. Let $r = \min_{\lambda \in S^u} |\lambda| > 1$.
+i.e. the group action multiplies a basis element by a constant. In fact, the eigenvalue at 0 of \cref{eq:DKGeig} is a result of this translational symmetry. The function $F_M$ from \cref{eq:dynEqM} (as well as $F$ from the full system \cref{eq:dynEq}) commutes with this one-parameter group, i.e. $F(\tau(s) U) = \tau(s) F(U)$. It is cruicial to note that this symmetry is lost if we consider the problem \cref{eq:dynEqM} on $X_{M,e}^2$, since the space of even functions is not translation invariant. 
 
-Since $X_M^2$ is finite-dimensional, the stable manifold holds. For each $M \geq 1$, let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds. 
+The strategy will be to prove that multi-breathers exist on the subspace $X_{M,e}^2$ of even functions. Since there is no translational symmetry, the stable and unstable manifolds of the origin will intersect transversely, which greatly simplifies the analysis. This parallels the restriction in \cite{Pelinovsky2012} to breathers which are even in $t$, and is consistent with the odd symmetry of the nonlinearity $f$. 
+Once that is accomplished, we will return to the full space $X_{M}^2$ for the eigenvalue problem, and use Lin's method as in \cites{Parker2021,Parker2020,Sandstede1998} to construct the interaction eigenfunctions as piecewise linear combinations of the eigenfunction corresponding to translation symmetry. This technique is similar to the one we employed in \cite{Parker2020} for DNLS, where, to prove the existence of multi-pulses, we removed the gauge symmetry by restricting the problem to real-valued solutions.
 
+\section{Multi-breathers}
 
-A breather solution to 
+We first consider the existence problem \cref{eq:dynEqM} on $X_{M,e}^2$, the subspace of even functions. Fix $d$ and $T$ such that \cref{hyp:hyp} holds. Since $g'(0) = f'(0)$, the linear operator $DF_M(0)$ on $X_{M,e}^2$ is also given by \cref{eq:DF0}. By \cref{lemma:DF0eigs}, the $2M+2$ eigenvalues of $DF_M(0)$ on $X_{M,e}^2$ are given by $S_{M,e} = \bigcup_{k=0}^M \{\lambda_k, \lambda_k^{-1} \}$, where these are defined in the statement of \cref{lemma:DF0eigs}. By our choice of $d$ and $T$ in \cref{hyp:hyp}, the spectrum of $DF_M(0)$ is real and does not intersect the unit circle, thus 0 is a hyperbolic equilibrium point of \cref{eq:dynEqM}. Define the stable and unstable subsets of the spectrum of $DF_M(0)$ on $X_{M,e}^2$ by
+\[
+S_{M,e}^s = \{ \lambda \in S_{M,e} : |\lambda| < 1\}, \qquad S_{M,e}^u = \{ \lambda \in S_{M,e} : |\lambda| > 1\}
+\]
+By symmetry, $|S_{M,e}^s| = |S_{M,e}^u| = M+1$. Define
+\begin{equation}\label{eq:defrM}
+r_{M,e} = \min \{ |\lambda| : \lambda \in S_{M,e}^u, |\lambda| > 1 \}.
+\end{equation}
+Since $X_{M,e}^2$ is finite-dimensional, the stable manifold holds. For each $M \geq 1$, let $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ be the $(M+1)$-dimensional stable and unstable manifolds. A breather solution to \cref{eq:dynEqM} is a homoclinic orbit to the equilibrium point at 0 which lies in the intersection of the stable and unstable manifolds. We take the existence of such a solution as a hypothesis.
 
-
-and consider the existence problem \cref{eq:dynEq} and the eigenvalue problem \cref{eq:dynEVP} posed on $X_n$. Then by \cref{hyp:hyp}, 0 is a hyperbolic equilibrium point of \cref{eq:dynEq}. Since we are now in a finite dimensional setting, the stable manifold theorem applies, and we define $W_n^s(0)$ and $W_n^u(0)$ to be the stable and unstable manifolds of 0 for the problem posed on $X_n$. 
-
-We then take the following assumption concerning the existence of a primary, single site breather solution.
 \begin{hypothesis}\label{hyp:breather}
-Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. Then there exists a single site breather solution $\uvec \in \ell^2(\Z,H^2_\per[0,T]$. Writing $U(n) = (u_n, u_{n-1})$, 
+Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. There exists a positive integer $M_0$ such that for all $M \geq M_0$, the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}^2$ in a homoclinic orbit $U^1_M(n) = (u^1_M(n), \tilde{u}^1_M(n))^T$. 
 \end{hypothesis}
-
-\begin{theorem}[Stable manifold theorem]\label{th:stabman}
-Let $T$ be an invertible linear operator on a Banach space $X$. Assume $T$ is hyperbolic according to \cref{def:hyp} with constant $r>1$, and consider the dynamical system on $\Z$
-\begin{equation}\label{eq:stabmaneq}
-U(n+1) = T U(n) + G(U(n)),
+By taking $u_n = u^1_M(n)$, the first component is a breather solution to the approximate DKG equation
+\begin{equation}\label{eq:DKGapprox}
+\begin{aligned}
+\ddot{u}_n &= d (\Delta_2 u)_n - g(u_n) && u_n \in X_M,
+\end{aligned}
 \end{equation}
-where $G: X \rightarrow X$ is $C^1$, with $G(0) = 0$ and $DG(0) = 0$.
-Then there exists constants $M$ and a $C^1$ map $g: E^s \cap B_\delta(0) \rightarrow E^u$ such that the local stable manifold is given by
-\[
-W^s_{loc}(0) = \left\{ (x, g(x)) : x \in E^s, \|x\|\leq \delta \right\}.
-\]
-Furthermore, if $U_0 \in W^s_{loc}(0)$ and $U(n)$ is the solution to \cref{eq:stabmaneq} with $U(0) = U_0$, then for $n \geq 0$, $U(n) \in W^s_{loc}(0)$ and
-\[
-\| U(n) \| \leq C r^{-n}.
-\]
+and $u_n(t)$ is even in $t$,
+
+\subsection{Existence}
+
+We construct a multi-breather on $X_{M,e}$ by splicing together multiple copies of the primary breather $U^1_M(n)$ end-to-end as in \cites{Parker2020,Sandstede1998}. We characterize a multi-breather in the following way. Let $m > 1$ be the total number of copies of the primary breather in the chain. Let $N_i$ ($i = 1, \dots, m-1$) be the distances (in lattice points) between the center point of each breather. We seek to construct a solution $U(n)$ which can be written piecewise in the form
+\begin{equation}\label{eq:Upiecewise}
+\begin{aligned}
+U_i^-(n) &= \sigma_i U^1_M(n) + \tilde{U}_i^-(n) && n \in [-N_{i-1}^-, 0] && \quad i = 1, \dots, m\\
+U_i^+(n) &= \sigma_i U^1_M(n) + \tilde{U}_i^+(n) && n \in [0, N_i^+] && \quad i = 1, \dots, m,
+\end{aligned}
+\end{equation}
+where $\sigma_i \in \{1, -1\}$ represents the orientation of each copy of the primary breather, $N_i^+ = \lfloor \frac{N_i}{2} \rfloor$, $N_i^- = N_i - N_i^+$, and $N_0^- = N_m^+ = \infty$. Adjacent copies of the primary breather are in-phase if $\sigma_i \sigma_{i+1} = 1$ or out-of-phase if $\sigma_i \sigma_{i+1} = -1$. (Again, as in \cite{Pelinovsky2012}, other phase relations are not considered). The functions $\tilde{U}_i^\pm(n)$ in \cref{eq:Upiecewise} are remainder terms, which will be small. We also define the characteristic distance
+\begin{equation}\label{defN}
+N = \frac{1}{2} \min\{ N_i \},
+\end{equation}
+which will be used in the estimates of the remainder terms $\tilde{U}_i^\pm(n)$. The individual pieces $U_i^\pm(n)$ are joined together end-to-end as in \cites{Sandstede1998,Knobloch2000,Parker2020,Parker2021} to create the multi-breather $U(n)$, which can be written in piecewise form as
+\begin{equation}
+\begin{aligned}
+U(n) &= \begin{cases}
+U_i^-\left( n - \sum_{j=1}^{i-1}N_j \right) & \sum_{j=1}^{i-1}N_j - N_{i-1}^- + 1 \leq n \leq \sum_{j=1}^{i-1}N_j \\
+U_i^+\left( n - \sum_{j=1}^{i-1}N_j \right) & \sum_{j=1}^{i-1}N_j + 1 \leq n \leq \sum_{j=1}^{i-1}N_j + N_i^+
+\end{cases}
+&& i = 1, \dots, m,
+\end{aligned}
+\end{equation}
+where we define $\sum_{j=1}^0 N_j = 0$. We then have the following existence theorem concerning the existence of multi-breathers on $X_{M,e}$. 
+
+\begin{theorem}\label{th:multikinks}
+Assume \cref{hyp:hyp} and \cref{hyp:breather}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Then there exists a positive integer $N_0$ with the following property. For all $m > 1$ and distances $N_i \geq N_0$, there exists a unique solution $U(n)$ which comprises, to leading order, $m$ sequential copies of the primary breather, and can be written piecewise in the form \cref{eq:Upiecewise}. For the remainder terms $\tilde{U}_i^\pm(n)$, we have the estimates
+\begin{equation}\label{eq:Uestimates}
+\begin{aligned}
+\| \tilde{U}_i^-(n)\|_{X_M} &\leq C r_{M,e}^{-N_{i-1}^-} r_{M,e}^{-(N_{i-1}^- + n)} && \qquad n = 2, \dots, m\\
+\|\tilde{U}_i^+(n) \|_{X_M} &\leq C r_{M,e}^{-N_i^+} r_{M,e}^{-(N_i^+ - n)} && \qquad n = 1, \dots, m-1 \\
+\| \tilde{U}_1^-(n)\|_{X_M} &\leq C r_{M,e}^{-2N} r_{M,e}^{n} \\
+\|\tilde{U}_m^+(n) \|_{X_M} &\leq C r_{M,e}^{-2N} r_{M,e}^{-n} .
+\end{aligned}
+\end{equation}
+\begin{proof}
+The proof is an adaptation of the proofs of theorems 1 and 3 in \cite{Parker2020}, and is very similar to the proof of \cite[Theorem 1]{Parker2021}. Since the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}$, the implementation of Lin's method does not involve jump conditions.
+\end{proof}
 \end{theorem}
 
-\begin{hypothesis}\label{hyp:breatherexists}
-There exists a homoclinic orbit solution 
-\[
-U_1(n) = (u_1(n),\tilde{u}_1(n))^T = (u_1(n),u_1(n-1))^T
-\]
-to \cref{eq:dynEq} which connects the unstable manifold $W^u(0)$ to the stable manifold $W^s(0)$. Futhermore, the tangent spaces $T_{U_1(n)}W^u(0)$ and $T_{U_1(n)}W^s(0)$ to the unstable and stable manifolds have a one-dimensional intersection spanned by $\partial_t U_1(n)$.
-\end{hypothesis}
 
-It follows from the stable manifold theorem that
-\begin{equation}\label{eq:U1decayest}
-\|U_1(n)\| \leq C r^{-|n|}.
-\end{equation}
 
-The variational equation is the linearization of \cref{eq:dynEq} about the homoclinic orbit solution $U_1(n)$, given by
-\begin{equation}\label{eq:vareq}
-V(n+1) = DF(U_1(n)) V(n).
-\end{equation}
-It follows from \cref{hyp:breatherexists} that $\partial_t U_1(n) = (\partial_t u_1(n),\partial_t \tilde{u}_1(n))^T$ is the unique, bounded solution to \cref{eq:vareq}, up to scalar multiples. We can thus decompose the tangent spaces to $W^u(0)$ and $W^s(0)$ at $U_1(0)$ as
-\begin{equation}\label{eq:TWdecomp}
-T_{U_1(n)}W^u(0) = \R \partial_t U_1(0) \oplus Y^-, \qquad  
-T_{U_1(n)}W^s(0) = \R \partial_t U_1(0) \oplus Y^+.
-\end{equation}
-It follows that the adjoint variational equation
-\begin{equation}\label{eq:adjvareq}
-Z(n) = DF(U_1(n))^* Z(n+1)
-\end{equation}
-has a unique bounded solution, which is given by
-\begin{equation}\label{eq:Z1}
-Z_1(n) = (\partial_t u_1(n-1),\partial_t u_1(n))^T,
-\end{equation}
-and that $Z_1(0) \perp \R \partial_t U_1(0) \oplus Y^- \oplus Y^+$ by \cite{Parker2020}*{Lemma 1}. Furthermore, $\R Z_1(0) = (\R \partial_t U_1(0) \oplus Y^- \oplus Y^+)^\perp$, otherwise there would be another bounded solution to \cref{eq:adjvareq} which is linearly independent from $Z_1(n)$. We can then decompose $X$ as
-\begin{equation}\label{eq:Xdecomp}
-X = \R \partial_t U_1(0) \oplus Y^- \oplus Y^+ \oplus \R Z_1(0).
-\end{equation}
+\subsection{Spectral stability}
+
+
+% From the stable manifold, we obtain the estimate 
+% \begin{equation}\label{eq:U1decayest}
+% \|U^1_M(n)\|_{X_{M,e}} \leq C r_{M,e}^{-|n|}.
+% \end{equation}
+
+% The variational equation is the linearization of \cref{eq:dynEqM} about the homoclinic orbit solution $U^1_M(n)$, given by
+% \begin{equation}\label{eq:vareq}
+% W(n+1) = DF_M(U_M^1(n)) W(n).
+% \end{equation}
+% Since the tangent spaces of $W_M^s(0)$ and $W_M^u(0)$ have a one-dimensional intersection by \cref{hyp:breather}, it follows that 
+% $\dot{U}_M^1(n) = (\dot{u}_M^1(n), \dot{\tilde{u}}_M^1(n)) = (\dot{u}_M^1(n), \dot{u}_M^1(n-1))$ 
+% is the unique, bounded solution to \cref{eq:vareq}, up to scalar multiples. (The fact that it is a solution can be verified by differentiating \cref{eq:DKGapprox} with respect to $t$). We can thus decompose the tangent spaces to $W_M^u(0)$ and $W_M^s(0)$ at $U_M^1(0)$ as
+% \begin{equation}\label{eq:TWdecomp}
+% T_{U_M^1(0)}W^u(0) = \R \dot{U}_M^1(0) \oplus Y_M^-, \qquad  
+% T_{U_M^1(0)}W^s(0) = \R \dot{U}_M^1(0) \oplus Y_M^+,
+% \end{equation}
+% where $\dim Y_M^- = \dim Y_M^+ = 2M$. In addition, the adjoint variational equation
+% \begin{equation}\label{eq:adjvareq}
+% Z(n) = DF_M(U_M^1(n))^* Z(n+1)
+% \end{equation}
+% has a unique bounded solution, given by
+% \begin{equation}\label{eq:Z1}
+% Z_M^1(n) = (-\dot{u}_M^1(n-1), \dot{u}_M^1(n))^T,
+% \end{equation}
+% and $Z_M^1(0) \perp \R \dot{U}_M^1(0) \oplus Y_M^- \oplus Y_M^+$ by \cite{Parker2020}*{Lemma 1}. We can thus decompose $X_M$ as
+% \begin{equation}\label{eq:Xdecomp}
+% X_M = \R \partial_t U_1(0) \oplus Y_M^- \oplus Y_M^+ \oplus \R Z_M^1(0).
+% \end{equation}
 
 \section{Exponential dichotomy}
 
