@@ -144,7 +144,7 @@ Morse & $\frac{1}{2}(1 - e^{-u})^2$ & $e^{-u}(1 - e^{-u})$ \\ \bottomrule
 \label{table:V}
 \end{table}
 
-\subsection{Breathers}
+\subsection{Breathers}\label{sec:DKGbreather}
 
 We consider here breather solutions to \cref{eq:DKG}, which are periodic in time and exponentially localized on the lattice. Specifically, a breather solution $\uvec$ is a solution $\uvec \in \ell^2(\Z, H^2_\per[0,T])$, where $H^2_\per[0,T]$ is the Hilbert-Sobolev space of periodic, real-valued functions on $[0,T]$. 
 The fundamental period $T$ is the smallest positive real number for which $\uvec(t+T) = \uvec(t)$ for all $t$. At the anti-continuum (AC) limit, where $d = 0$, the individual sites in the lattice are decoupled. Each site $u_n(t)$ is a $T$-periodic solution to the nonlinear oscillator equation
@@ -161,7 +161,7 @@ In \cite{Pelinovsky2012}, Pelinovsky and Sakovich prove the existence of multi-s
 \end{equation}
 at the AC limit, where $\phi(t)$ is the fundamental AC breather, $\evec_{k_i}$ is the unit vector for site $k_i$ in the integer lattice, and $\sigma_i \pm 1$ is the phase factor for the oscillator at site $k_i$. Adjacent oscillators are in-phase if $\sigma_i \sigma_{i+1} = 1$ and out-of-phase if $\sigma_i \sigma_{i+1} = 1$. They then use the implicit function theorem to prove the existence of a multi-site breather $\uvec^{(d)}(t)$ to \cref{eq:DKG} for $d$ sufficiently small \cite[Theorem 1]{Pelinovsky2012}. Although other configurations of multi-site breathers, in which adjacent oscillators are neither in-phase nor out-of-phase, may be possible for $d > 0$, we will not consider this possibility here (see also \cite[Remark 2]{Pelinovsky2012}).
 
-\subsection{Linearization}
+\subsection{Linearization}\label{sec:DKGlinear}
 
 For a specific coupling constant $d$ and fundamental period $T$, let $\uvec(t)$ be a breather solution to \cref{eq:DKG}. To study spectral stability of a breather solution $\uvec(t)$, we substitute the perturbation ansatz $\uvec(t) + \epsilon \vvec(t)$ into \cref{eq:DKG} and keep terms of order $\epsilon$ to obtain the linearized equation.
 \begin{equation}\label{eq:DKGlinear}
@@ -344,9 +344,9 @@ The coupling constant $d$ and period $T$ are chosen so that the spectrum of $DF(
 % \end{proof}
 % \end{lemma}
 
-\subsection{Finite dimensional approximation}
+\section{Finite dimensional approximation}
 
-We now define our finite dimensional approximation for \cref{eq:dynEq}. For $M \geq 1$, let 
+In this section, we define our finite dimensional approximation for \cref{eq:dynEq}. For $M \geq 1$, let 
 \begin{equation}\label{eq:XM}
 X_M = \spn\left\{ \bigcup_{k = -M}^M v_k(t) \right\}, \qquad
 v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right).
@@ -356,38 +356,31 @@ be the $(2M+1)$-dimensional subspace of $L_\per^2([0,T])$ spanned by the Fourier
 P_M u(t) = \sum_{k=-M}^M \langle u, v_k \rangle_{L^2([0,T])} v_k(t)
 = \sum_{k=-M}^M \left( \int_0^T u(s) \overline{v_k(s)} ds \right) v_k(t)
 \end{equation}
-be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. Let $X_{M,e}$ be the $(M+1)$-dimensional subspace of $X_M$ comprising functions which are even in $t$, i.e.
+be the corresponding projection operator, which is smooth in $t$ as long as $u$ is also smooth in $t$. In addition, let $X_{M,e}$ be the $(M+1)$-dimensional subspace of $X_M$ comprising functions which are even in $t$, i.e.
 \begin{equation}
 X_{M,e} = \left\{ f \in X_M : f(-t) = f(t) \text{ for all }t \in \R \right\}.
 \end{equation}
-% An orthonormal basis for $X_{M,e}$ is $\left\{ \tilde{v}_k(t) \right\}_{k=0}^M$, where
-% \begin{equation}\label{eq:vktilde}
-% \tilde{v}_k(t) = \begin{cases}
-% \frac{1}{T} & k = 0 \\
-% \frac{2}{T} \cos\left( \frac{2 \pi k t}{T} \right) & k = 1, \dots, M.
-% \end{cases}
-% \end{equation}
-Applying the projection $P_M$ to both components of \cref{eq:dynEq}, i.e. projecting onto $X_M^2$, we obtain
-\begin{equation}
-\begin{pmatrix}P_M u(n+1) \\ P_M \tilde{u}(n+1) \end{pmatrix} = 
-\begin{pmatrix}2 P_M u  + \dfrac{1}{d}P_M f(u) + \dfrac{1}{d} P_M \partial_t^2 u - P_M \tilde{u} \\
-P_M u
-\end{pmatrix}.
+
+For $M \geq 1$, we define the approximation of the discrete Klein-Gordon equation \cref{eq:DKG} on $\ell^2(\Z, X_M)$ by
+\begin{equation}\label{eq:DKGapprox}
+\begin{aligned}
+\ddot{u}_n &= d (\Delta_2 u)_n - g(u_n) && u_n \in X_M,
+\end{aligned}
 \end{equation}
-% The operators $P_M$ and $\partial_t$ commute, since 
-% \begin{align*}
-% \langle \dot{u}, v_k \rangle v_k &= -\langle u, \dot{v}_k \rangle v_k
-% = -\left\langle u, \frac{2 \pi i k}{T} v_k \right\rangle v_k \\
-% &= -\left( -\frac{2 \pi i k}{T} \right) \langle u, v_k \rangle v_k
-% = \langle u, v_k \rangle \left( \frac{2 \pi i k}{T} \right) v_k 
-% = \langle u, v_k \rangle \dot{v}_k,
-% \end{align*}
-% where we used the fact that the differentiation operator is anti-self-adjoint, and the inner product is conjugate linear in the second component. It follows that $P_M$ and $\partial_t^2$ commute. 
-While the projection $P_M$ commutes with the differentiation operator $\partial_t^2$, in general it not the case that $P_M f(u) = f(P_M u)$. However, since $u$ is smooth, $(I-P_M)u$ will be small for sufficiently large $M$, thus we expand $f(u)$ as
-\[
-f(u) = f( P_M u + (I-P_M)u) = f(P_M u) + \mathcal{O}((I-P_M)u)
-\]
-and keep only the first term to get the approximate system on $X_M^2$
+where $g: X_M \rightarrow X_M$ is defined by $g(u) = P_M f(u)$. When $u = 0$, $g(0) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$.
+Furthermore, since $f$ is an odd function, $g$ is as well. In general, it not the case that $P_M f(u) = f(P_M u)$, thus we cannot simply obtain a solution to \cref{eq:DKGapprox} by projecting a solution of \cref{eq:DKG} onto $X_M$. However, since the Fourier coefficients of a smooth, $T$-periodic function $u$ decay exponentially, equation \cref{eq:DKGapprox} should be a reasonable approximation to \cref{eq:DKG} for large $M$. Linearization of \cref{eq:DKGapprox} about a solution $\uvec \in \ell^2(\Z, X_M)$ yields the eigenvalue problem
+\begin{equation}\label{eq:DKGMeig}
+\begin{aligned}
+d (\Delta_2 w)_n - g'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
+\end{aligned}
+\end{equation}
+which we write as
+\begin{equation}\label{eq:DKGMeigL}
+\calL_M(\uvec)\wvec = (2 \lambda \partial_t + \lambda^2 )\wvec,
+\end{equation} 
+where $\calL_M(\uvec)$ is the linear operator on $\ell^2(\Z, X_M)$ defined by the LHS of \cref{eq:DKGMeigL}. As in \cref{sec:DKGlinear}, $\calL_M(\uvec) \dot{\uvec} = 0$, and there exists a solution $\yvec$ to $\calL_M(\uvec) \yvec = 2 \ddot{\uvec}$, where $\yvec = \omega \partial_\omega \uvec$ and $\omega = \frac{2\pi}{T}$.
+
+Reformulating \cref{eq:DKGapprox} from a spatial dynamics perspective yields the discrete dynamical system on $X_M^2$
 \begin{align}\label{eq:dynEqM}
 U(n+1) &= F_M(U(n)) && U(n) \in X_M^2,
 \end{align}
@@ -398,44 +391,20 @@ F_M\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} =
 u
 \end{pmatrix}
 \end{equation}
-and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. When $u = 0$, $g(0) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. Furthermore, since $f$ is an odd function, so is $g$, thus $F_M(-U) = -F_M(U)$. It follows that if $U(n)$ is a solution to \cref{eq:dynEqM}, so is $-U(n)$. If $U(n) = (u(n), \tilde{u}(n))^T$ is a solution to \cref{eq:dynEqM}, then, by taking $u_n = u(n)$, the first component $u(n)$ is a breather solution to the approximate DKG equation
-\begin{equation}\label{eq:DKGapprox}
-\begin{aligned}
-\ddot{u}_n &= d (\Delta_2 u)_n - g(u_n) && u_n \in X_M.
-\end{aligned}
+Since $F_M(-U) = -F_M(U)$, it follows that if $U(n)$ is a solution to \cref{eq:dynEqM}, so is $-U(n)$. Similarly, the eigenvalue problem \cref{eq:DKGMeig} can be reformulated as
+\begin{equation}\label{eq:dynEVPM}
+W(n+1) = \left[ DF_M(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
 \end{equation}
-Linearization of \cref{eq:DKGapprox} about a solution $\uvec \in \ell^2(\Z, X_M)$ yields the eigenvalue problem
-\begin{equation}\label{eq:DKGMeigL}
-\begin{aligned}
-d (\Delta_2 w)_n - g'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
-\end{aligned}
-\end{equation}
-which we write as $\calL_M(\uvec)\wvec = (2 \lambda \partial_t + \lambda^2 )\wvec$, where 
-$\calL_M(\uvec)$ is the linear operator on $\ell^2(\Z, X_M)$ defined by the LHS of \cref{eq:DKGMeigL}.
-As i 
+where $B$ is defined in \cref{eq:DFU}.
 
-\begin{equation}\label{eq:dynEVP}
-W(n+1) = \left[ DF(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
-\end{equation}
-where
-\begin{equation}\label{eq:DFU}
-DF(U(n)) = \begin{pmatrix}
-2 + \dfrac{f'(u(n))}{d} + \dfrac{1}{d}\partial_t^2  & -1 \\ 1 & 0
-\end{pmatrix}, \qquad
-B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
-\end{equation}
-
-
-
-
-Let $\{\tau(s) : s \in \R\}$ be the one-parameter group of unitary translation operators on $X_M^2$, defined by $[\tau(s)]U(\cdot) = U(\cdot - s)$, which has infinitesimal generator $\tau'(0) = \partial_t$. We note that this group is well-defined on $X_M^2$, since 
+Finally, let $\{\tau(s) : s \in \R\}$ be the one-parameter group of unitary translation operators on $X_M^2$, defined by $[\tau(s)]U(\cdot) = U(\cdot - s)$, which has infinitesimal generator $\tau'(0) = \partial_t$. We note that this group is well-defined on $X_M^2$, since 
 \[
 \tau(s) v_k(t) 
 \frac{1}{T} \exp\left( i \frac{2 \pi k (t-s)}{T}\right) 
 = \exp\left( -i \frac{2 \pi k s}{T} \right) \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T}\right) 
 = \exp\left( -i \frac{2 \pi k s}{T} \right) v_k(t),
 \]
-i.e. the group action multiplies a basis element by a constant. In fact, the eigenvalue at 0 of \cref{eq:DKGeig} is a result of this translational symmetry. The function $F_M$ from \cref{eq:dynEqM} (as well as $F$ from the full system \cref{eq:dynEq}) commutes with this one-parameter group, i.e. $F(\tau(s) U) = \tau(s) F(U)$. It is cruicial to note that this symmetry is lost if we consider the problem \cref{eq:dynEqM} on $X_{M,e}^2$, since the space of even functions is not translation invariant. 
+i.e. the group action multiplies a basis element by a constant. In fact, the eigenvalue at 0 is a result of this translational symmetry. The function $F_M$ from \cref{eq:dynEqM} (as well as $F$ from the full system \cref{eq:dynEq}) commutes with this one-parameter group, i.e. $F(\tau(s) U) = \tau(s) F(U)$. It is cruicial to note that this symmetry is lost if we consider the problem \cref{eq:dynEqM} on $X_{M,e}^2$, since the space of even functions is not translation invariant. 
 
 \section{Multi-breathers}
 
@@ -458,12 +427,10 @@ Since $X_{M,e}^2$ is finite-dimensional, the stable manifold holds. For each $M 
 \begin{hypothesis}\label{hyp:breather}
 Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. There exists a positive integer $M_0$ such that for all $M \geq M_0$, the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}^2$ in a homoclinic orbit $Q_M(n) = (q_M(n), \tilde{q}_M(n))^T$. 
 \end{hypothesis}
-
-In addition, we obtain the estimate 
+As a consequence of the stable manifold theorem, we obtain the estimate 
 \begin{equation}\label{eq:U1decayest}
-\|Q_M(n)\|_{X_M} \leq C r_M^{-|n|}
+\|Q_M(n)\|_{X_M} \leq C r_M^{-|n|}.
 \end{equation}
-as a consequence of the stable manifold theorem.
 
 We now consider \cref{eq:dynEqM} on $X_M^2$. The spectrum of $DF(0)$ on $X_M^2$ is exactly the same as that on $X_{M,e}^2$, except the eigenvalues corresponding to $k = 1, \dots, M$ have multiplicity of 2. It follows that 0 is also a hyperbolic equilibrium of \cref{eq:dynEqM} on $X_M^2$. Let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds, which are subsets of $X_M^2$. For $M \geq M_0$, $Q_M(n)$ is also a homoclinic orbit connecting these stable and unstable manifolds. In the next hypothesis, we assume that this intersection is non-degenerate.
 
@@ -524,12 +491,15 @@ where we define $\sum_{j=1}^0 N_j = 0$. We then have the following existence the
 Assume \cref{hyp:hyp} and \cref{hyp:breather}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Then there exists a positive integer $N_0$ with the following property. For all $m > 1$ and distances $N_i \geq N_0$, there exists a unique solution $U(n)$ which comprises, to leading order, $m$ sequential copies of the primary breather, and can be written piecewise in the form \cref{eq:Upiecewise}. For the remainder terms $\tilde{U}_i^\pm(n)$, we have the estimates
 \begin{equation}\label{eq:Uestimates}
 \begin{aligned}
+\tilde{U}_i^+(N_i^+) &= \sigma_{i+1} Q_M(-N_i^-) + \mathcal{O}(r_M^{-2N}) \\
+\tilde{U}_{i+1}^-(-N_i^-) &= \sigma_{i} Q_M(N_i^+) + \mathcal{O}(r_M^{-2N}) \\ 
 \| \tilde{U}_i^-(n)\|_{X_M} &\leq C r_M^{-N_{i-1}^-} r_M^{-(N_{i-1}^- + n)} && \qquad n = 2, \dots, m\\
 \|\tilde{U}_i^+(n) \|_{X_M} &\leq C r_M^{-N_i^+} r_M^{-(N_i^+ - n)} && \qquad n = 1, \dots, m-1 \\
 \| \tilde{U}_1^-(n)\|_{X_M} &\leq C r_M^{-2N} r_M^{n} \\
-\|\tilde{U}_m^+(n) \|_{X_M} &\leq C r_M^{-2N} r_M^{-n} .
+\|\tilde{U}_m^+(n) \|_{X_M} &\leq C r_M^{-2N} r_M^{-n},
 \end{aligned}
 \end{equation}
+which hold as well for derivatives of the functions.
 \begin{proof}
 The proof is an adaptation of the proofs of theorems 1 and 3 in \cite{Parker2020}, and is very similar to the proof of \cite[Theorem 1]{Parker2021}. Since the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}$, the implementation of Lin's method does not involve jump conditions.
 \end{proof}
@@ -537,14 +507,45 @@ The proof is an adaptation of the proofs of theorems 1 and 3 in \cite{Parker2020
 
 \subsection{Spectral stability}
 
-
+For a multi-breather consisting of $m$ components, as long as the individual copies of the primary breather are sufficiently well separated, there will be $2(m-1)$ interaction eigenvalues in spectrum of \cref{eq:DKGMeig}, which will be located near the origin. As in \cites{Parker2020,Sandstede1998}, we locate these eigenvalues by using Lin's method to construct the corresponding eigenfunctions, which gives us the following theorem. The proof is given in \cref{app:specproof}.
 
 \begin{theorem}\label{th:spectrum}
 Assume \cref{hyp:hyp}, \cref{hyp:breather}, and \cref{hyp:breathernondegen}. Let $U(n)$ be an $m$-component multi-breather constructed as in \cref{th:multibreathers} with distances $N_i$ and orientation parameters $\sigma_i$. Then there exists $\delta > 0$ small with the following property. $\lambda$ is an eigenvalue of the linearization about $\phi^m_n(t)$ if and only if $E(\lambda) = 0$, where
 \begin{equation}\label{Elambda}
-E(\lambda) = \det\left(A - \frac{1}{d}M \lambda^2 I + R(\lambda)\right).
+E(\lambda) = \det\left(A - \frac{1}{d}M \lambda^2 I + R(\lambda)\right),
 \end{equation}
-$A$ is the tridiagonal $m \times m$ matrix
+where
+\begin{align}\label{eq:M}
+M =
+\sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n(t)^2 + 2 \partial_t y_n(t) q_n(t) \right) dt,
+\end{align}
+$A$ is the tri-diagonal $m \times m$ matrix
+\begin{align}\label{eq:matrixA}
+A &= \begin{pmatrix}
+-a_1 & a_1 & & & \\
+-\tilde{a}_1 & \tilde{a}_1 - a_2 & a_2 \\
+& -\tilde{a}_2 & \tilde{a}_2 - a_3 & a_3 \\
+& \ddots & & \ddots \\
+& & & -\tilde{a}_{m-1} & \tilde{a}_{m-1}  \\
+\end{pmatrix},
+\end{align}
+with
+\begin{equation}
+\begin{aligned}
+a_i &= \sigma_i \sigma_{i+1} \int_0^T \left[ \dot{q}_M(N_i^+)\dot{q}_M(-N_i^- - 1) 
+- \dot{q}_M(N_i^+ - 1)\dot{q}_M(-N_i^-) \right] dt \\
+\tilde{a}_i &= \sigma_i \sigma_{i+1} \int_0^T \left[ \dot{q}_M(-N_i^i)\dot{q}_M(N_i^+ - 1) 
+- \dot{q}_M(-N_i^- - 1)\dot{q}_M(N_i^+) \right] dt.
+\end{aligned}
+\end{equation}
+The remainder term has uniform bound
+\begin{equation}\label{eq:Rbound}
+R(\lambda)(c)\|_{X_M^2} \leq C \left( (r_M^{-N} + |\lambda|)^3\right).
+\end{equation}
+\end{theorem}
+
+
+
 \begin{align}\label{matrixA}
 A &= \begin{pmatrix}
 -a_1 & a_1 & & & \\
@@ -554,18 +555,13 @@ a_1 & -a_1 - a_2 & a_2 \\
 & & & a_{m-1} & -a_{m-1}  \\
 \end{pmatrix},
 \end{align}
-where
-\begin{align*}
-M &= \sum_{n = -\infty}^\infty \int_0^T \left( \dot{\phi}_n(t)^2 - 2 z_n(t) \ddot{\phi}_n(t)^2 \right) dt
-\end{align*}
+
 \begin{align*}
 a_i &= \begin{cases}
 \sigma_i \sigma_{i+1} \int_0^T \dot{\phi}_{\frac{N_i}{2}}(t)\left( \dot{\phi}_{\frac{N_i}{2}+1}(t) - \dot{\phi}_{\frac{N_i}{2}-1}(t) \right) dt & N_i \text{ even} \\
 \sigma_i \sigma_{i+1} \int_0^T \left( \dot{\phi}_{\frac{N_i-1}{2}}(t)\dot{\phi}_{\frac{N_i+3}{2}}(t) - \dot{\phi}_{\frac{N_i+1}{2}}(t)\dot{\phi}_{\frac{N_i-3}{2}}(t) \right) dt & N_i \text{ odd}
 \end{cases} \\
 \end{align*}
-and $z_n(t)$ is defined in \cref{eq:Lphikernel}. The remainder term has $R(\lambda)$ has some suitable bound.
-\end{theorem}
 
 \section{Numerical results}
 
@@ -620,12 +616,76 @@ and $z_n(t)$ is defined in \cref{eq:Lphikernel}. The remainder term has $R(\lamb
 	\label{fig:timestepSG}
 \end{figure}
 
-
-
 \paragraph{Acknowledgments}
 
 This material is based upon work supported by the U.S. National Science Foundation under the RTG grant DMS-1840260 (R.P. and A.A.)
 and DMS-1809074 (P.G.K.).
+
+\appendix
+
+\section{Proof of \texorpdfstring{\cref{th:spectrum}}{Theorem 2} }\label{app:specproof}
+
+The proof is a straightforward adaptation of the proof of \cite[Theorem 2]{Parker2020}. We take as an ansatz for the eigenfunction $W(n)$ the following piecewise linear combination
+\begin{equation}\label{eq:Wansatz}
+W_i^\pm(n) = c_i ( \dot{U}_i^\pm(n) + \lambda Y_i^\pm(n) ) + \tilde{W}_i^\pm(n),
+\end{equation}
+where $c_i \in \C$, and $W_i^\pm(n)$ is defined on the same interval as $U_i^\pm(n)$ in \cref{eq:Upiecewise}. Substituting \cref{eq:Wansatz} into \cref{eq:dynEVPM}, using the relations
+\begin{equation}
+\begin{aligned}
+\dot{U}_i^\pm(n+1) &= DF_M(U(n))\dot{U}_i^\pm(n) \\ 
+\qquad Y_i^\pm(n+1) &= DF_M(U(n)) Y_i^\pm(n) + 2 \partial_t B \dot{U}_i^\pm(n)
+\end{aligned}
+\end{equation}
+and simplifying, we obtain the equation
+\begin{equation}\label{eq:EVPpiecewise}
+\begin{aligned}
+\tilde{W}_i^\pm(n+1) &= DF(\sigma_i Q_M(n)) \tilde{W}_i^\pm(n) + \lambda^2 c_i B[ 2 \partial_t Y_i^\pm(n) + \dot{U}_i^\pm(n)] \\
+&\quad+ [G_i^\pm(n) + (2 \lambda \partial_t + \lambda^2) B] \tilde{W}_i^\pm(n) + c_i \lambda^3 B Y_i^\pm(n)
+\end{aligned}
+\end{equation}
+where
+\begin{equation}\label{eq:Gipm}
+G_i^\pm(n) = DF_M(U_i^\pm(n)) - DF_M(\sigma_i Q_M(n)).
+\end{equation}
+In addition to solving \cref{eq:EVPpiecewise}, the eigenfunction $W_i^\pm$ must satisfy matching conditions at $n = \pm N_i$ and $n = 0$. As in \cites{Parker2020,Parker2021,Sandstede1998}, this will in general not be possible. Instead, we solve the system 
+\begin{equation}\label{eq:EVPsystem}
+\begin{aligned}
+\tilde{W}_i^\pm(n+1) &= DF(\sigma_i Q_M(n)) \tilde{W}_i^\pm(n) + \lambda^2 c_i B[ 2 \partial_t Y_i^\pm(n) + \dot{U}_i^\pm(n)] \\
+&\quad+ [G_i^\pm(n) + (2 \lambda \partial_t + \lambda^2) B] \tilde{W}_i^\pm(n) + c_i \lambda^3 B Y_i^\pm(n) \\
+\tilde{W}_i^+(N_i^+) &- \tilde{W}_{i+1}^-(-N_i^-) = C_i c \\
+\tilde{W}_i^+(0) &- \tilde{W}_i^-(0) \in \C Z_M(n),
+\end{aligned}
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+C_i c &= [ \dot{U}_{i+1}^-(-N_i^-) + \lambda Y_{i+1}^-(-N_i^-) ]c_{i+1} 
+- [ \dot{U}_i^+(N_i^+) + \lambda Y_i^+(N_i^+) ] c_i.
+\end{aligned}
+\end{equation}
+A solution to \cref{eq:EVPsystem} is an eigenfunction if and only if the $m$ jump conditions
+\begin{equation}\label{eq:jump1}
+\xi_i = \langle Z_m(0), \tilde{W}_i^+(0) - \tilde{W}_i^-(0) \rangle = 0
+\end{equation}
+are satisfied.
+
+We proceed as in the proof of \cite[Theorem 2]{Parker2020}. Since $DF(0)$ is hyperbolic, and $\| Q_M(n) \|_{X_M^2} \leq C r_M^{-|n|}$ by the stable manifold theorem, we can adapt the results of \cite{Palmer1988} to decompose the evolution operator $\Phi(m,n)$ of the variational equation \cref{eq:vareq} in exponential dichotomies on $\Z^\pm$. We then rewrite \cref{eq:EVPpiecewise} as a fixed point problem using the discrete variation of constants formula (see, for example, \cite[Lemma 3]{Parker2020}), and project onto the stable and unstable subspaces of the exponential dichotomy. From there, we proceed as in \cite{Parker2020}, using the estimates \cref{eq:Uestimates}, to obtain a unique solution to \cref{eq:EVPsystem}. The jump conditions \cref{eq:jump1} become
+\begin{equation}\label{eq:jump2}
+\begin{aligned}
+\xi_i &= \sigma_i \sigma_{i+1} \langle Z_M(N_i^+), \dot{Q}_M (-N_i^-) \rangle (c_{i+1} - c_i) 
++ \sigma_i\sigma_{i-1} \langle  Z_1(-N_{i-1}^-), \dot{Q}(N_{i-1}^+) \rangle (c_i - c_{i-1}) \\
+&\qquad -\frac{1}{d} \lambda^2 M + R(\lambda)_i(c).
+\end{aligned}
+\end{equation}
+where
+\begin{align*}
+M &= -\sum_{n=-\infty}^\infty \left\langle Z_M(n+1), B[ 2 \partial_t Y(n) + \dot{Q}(n)]\right\rangle 
+= \sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n(t)^2 + 2 \partial_t y_n(t) q_n(t) \right) dt.
+\end{align*}
+and the remainder term has uniform bound
+\[
+\| R(\lambda)(c)\|_{X_M^2} \leq C \left( (r_M^{-N} + |\lambda|)^3\right).
+\]
 
 \bibliographystyle{amsplain}
 \bibliography{DKG.bib}
