@@ -63,6 +63,8 @@
 \newcommand{\uvec}{\mathbf{u}}
 \newcommand{\vvec}{\mathbf{v}}
 \newcommand{\wvec}{\mathbf{w}}
+\newcommand{\xvec}{\mathbf{x}}
+\newcommand{\yvec}{\mathbf{y}}
 \newcommand{\zvec}{\mathbf{z}}
 
 \DeclareMathOperator{\spn}{span}
@@ -183,11 +185,11 @@ There is always a Floquet exponent at 0 (corresponding to the Floquet multiplier
 \begin{equation}\label{eq:Lkernel1}
 \calL(\uvec)\dot{\uvec} = 0,
 \end{equation}
-which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\zvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves 
+which can be verified by differentiating \cref{eq:DKG} with respect to $t$. Furthermore, there exists a solution $\yvec \in \ell^2(\Z, H^2_\per[0,T])$ which solves 
 \begin{equation}
-\calL(\uvec)\zvec = 2 \ddot{\uvec},
+\calL(\uvec)\yvec = 2 \ddot{\uvec},
 \end{equation}
-and can be constrained to be perpendicular to $\dot{\uvec}$ with respect to the inner product \cref{eq:IP1} (see \cite[Section 3]{Pelinovsky2012}). In fact, we can actually compute $\zvec(t)$. 
+and can be chosen to be perpendicular to $\dot{\uvec}$ with respect to the inner product \cref{eq:IP1} (see \cite[Section 3]{Pelinovsky2012}). In fact, we can actually compute $\yvec(t)$. 
 Letting $\omega = \frac{2 \pi}{T}$ be the frequency of the breather and normalizing the period of the breather to $2 \pi$ by rescaling the time variable to $\tau = \omega T$, as in \cite{kevrekidis2016}, equation \cref{eq:DKG} becomes
 \begin{equation}\label{eq:DKGomega}
 \omega^2 \partial_\tau^2 u_n = d (\Delta_2 u)_n - f(u_n).
@@ -197,7 +199,7 @@ Differentiating with respect to $\omega$, we obtain
 d (\Delta_2 \partial_\omega u)_n - f'(u_n)\partial_\omega u_n 
 - \omega^2 \partial_\tau^2 ( \partial_\omega u_n) = 2 \omega \partial_\tau^2 u_n.
 \end{equation}
-Changing variables back to $t$, this becomes $\calL(\uvec)\partial_\omega \uvec = \frac{2}\omega \ddot{\uvec}$, thus $\zvec = \omega \partial_\omega \uvec$.
+Changing variables back to $t$, this becomes $\calL(\uvec)\partial_\omega \uvec = \frac{2}\omega \ddot{\uvec}$, thus $\yvec = \omega \partial_\omega \uvec$.
 
 \subsection{Continuous spectrum}
 
@@ -252,13 +254,13 @@ We note that since $f$ is a odd function, if $U(n)$ is a solution to \cref{eq:dy
 W(n+1) = \left[ DF(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
 \end{equation}
 where
-\begin{equation}\label{eq:DF0}
+\begin{equation}\label{eq:DFU}
 DF(U(n)) = \begin{pmatrix}
 2 + \dfrac{f'(u(n))}{d} + \dfrac{1}{d}\partial_t^2  & -1 \\ 1 & 0
 \end{pmatrix}, \qquad
 B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
 \end{equation}
-The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider $U(n)$ to be a homoclinic orbit of the equilibrium at 0. The complication here is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, rather than just $H^2_\per([0,T], \R^2)$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Roughly, this subspace consists of the first $N$ Fourier modes of the standard basis for $L_\per^2([0,T])$. Although this is a limited result, we note that since $U(n)$ is smooth, it Fourier coefficients decay exponentially. Since we can take $N$ as large as we like, this is a very good approximation. In addition, since the numerical simulations are performed using Fourier spectral methods, this theory applies directly to the numerical discretization. Before we formulate our approximation, we prove some important results about the spectrum of $DF(0)$.
+The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. The standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider $U(n)$ to be a homoclinic orbit of the equilibrium at 0. The complication here is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, rather than just $H^2_\per([0,T], \R^2)$, since each application of \cref{eq:dynEq} involves differentiating twice with respect to $t$. Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Roughly, this subspace consists of the first $N$ Fourier modes of the standard basis for $L_\per^2([0,T])$. Although this is a limited result, we note that since $U(n)$ is smooth, its Fourier coefficients decay exponentially. Since we can take $N$ as large as we like, this is a very good approximation. In addition, since the numerical simulations are performed using Fourier spectral methods, this theory applies directly to the numerical discretization. Before we formulate our approximation, we prove some important results about the spectrum of $DF(0)$.
 
 \subsection{Spectrum of \texorpdfstring{$DF(0)$}{DF(0)}}
 
@@ -321,27 +323,26 @@ We take the following assumption on the spectrum of $DF(0)$, which is the analog
 The coupling constant $d$ and period $T$ are chosen so that the spectrum of $DF(0)$ is bounded away from the unit circle.
 \end{hypothesis}
 
-Finally, we show that the eigenfunctions of $DF(0)$ are a Hilbert basis for $L^2_\per([0,T],\R^2)$.
-
-\begin{lemma}\label{lemma:DF0basis}
-Assume \cref{hyp:hyp}. The set of eigenfunctions $\bigcup_{k \in \Z} \{U_k(t) , U_k^{-1}(t) \}$ of $DF(0)$ is a Hilbert basis for $L^2_\per([0,T],\R^2)$, i.e. every function $Y(t) \in L^2_\per([0,T],\R^2)$ can be written uniquely as
-\begin{equation}\label{eq:yinDF0basis}
-Y(t) = \sum_{k \in \Z} a_k U_k(t) + \sum_{k \in \Z} b_k U^{-1}_k(t),
-\end{equation}
-where $a_k, b_k \in \C$ and the sum converges for all $Y(t)$.
-\begin{proof}
-Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, the set $\{ v_k(t) : k \in \Z \}$ is an orthonormal basis for $L^2_\per([0,T],\R)$. It follows that the set $\bigcup_{k \in \Z} \{Z^1_k(t) , Z^2_k(t) \}$ is an orthonormal basis for $L^2_\per([0,T],\R^2)$, where $Z^1_k(t) = (v_k(t), 0)^T$ and $Z^2_k(t) = (0, v_k(t))^T$. Therefore, there exist unique scalars $c_k, d_k \in \C$ such that
-\begin{equation*}
-Y(t) = \sum_{k \in \Z} c_k Z^1_k(t) + \sum_{k \in \Z} d_k Z^2_k(t),
-\end{equation*}
-and the sum converges for all $Y(t)$. Equation \cref{eq:yinDF0basis} follows by taking
-\[
-a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
-b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
-\]
-where $\lambda_k$ is defined in \cref{eq:DF0lambdak}, and $\lambda_k^2 \neq 1$ by \cref{hyp:hyp}.
-\end{proof}
-\end{lemma}
+% Finally, we show that the eigenfunctions of $DF(0)$ are a Hilbert basis for $L^2_\per([0,T],\R^2)$.
+% \begin{lemma}\label{lemma:DF0basis}
+% Assume \cref{hyp:hyp}. The set of eigenfunctions $\bigcup_{k \in \Z} \{U_k(t) , U_k^{-1}(t) \}$ of $DF(0)$ is a Hilbert basis for $L^2_\per([0,T],\R^2)$, i.e. every function $Y(t) \in L^2_\per([0,T],\R^2)$ can be written uniquely as
+% \begin{equation}\label{eq:yinDF0basis}
+% Y(t) = \sum_{k \in \Z} a_k U_k(t) + \sum_{k \in \Z} b_k U^{-1}_k(t),
+% \end{equation}
+% where $a_k, b_k \in \C$ and the sum converges for all $Y(t)$.
+% \begin{proof}
+% Letting $v_k(t) = \frac{1}{T} \exp\left( i \frac{2 \pi k t}{T} \right)$, the set $\{ v_k(t) : k \in \Z \}$ is an orthonormal basis for $L^2_\per([0,T],\R)$. It follows that the set $\bigcup_{k \in \Z} \{Z^1_k(t) , Z^2_k(t) \}$ is an orthonormal basis for $L^2_\per([0,T],\R^2)$, where $Z^1_k(t) = (v_k(t), 0)^T$ and $Z^2_k(t) = (0, v_k(t))^T$. Therefore, there exist unique scalars $c_k, d_k \in \C$ such that
+% \begin{equation*}
+% Y(t) = \sum_{k \in \Z} c_k Z^1_k(t) + \sum_{k \in \Z} d_k Z^2_k(t),
+% \end{equation*}
+% and the sum converges for all $Y(t)$. Equation \cref{eq:yinDF0basis} follows by taking
+% \[
+% a_k = \frac{1}{\lambda_k^2 - 1}\left(-c_k + \lambda_k d_k \right), \quad
+% b_k = \frac{1}{\lambda_k^2 - 1}\left( \lambda_k^2 c_k - \lambda_k d_k \right),
+% \]
+% where $\lambda_k$ is defined in \cref{eq:DF0lambdak}, and $\lambda_k^2 \neq 1$ by \cref{hyp:hyp}.
+% \end{proof}
+% \end{lemma}
 
 \subsection{Finite dimensional approximation}
 
@@ -373,15 +374,16 @@ Applying the projection $P_M$ to both components of \cref{eq:dynEq}, i.e. projec
 P_M u
 \end{pmatrix}.
 \end{equation}
-The operators $P_M$ and $\partial_t$ commute, since 
-\begin{align*}
-\langle \dot{u}, v_k \rangle v_k &= -\langle u, \dot{v}_k \rangle v_k
-= -\left\langle u, \frac{2 \pi i k}{T} v_k \right\rangle v_k \\
-&= -\left( -\frac{2 \pi i k}{T} \right) \langle u, v_k \rangle v_k
-= \langle u, v_k \rangle \left( \frac{2 \pi i k}{T} \right) v_k 
-= \langle u, v_k \rangle \dot{v}_k,
-\end{align*}
-where we used the fact that the differentiation operator is anti-self-adjoint, and the inner product is conjugate linear in the second component. It follows that $P_M$ and $\partial_t^2$ commute. Since $u$ is smooth, $(I-P_M)u$ will be small for sufficiently large $M$, thus we expand $f(u)$ as
+% The operators $P_M$ and $\partial_t$ commute, since 
+% \begin{align*}
+% \langle \dot{u}, v_k \rangle v_k &= -\langle u, \dot{v}_k \rangle v_k
+% = -\left\langle u, \frac{2 \pi i k}{T} v_k \right\rangle v_k \\
+% &= -\left( -\frac{2 \pi i k}{T} \right) \langle u, v_k \rangle v_k
+% = \langle u, v_k \rangle \left( \frac{2 \pi i k}{T} \right) v_k 
+% = \langle u, v_k \rangle \dot{v}_k,
+% \end{align*}
+% where we used the fact that the differentiation operator is anti-self-adjoint, and the inner product is conjugate linear in the second component. It follows that $P_M$ and $\partial_t^2$ commute. 
+While the projection $P_M$ commutes with the differentiation operator $\partial_t^2$, in general it not the case that $P_M f(u) = f(P_M u)$. However, since $u$ is smooth, $(I-P_M)u$ will be small for sufficiently large $M$, thus we expand $f(u)$ as
 \[
 f(u) = f( P_M u + (I-P_M)u) = f(P_M u) + \mathcal{O}((I-P_M)u)
 \]
@@ -396,7 +398,35 @@ F_M\begin{pmatrix}u \\ \tilde{u} \end{pmatrix} =
 u
 \end{pmatrix}
 \end{equation}
-and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. We note that if $u = 0$, then $g(u) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. Furthermore, since $f$ is an odd function, so is $g$, thus $F_M(-U) = -F_M(U)$. It follows that if $U(n)$ is a solution to \cref{eq:dynEqM}, so is $-U(n)$. From here on, we will work with this approximate system.
+and $g: X_M \rightarrow X_M$ is defined by $g = P_M f$. When $u = 0$, $g(0) = P_M f(0) = 0$, and $g'(0) = P_M f'(0) = f'(0)$, since $f'(0)$ is a constant function, which is in $X_M$ for all $M$. Furthermore, since $f$ is an odd function, so is $g$, thus $F_M(-U) = -F_M(U)$. It follows that if $U(n)$ is a solution to \cref{eq:dynEqM}, so is $-U(n)$. If $U(n) = (u(n), \tilde{u}(n))^T$ is a solution to \cref{eq:dynEqM}, then, by taking $u_n = u(n)$, the first component $u(n)$ is a breather solution to the approximate DKG equation
+\begin{equation}\label{eq:DKGapprox}
+\begin{aligned}
+\ddot{u}_n &= d (\Delta_2 u)_n - g(u_n) && u_n \in X_M.
+\end{aligned}
+\end{equation}
+Linearization of \cref{eq:DKGapprox} about a solution $\uvec \in \ell^2(\Z, X_M)$ yields the eigenvalue problem
+\begin{equation}\label{eq:DKGMeigL}
+\begin{aligned}
+d (\Delta_2 w)_n - g'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
+\end{aligned}
+\end{equation}
+which we write as $\calL_M(\uvec)\wvec = (2 \lambda \partial_t + \lambda^2 )\wvec$, where 
+$\calL_M(\uvec)$ is the linear operator on $\ell^2(\Z, X_M)$ defined by the LHS of \cref{eq:DKGMeigL}.
+As i 
+
+\begin{equation}\label{eq:dynEVP}
+W(n+1) = \left[ DF(U(n)) + (2 \lambda \partial_t + \lambda^2) B \right] W(n),
+\end{equation}
+where
+\begin{equation}\label{eq:DFU}
+DF(U(n)) = \begin{pmatrix}
+2 + \dfrac{f'(u(n))}{d} + \dfrac{1}{d}\partial_t^2  & -1 \\ 1 & 0
+\end{pmatrix}, \qquad
+B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
+\end{equation}
+
+
+
 
 Let $\{\tau(s) : s \in \R\}$ be the one-parameter group of unitary translation operators on $X_M^2$, defined by $[\tau(s)]U(\cdot) = U(\cdot - s)$, which has infinitesimal generator $\tau'(0) = \partial_t$. We note that this group is well-defined on $X_M^2$, since 
 \[
@@ -428,12 +458,7 @@ Since $X_{M,e}^2$ is finite-dimensional, the stable manifold holds. For each $M 
 \begin{hypothesis}\label{hyp:breather}
 Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. There exists a positive integer $M_0$ such that for all $M \geq M_0$, the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}^2$ in a homoclinic orbit $Q_M(n) = (q_M(n), \tilde{q}_M(n))^T$. 
 \end{hypothesis}
-By taking $u_n = q_M(n)$, the first component $q_M(n)$ is a breather solution to the approximate DKG equation
-\begin{equation}\label{eq:DKGapprox}
-\begin{aligned}
-\ddot{u}_n &= d (\Delta_2 u)_n - g(u_n) && u_n \in X_M.
-\end{aligned}
-\end{equation}
+
 In addition, we obtain the estimate 
 \begin{equation}\label{eq:U1decayest}
 \|Q_M(n)\|_{X_M} \leq C r_M^{-|n|}
@@ -510,87 +535,36 @@ The proof is an adaptation of the proofs of theorems 1 and 3 in \cite{Parker2020
 \end{proof}
 \end{theorem}
 
-
-
 \subsection{Spectral stability}
 
-\section{Exponential dichotomy}
 
-Let $Y$ be a Hilbert space with inner product $\langle \cdot, \cdot \rangle$. For each $n \in \Z$, let $A(n)$ be an invertible linear operator defined on $Y$ (or on a dense subset $X$ of $Y$). $A(n)$ is not necessarily bounded. Consider the linear difference equation
-\begin{align}\label{eq:diffeq1}
-U(n+1) &= A(n) U(n) && U(n) \in X, n \in \Z
+
+\begin{theorem}\label{th:spectrum}
+Assume \cref{hyp:hyp}, \cref{hyp:breather}, and \cref{hyp:breathernondegen}. Let $U(n)$ be an $m$-component multi-breather constructed as in \cref{th:multibreathers} with distances $N_i$ and orientation parameters $\sigma_i$. Then there exists $\delta > 0$ small with the following property. $\lambda$ is an eigenvalue of the linearization about $\phi^m_n(t)$ if and only if $E(\lambda) = 0$, where
+\begin{equation}\label{Elambda}
+E(\lambda) = \det\left(A - \frac{1}{d}M \lambda^2 I + R(\lambda)\right).
+\end{equation}
+$A$ is the tridiagonal $m \times m$ matrix
+\begin{align}\label{matrixA}
+A &= \begin{pmatrix}
+-a_1 & a_1 & & & \\
+a_1 & -a_1 - a_2 & a_2 \\
+& a_2 & -a_2 - a_3 & a_3 \\
+& \ddots & & \ddots \\
+& & & a_{m-1} & -a_{m-1}  \\
+\end{pmatrix},
 \end{align}
-together with its adjoint
-\begin{align}\label{eq:adjdiffeq1}
-Z(n+1) &= [A(n)^{-1}]^* Z(n) && Z(n) \in X, n \in \Z.
-\end{align}
-The discrete evolution operator $\Phi(m,n)$ for \cref{eq:diffeq1} is defined by
-\begin{equation}\label{eq:evoldiffeq1}
-\Phi(m,n) = \begin{cases}
-A(m-1) \cdots A(n+1)A(n) & m > n \\
-\id & m = n \\
-A^{-1}(m) \cdots A^{-1}(n-2) A^{-1}(n-1) & m < n.
-\end{cases}
-\end{equation}
-The evolution operator has the following properties \cites{Palmer1988,Parker2020}:
-\begin{enumerate}[(i)]
-	\item $\Phi(m,k)\Phi(k,n) = \Phi(m,n)$.
-	\item $\Phi(m,n) = \Phi(n,m)^{-1}$.
-	\item If $\Psi(m,n)$ is the discrete evolution operator for the adjoint equation \cref{eq:adjdiffeq1}, then $\Psi(m,n) = \Phi(n,m)^*$.
-	\item If $U(n)$ is a solution to \cref{eq:diffeq1} and $Z(n)$ is a solution to \cref{eq:adjdiffeq1}, then $\langle U(n), Z(n) \rangle$ is constant in $n$.
-\end{enumerate}
-
-We can now define an exponential dichotomy for the linear difference equation \cref{eq:diffeq1}.
-
-\begin{definition}\label{def:ED}
-The linear difference equation \cref{eq:diffeq1} on a Hilbert space $X$ with evolution operator \cref{eq:evoldiffeq1} has exponential dichotomies on $\Z^\pm$ if there are constants $K>0$ and $r>1$ and a family of projections $P_\pm^s$ and $P_\pm^u$ defined on $\Z^\pm$ such that the following are true:
-\begin{enumerate}[(i)]
-	\item $P_\pm^u(n) = \id - P_\pm^s(n)$.
-	\item The projections commute with the evolution operator in the following way:
-	\begin{equation}\label{projcommute}
-	P_\pm^{s/u}(m) \Phi(m, n) =  \Phi(m, n) P_\pm^{s/u}(n).
-	\end{equation}
-	\item We have the estimates 
-	\begin{equation}\label{eq:dichotomyest}
-	\begin{aligned}
-	|\Phi(m, n)P_+^s(n)| &\leq K r^{m - n} && \qquad 0 \leq n \leq m \\
-	|\Phi(m, n)P_+^u(n)| &\leq K r^{n - m} && \qquad 0 \leq m \leq n \\
-	|\Phi(m, n)P_-^s(n)| &\leq K r^{m - n} && \qquad n \leq m \leq 0 \\
-	|\Phi(m, n)P_-^u(n)| &\leq K r^{n - m} && \qquad m \leq n \leq 0 \:.
-	\end{aligned}
-	\end{equation}
-\end{enumerate}
-\end{definition}
-
-For $d>0$, let $u_n(t)$ be the primary breather solution to \cref{eq:DKG} with period $T$. Let $X = H^2_\per([0,T],\R^2)$ and $Y = L^2_\per([0,T],\R^2)$. Define the linear operator $A(n): X \subset Y \rightarrow Y$ by
-\begin{equation}\label{eq:An}
-A(n) = \begin{pmatrix}
-\dfrac{1}{d}\partial_t^2 + \dfrac{V''(u(n))}{d} + 2 & -\id \\ \id & 0
-\end{pmatrix}.
-\end{equation}
-For all $n \in \Z$, $A(n)$ is invertible, with inverse 
-\begin{equation}\label{eq:Aninv}
-A(n)^{-1} = \begin{pmatrix}
-0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{V''(u(n))}{d} + 2
-\end{pmatrix}.
-\end{equation}
-
-In addition, we consider the invertible linear operator $A_0: X \subset Y \rightarrow Y$, which is independent of $n$.
-\begin{equation}\label{eq:A0}
-A_0 = \begin{pmatrix}
-\dfrac{1}{d}\partial_t^2 + \dfrac{V''(0)}{d} + 2 & -\id \\ \id & 0
-\end{pmatrix}, \qquad
-A_0^{-1} = \begin{pmatrix}
-0 & \id \\ -\id & \dfrac{1}{d}\partial_t^2 + \dfrac{V''(0)}{d} + 2
-\end{pmatrix}
-\end{equation}
-First, we show in a series of lemmas that, under suitable conditions, the linear difference equation
-\begin{align}\label{eq:diffeq0}
-U(n+1) &= A_0 U(n) && U(n) \in X, n \in \Z
-\end{align}
-has exponential dichotomies on $\Z^\pm$. First, we compute the eigenvalues and eigenfunctions of $A_0$.
-
-\begin{theorem}The equation $U(n+1) = A_0 U(n)$ has exponential dichotomies on $\Z^\pm$.
+where
+\begin{align*}
+M &= \sum_{n = -\infty}^\infty \int_0^T \left( \dot{\phi}_n(t)^2 - 2 z_n(t) \ddot{\phi}_n(t)^2 \right) dt
+\end{align*}
+\begin{align*}
+a_i &= \begin{cases}
+\sigma_i \sigma_{i+1} \int_0^T \dot{\phi}_{\frac{N_i}{2}}(t)\left( \dot{\phi}_{\frac{N_i}{2}+1}(t) - \dot{\phi}_{\frac{N_i}{2}-1}(t) \right) dt & N_i \text{ even} \\
+\sigma_i \sigma_{i+1} \int_0^T \left( \dot{\phi}_{\frac{N_i-1}{2}}(t)\dot{\phi}_{\frac{N_i+3}{2}}(t) - \dot{\phi}_{\frac{N_i+1}{2}}(t)\dot{\phi}_{\frac{N_i-3}{2}}(t) \right) dt & N_i \text{ odd}
+\end{cases} \\
+\end{align*}
+and $z_n(t)$ is defined in \cref{eq:Lphikernel}. The remainder term has $R(\lambda)$ has some suitable bound.
 \end{theorem}
 
 \section{Numerical results}
