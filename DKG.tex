@@ -97,7 +97,7 @@
 
 \begin{document}
 
-\title{Multi-breathers in the discrete sine-Gordon equation}
+\title{Multi-breathers in the discrete Klein-Gordon equation}
 
 \author{Ross Parker}
 \address{Department of Mathematics, Southern Methodist University, 
@@ -127,6 +127,22 @@ Dallas, TX 75275, USA}
 
 \section{Introduction}
 
+Dynamical models on a one-dimensional lattice have been an topic of interest for more than 50 years. Perhaps the most famous example is the Fermi–Pasta–Ulam–Tsingou model \cites{FPUT,Zabusuy1965}, which was one of the first problems to be studied using numerical simulations. In this work, we will examine the discrete Klein-Gordon (DKG) equation
+\begin{equation*}
+\ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
+\end{equation*}
+which describes the dynamics of an infinitely long, one-dimensional lattice of particles. The quantity $u_n$ represents the displacement of $n$th particle in the integer lattice as a function of the time $t$. Each particle is harmonically coupled to its two nearest neighbors via the discrete second difference operator $\Delta_2$, and the strength of this coupling is quantified by the parameter $d$. The particles are subject to an external, nonlinear, onsite potential $V(u)$, such that $f(u) = V'(u)$ \cite{Karachalios}. The DKG equation is the discrete analogue of the nonlinear Klein-Gordon equation
+\begin{equation*}
+u_{tt} = u_{xx} - f(u),
+\end{equation*}
+which is a prototypical model in the study of nonlinear waves and solitons. One of the the most well-studied forms of this equation is the sine-Gordon equation \cites{braun2004,SGbook,p4book,kivsharmalomed}, which has periodic nonlinearity $f(u)=\sin(u)$, and is completely integrable. The transition between the continuous and discrete models in the sine-Gordon case has been extensively discussed in \cite{SGchapter}. The discrete sine-Gordon model, also known as the Frenkel-Kontorova model, describes the dynamics of a crystal lattice near a dislocation core \cites{braun1998,braun2004}, and has been used in numerous applications (see, for example, \cite{braun2004}*{Chapter 2}), including a mechanical model for a chain of pendula \cites{Scott1969,english}, arrays of Josephson junctions \cites{Ustinov1992,Floria1998}, and DNA dynamics \cites{Yomosa1983,Yakushevich1998,DeLeo2011}.
+
+Two major classes of coherent structures in the nonlinear Klein-Gordon equation (both discrete and continuous) are of particular interest: kinks, which are heteroclinic structures resembling ``wave fronts'' which connect two adjacent minima of the potential $V(u)$, and breathers, which are structures that are spatially localized and oscillatory in time. For the continuum sine-Gordon equation, exact, analytical solutions for both of these structures have been found \cite{SGchapter}. For discrete systems, the existence and stability of static kinks have been well-studied (see \cites{KevrekidisWeinstein2000,SGchapter}, as well as \cite{Parker2021} for results on multi-kink solutions), and there has also been interest in moving kinks \cites{Aigner2003,Iooss2006,Cisneros2008}. We will concern ourselves herein with discrete breather solutions.
+
+Discrete breathers have been studied in Hamiltonian \cite{Flach1998} and dissipative systems \cite{Flach2008a}, and have applications in areas such as laser scanning microscopy and coupled optical waveguides \cite{Flach2008}. Existence and stability of discrete breather solutions in Klein-Gordon lattices were first studied by MacKay and Aubry \cites{MacKay1994,Aubry1997} by considering the system near the anti-continuum (AC) limit ($d=0$), in which the individual sites in the lattice are uncoupled. The advantage of this approach is that the solution for a single site is known at the AC limit, and this can be continued to small $d>0$ using the implicit function theorem. A similar approach has been used for multi-site solitons in the discrete nonlinear Schr\"odinger equation (DNLS) \cite{Pelinovsky2005}, which demonstrated that the only stable multi-solitons are those in which adjacent peaks are excited out-of-phase. Analysis of multi-breathers in DKG, in which a finite number of sites in the integer lattice are excited at the AC limit, was done in \cites{Archilla2003,Koukouloyannis2009}, but this was restricted the case where excited sites are adjacent; in this situation, for small $d>0$, out-of-phase multibreathers are stable for soft potentials, and in-phase multi-breathers are stable for hard potentials \cite{Archilla2003}*{Theorem 6}. Results on existence and spectral stability of multibreathers were extended in \cite{Pelinovsky2012} to multi-site breathers where any arbitrary finite set of lattice points are excited at the AC limit; in particular, this allows the excited sites to be separated in the lattice. However, spectral stability of multibreathers does not necessarily imply nonlinear stability; even if the multi-breather is spectrally stable, nonlinear instabilities can result from resonance between internal eigenmodes and the continuous spectrum band, as long as the two have opposite Krein signatures \cite{cuevas-maraver2016}.
+
+In this paper, we take a different approach to multi-site breathers. As we did with multi-solitons in DNLS \cite{Parker2020} and multi-kinks in DKG \cite{Parker2021}, we construct a multi-breather by joining together multiple, well-separated copies of a single-site breather. In effect, we replace the condition that the coupling parameter $d>0$ is small with the condition that the individual copies of the primary breather are well separated.
+
 \section{Mathematical background}\label{sec:bg}
 
 We will consider the discrete Klein-Gordon (DKG) equation with on-site nonlinearity $f(u)$
@@ -138,7 +154,7 @@ on the integer lattice $\Z$, where $t \in \R$ is the evolution time, $u_n(t) \in
 \item $V$ is an even function, and $V(0) = 0$. This implies $V'(0) = 0$.
 \item $V''(0)>0$.
 \end{enumerate}
-We note that the Morse potential in \cref{table:V} does not satisfy the first assumption, since it is not an even function. For any time $t$, we take the displacements $\{u_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Since $f(u)$ is an odd function, if $\uvec(t)$ is a solution to \cref{eq:DKG}, then $-\uvec(t)$ is as well. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, and can be written as
+We note that the Morse potential, which is considered in \cite{cuevas-maraver2016},   does not satisfy the first assumption, since it is not an even function. For any time $t$, we take the displacements $\{u_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Since $f(u)$ is an odd function, if $\uvec(t)$ is a solution to \cref{eq:DKG}, then $-\uvec(t)$ is as well. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, and can be written as
 \begin{equation}\label{eq:Hform}
 \frac{d}{dt}\begin{pmatrix} u_n \\ v_n \end{pmatrix} = 
 \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} \partial \calH / \partial u_n \\ \partial \calH / \partial v_n \end{pmatrix},
@@ -516,7 +532,7 @@ Assume \cref{hyp:hyp} and \cref{hyp:breather}, and let $M \geq M_0$, where $M_0$
 \|\tilde{U}_m^+(n) \|_{X_M} &\leq C r_M^{-2N} r_M^{-n},
 \end{aligned}
 \end{equation}
-which hold as well for derivatives of $\tilde{U}_i^\pm(n)$
+which hold as well for derivatives of $\tilde{U}_i^\pm(n)$.
 \begin{proof}
 The proof is a straightforward adaptation of the proofs of theorems 1 and 3 in \cite{Parker2020}, and is very similar to the proof of \cite{Parker2021}*{Theorem 1}. Since the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}$, the implementation of Lin's method does not involve jump conditions.
 \end{proof}
@@ -658,8 +674,9 @@ We first consider the discrete sine-Gordon equation, where the nonlinearity is $
 	\label{fig:freqdecay}
 \end{figure}
 
-\cref{fig:double} shows the initial conditions (solution at $t=0$) for the out-of-phase (top) and in-phase (bottom) double breather at $d = 0.25$, together with their Floquet spectra and the eigenfunction corresponding to the interaction Floquet eigenmode. The out-of-phase double breather has a pair of interaction Floquet eigenmodes on the unit circle, while the in-phase double breather has a pair of real interaction Floquet eigenmodes. \cref{fig:eigerror} shows the relative error in the computation of these Floquet eigenmodes, using the formula \cref{eq:inteigsdouble}. As expected, the relative error increases with the coupling parameter $d$, and decreases with the separation distance $N$. \cref{fig:SGintersite} shows the initial condition $u_n(0)$ and Floquet spectra for two special two-site breathers, for which the two excited sites at the AC limit are in adjacent lattice nodes. We will call these adjacent breathers.
-As predicted by \cite{cuevas-maraver2016}, the in-phase adjacent breather is unstable, and the out-of-phase adjacent breather is spectrally stable, at least for small $d$. 
+\cref{fig:double} shows the initial conditions (solution at $t=0$) for the out-of-phase (top) and in-phase (bottom) double breather at $d = 0.25$, together with their Floquet spectra and the eigenfunction corresponding to the interaction Floquet eigenmode. The out-of-phase double breather has a pair of interaction Floquet eigenmodes on the unit circle, while the in-phase double breather has a pair of real interaction Floquet eigenmodes. We note that the solvability condition $M < 0$ for the sine-Gordon potential.
+\cref{fig:eigerror} shows the relative error in the computation of these Floquet eigenmodes, using the formula \cref{eq:inteigsdouble}. As expected, the relative error increases with the coupling parameter $d$, and decreases with the separation distance $N$. \cref{fig:SGintersite} shows the initial condition $u_n(0)$ and Floquet spectra for two special two-site breathers, for which the two excited sites at the AC limit are in adjacent lattice nodes. We will call these adjacent breathers.
+As predicted by \cite{cuevas-maraver2016}, the in-phase adjacent breather is unstable, and the out-of-phase adjacent breather is spectrally stable, at least for small $d$. The two copies of the primary breather in the adjacent breather are not well separated, thus the eigenvalue results do not apply.
 
 \begin{figure}
 	\begin{center}
@@ -799,6 +816,16 @@ For each experiment, we perturb the stationary breather by adding a small multip
 
 \subsection{Hard \texorpdfstring{$\phi^4$}{phi-4} potential}
 
+The results for the soft $\phi^4$ potential are similar to those for sine-Gordon (which is expected, since the first two terms in the Taylor expansion of the sine-Gordon potential are qualitatively similar to the soft $\phi^4$ potential), thus we will not show them here. We instead look at the hard $\phi^4$ potential. \cref{fig:phi4sol} shows the initial conditions for the primary breather, the in-phase adjacent breather, and the out-of-phase adjacent breather, together with their Floquet spectra. In contrast to the sine-Gordon potential, the out-of-phase adjacent breather is unstable. The in-phase adjacent breather is spectrally stable for sufficiently small $d$ (see also Figures 4 and 6 in \cite{cuevas-maraver2016}). These agree with the results of \cites{Archilla2003,Koukouloyannis2009}. As the distance between breathers $N_1$ is increased, the in-phase double breather is spectrally stable for $N_1$ odd and spectrally unstable for $N_1$ even, and the reverse is true for the out-of-phase double breather (see \cref{fig:phi4hardfloqplot}). We note that the solvability condition $M > 0$ for the hard $\phi^4$ potential. The alternating eigenvalue pattern is a consequence of the dependence of the sign of $a_1$ in \cref{eq:inteigsdouble} on the parity of $N_1$.
+
+\begin{figure}
+	\includegraphics[width=15cm]{phi4hardfloqplot.eps}
+	\caption{Floquet spectra for $N_1 = 1, 2, 3, 4$ for in-phase double breather (top) and out-of-phase double breather (bottom) for hard $\phi^4$ potential with $d = 0.125$.}
+	\label{fig:phi4hardfloqplot}
+\end{figure}
+
+\cref{fig:bifdiagphi4} shows the bifurcation diagram for out-of-phase and in-phase double breathers for $N_1 = 6$. As noted above, the out-of-phase double breather is spectrally stable, while the in-phase double breather is unstable. For $N_1$ odd, this pattern is reversed (not shown). The upper branches are double breathers comprising two out-of-phase adjacent breathers, where we recall that this is the unstable configuration for the adjacent breather. The middle branch is an asymmetric double breather, comprising one single-site breather and one out-of-phase adjacent breather. \cref{fig:phi4eigerror} shows the relative error in the computation of the Floquet interaction eigenmodes on the lower branches for both the in-phase and out-of-phase double breathers for both even and odd $N_1$, using the formula \cref{eq:inteigsdouble}. As for the sine-Gordon equation, the relative error increases with $d$. We note that the relative error is less than $10^{-2}$ up to approximately $d = 3$, which is close to the turning points of the bifurcation diagrams. 
+
 \begin{figure}
 	\begin{center}
 	\begin{subfigure}{0.3\linewidth}
@@ -817,7 +844,7 @@ For each experiment, we perturb the stationary breather by adding a small multip
 		\label{fig:phi4solc} 
 	\end{subfigure}
 	\end{center}
-	\caption{Initial condition $u_n(0)$ and Floquet spectrum (inset) for primary breather (a), in-phase adjacent breather (b), and out-of-phase adjacent breather (c) for hard $\phi^4$ potential with coupling parameter $d=1$. }
+	\caption{Initial condition $u_n(0)$ and Floquet spectrum (inset) for primary breather (a), in-phase adjacent breather (b), and out-of-phase adjacent breather (c) for hard $\phi^4$ potential with coupling parameter $d=0.1$. }
 	\label{fig:phi4sol}
 \end{figure}
 
@@ -836,9 +863,18 @@ For each experiment, we perturb the stationary breather by adding a small multip
 
 \begin{figure}
 	\begin{center}
-	\includegraphics[width=8cm]{doubleeigerrorphi4.eps} 
+		\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{images/doublephi4eigerrorpp.eps} 
+		\label{fig:phi4eigerrora} 
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{images/doublephi4eigerrorpm.eps} 
+		\label{fig:phi4eigerrorb} 
+	\end{subfigure}
 	\end{center}
-	\caption{Semilog plot of relative error of interaction eigenvalue computation vs. $d$ for in-phase (solid blue line) and out-of-phase double breathers (dotted orange line) double breather for hard $\phi^4$ potential with $N_1 = 6$.}
+	\caption{Semilog plot of relative error of interaction eigenvalue computation vs. $d$ for in-phase (a) and out-of-phase (b) double breathers for hard $\phi^4$ potential with $N_1 = 3, 4, 5, 6$.}
 	\label{fig:phi4eigerror}
 \end{figure}
 
@@ -861,14 +897,14 @@ where $c_i \in \C$, and $W_i^\pm(n)$ is defined on the same interval as $U_i^\pm
 \begin{equation}
 \begin{aligned}
 \dot{U}_i^\pm(n+1) &= DF_M(U(n))\dot{U}_i^\pm(n) \\ 
-\qquad Y_i^\pm(n+1) &= DF_M(U(n)) Y_i^\pm(n) + 2 \partial_t B \dot{U}_i^\pm(n)
+\qquad Y_i^\pm(n+1) &= DF_M(U(n)) Y_i^\pm(n) + 2 \partial_t B \dot{U}_i^\pm(n),
 \end{aligned}
 \end{equation}
 and simplifying, we obtain the equation
 \begin{equation}\label{eq:EVPpiecewise}
 \begin{aligned}
 \tilde{W}_i^\pm(n+1) &= DF(\sigma_i Q_M(n)) \tilde{W}_i^\pm(n) + \lambda^2 c_i B[ 2 \partial_t Y_i^\pm(n) + \dot{U}_i^\pm(n)] \\
-&\quad+ [G_i^\pm(n) + (2 \lambda \partial_t + \lambda^2) B] \tilde{W}_i^\pm(n) + c_i \lambda^3 B Y_i^\pm(n)
+&\quad+ [G_i^\pm(n) + (2 \lambda \partial_t + \lambda^2) B] \tilde{W}_i^\pm(n) + c_i \lambda^3 B Y_i^\pm(n),
 \end{aligned}
 \end{equation}
 where
@@ -897,7 +933,7 @@ A solution to \cref{eq:EVPsystem} is an eigenfunction if and only if the $m$ jum
 \end{equation}
 are satisfied.
 
-We proceed as in the proof of \cite{Parker2020}*{Theorem 2}. Since $DF(0)$ is hyperbolic, and $\| Q_M(n) \|_{X_M^2} \leq C r_M^{-|n|}$ by the stable manifold theorem, we can adapt the results of \cite{Palmer1988} to decompose the evolution operator $\Phi(m,n)$ of the variational equation \cref{eq:vareq} in exponential dichotomies on $\Z^\pm$. We then rewrite \cref{eq:EVPpiecewise} as a fixed point problem using the discrete variation of constants formula (see, for example, \cite{Parker2020}*{Lemma 3}), and project onto the stable and unstable subspaces of the exponential dichotomy. From there, we follow the steps in \cite{Parker2020}, using the estimates \cref{eq:Uestimates}, to obtain a unique solution to \cref{eq:EVPsystem}. The jump conditions \cref{eq:jump1} become
+We proceed as in the proof of \cite{Parker2020}*{Theorem 2}. Since $DF(0)$ is hyperbolic, and $\| Q_M(n) \|_{L^2_\per([0,T])} \leq C r_M^{-|n|}$ by the stable manifold theorem, we can adapt the results of \cite{Palmer1988} to decompose the evolution operator $\Phi(m,n)$ of the variational equation \cref{eq:vareq} in exponential dichotomies on $\Z^\pm$. We then rewrite \cref{eq:EVPpiecewise} as a fixed point problem using the discrete variation of constants formula (see, for example, \cite{Parker2020}*{Lemma 3}), and project onto the stable and unstable subspaces of the exponential dichotomy. From there, we follow the steps in \cite{Parker2020}, using the estimates \cref{eq:Uestimates}, to obtain a unique solution to \cref{eq:EVPsystem}. The jump conditions \cref{eq:jump1} become
 \begin{equation}\label{eq:jump2}
 \begin{aligned}
 \xi_i &= \sigma_i \sigma_{i+1} \langle Z_M(N_i^+), \dot{Q}_M (-N_i^-) \rangle (c_{i+1} - c_i) 
@@ -909,7 +945,7 @@ where the remainder term has uniform bound
 \[
 \| R(\lambda)(c)\|_{X_M^2} \leq C \left( (r_M^{-N} + |\lambda|)^3\right).
 \]
-Evaluating the inner products, this becomes
+Evaluating the inner products, we obtain
 \begin{equation}\label{eq:jump3}
 \begin{aligned}
 \xi_i &= a_i (c_{i+1} - c_i) + \tilde{a}_{i-1} (c_i - c_{i-1}) + \frac{1}{d} \lambda^2 M + R(\lambda)_i(c),
@@ -919,7 +955,7 @@ where $a_i$ and $\tilde{a}_{i-1}$ are defined by \cref{eq:ai} and $M$ is defined
 \begin{equation}\label{eq:matrixform}
 \left( A + \frac{1}{d} M \lambda^2 I + R(\lambda) \right) c = 0
 \end{equation}
-on $\R^m$, where $c = (c_1, \dots, c_m)^T$, and $A$ is defined by \cref{eq:matrixA}. Equation \cref{eq:matrixform} has a nontrivial solution if and only if its determinant is 0.
+on $\R^m$, where $c = (c_1, \dots, c_m)^T$, and the matrix $A$ is defined by \cref{eq:matrixA}. Equation \cref{eq:matrixform} has a nontrivial solution if and only if its determinant is 0.
 
 \bibliographystyle{amsplain}
 \bibliography{DKG.bib}
