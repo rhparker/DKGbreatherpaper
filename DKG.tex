@@ -131,39 +131,7 @@ Dynamical models on a one-dimensional lattice have been an topic of interest for
 \begin{equation*}
 \ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
 \end{equation*}
-which describes the dynamics of an infinitely long, one-dimensional lattice of particles. The quantity $u_n$ represents the displacement of $n$th particle in the integer lattice as a function of the time $t$. Each particle is harmonically coupled to its two nearest neighbors via the discrete second difference operator $\Delta_2$, and the strength of this coupling is quantified by the parameter $d$. The particles are subject to an external, nonlinear, onsite potential $V(u)$, such that $f(u) = V'(u)$ \cite{Karachalios}. The DKG equation is the discrete analogue of the nonlinear Klein-Gordon equation
-\begin{equation*}
-u_{tt} = u_{xx} - f(u),
-\end{equation*}
-which is a prototypical model in the study of nonlinear waves and solitons. One of the the most well-studied forms of this equation is the sine-Gordon equation \cites{braun2004,SGbook,p4book,kivsharmalomed}, which has periodic nonlinearity $f(u)=\sin(u)$, and is completely integrable. The transition between the continuous and discrete models in the sine-Gordon case has been extensively discussed in \cite{SGchapter}. The discrete sine-Gordon model, also known as the Frenkel-Kontorova model, describes the dynamics of a crystal lattice near a dislocation core \cites{braun1998,braun2004}, and has been used in numerous applications (see, for example, \cite{braun2004}*{Chapter 2}), including a mechanical model for a chain of pendula \cites{Scott1969,english}, arrays of Josephson junctions \cites{Ustinov1992,Floria1998}, and DNA dynamics \cites{Yomosa1983,Yakushevich1998,DeLeo2011}.
-
-Two major classes of coherent structures in the nonlinear Klein-Gordon equation (both discrete and continuous) are of particular interest: kinks, which are heteroclinic structures resembling ``wave fronts'' which connect two adjacent minima of the potential $V(u)$, and breathers, which are structures that are spatially localized and oscillatory in time. For the continuum sine-Gordon equation, exact, analytical solutions for both of these structures have been found \cite{SGchapter}. For discrete systems, the existence and stability of static kinks have been well-studied (see \cites{KevrekidisWeinstein2000,SGchapter}, as well as \cite{Parker2021} for results on multi-kink solutions), and there has also been interest in moving kinks \cites{Aigner2003,Iooss2006,Cisneros2008}. We will concern ourselves herein with discrete breather solutions.
-
-Discrete breathers have been studied in Hamiltonian \cite{Flach1998} and dissipative systems \cite{Flach2008a}, and have applications in areas such as laser scanning microscopy and coupled optical waveguides \cite{Flach2008}. Existence and stability of discrete breather solutions in Klein-Gordon lattices were first studied by MacKay and Aubry \cites{MacKay1994,Aubry1997} by considering the system near the anti-continuum (AC) limit ($d=0$), in which the individual sites in the lattice are uncoupled. The advantage of this approach is that the solution for a single site is known at the AC limit, and this can be continued to small $d>0$ using the implicit function theorem. A similar approach has been used for multi-site solitons in the discrete nonlinear Schr\"odinger equation (DNLS) \cite{Pelinovsky2005}, which demonstrated that the only stable multi-solitons are those in which adjacent peaks are excited out-of-phase. Analysis of multi-breathers in DKG, in which a finite number of sites in the integer lattice are excited at the AC limit, was done in \cites{Archilla2003,Koukouloyannis2009}, but this was restricted the case where excited sites are adjacent; in this situation, for small $d>0$, out-of-phase multibreathers are stable for soft potentials, and in-phase multi-breathers are stable for hard potentials \cite{Archilla2003}*{Theorem 6}. Results on existence and spectral stability of multibreathers were extended in \cite{Pelinovsky2012} to multi-site breathers where any arbitrary finite set of lattice points are excited at the AC limit; in particular, this allows the excited sites to be separated in the lattice. However, spectral stability of multibreathers does not necessarily imply nonlinear stability; even if the multi-breather is spectrally stable, nonlinear instabilities can result from resonance between internal eigenmodes and the continuous spectrum band, as long as the two have opposite Krein signatures \cite{cuevas-maraver2016}.
-
-In this paper, we take a different approach to multi-site breathers. As we did with multi-solitons in DNLS \cite{Parker2020} and multi-kinks in DKG \cite{Parker2021}, we construct a multi-breather by joining together multiple, well-separated copies of a single-site breather. In effect, we replace the condition that the coupling parameter $d>0$ is small with the condition that the individual copies of the primary breather are well separated.
-
-\section{Mathematical background}\label{sec:bg}
-
-We will consider the discrete Klein-Gordon (DKG) equation with on-site nonlinearity $f(u)$
-\begin{equation}\label{eq:DKG}
-\ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
-\end{equation}
-on the integer lattice $\Z$, where $t \in \R$ is the evolution time, $u_n(t) \in \R$ is the displacement of the $n$th particle in the lattice, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = V'(u)$ for a smooth, on-site potential function $V(u)$. Some common nonlinearities for DKG are listed in \cref{table:V}. We take the following assumptions for the potential $V$:
-\begin{enumerate}[(a)]
-\item $V$ is an even function, and $V(0) = 0$. This implies $V'(0) = 0$.
-\item $V''(0)>0$.
-\end{enumerate}
-We note that the Morse potential, which is considered in \cite{cuevas-maraver2016},   does not satisfy the first assumption, since it is not an even function. For any time $t$, we take the displacements $\{u_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Since $f(u)$ is an odd function, if $\uvec(t)$ is a solution to \cref{eq:DKG}, then $-\uvec(t)$ is as well. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, and can be written as
-\begin{equation}\label{eq:Hform}
-\frac{d}{dt}\begin{pmatrix} u_n \\ v_n \end{pmatrix} = 
-\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} \partial \calH / \partial u_n \\ \partial \calH / \partial v_n \end{pmatrix},
-\end{equation}
-where $v_n = \dot{u}_n$ is the velocity of the $n$th particle in the lattice, and $\calH$ is the conserved energy
-\begin{equation}\label{eq:H}
-	\calH(\uvec) = \sum_{n=-\infty}^\infty 
-	\left( \frac{1}{2} v_n^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + V(u_n) \right).
-\end{equation}
+which describes the dynamics of an infinitely long, one-dimensional lattice of particles. The quantity $u_n$ represents the displacement of $n$th particle in the integer lattice as a function of the time $t$. Each particle is harmonically coupled to its two nearest neighbors via the discrete second difference operator $\Delta_2$, and the strength of this coupling is quantified by the parameter $d$. The particles are subject to an external, nonlinear, onsite potential $V(u)$, such that $f(u) = V'(u)$ \cite{Karachalios}. Common nonlinearities are shown in \cref{table:V}.
 
 \begin{table}
 \begin{tabular}{lll}\toprule
@@ -176,6 +144,44 @@ Morse & $\frac{1}{2}(1 - e^{-u})^2$ & $e^{-u}(1 - e^{-u})$ \\ \bottomrule
 \caption{Common nonlinearities for the discrete Klein-Gordon equation.}
 \label{table:V}
 \end{table}
+
+The DKG equation is the discrete analogue of the nonlinear Klein-Gordon equation
+\begin{equation*}
+u_{tt} = u_{xx} - f(u),
+\end{equation*}
+which is a prototypical model in the study of nonlinear waves and solitons. One of the the most well-studied forms of this equation is the sine-Gordon equation \cites{braun2004,SGbook,p4book,kivsharmalomed}, which has periodic nonlinearity $f(u)=\sin(u)$, and is completely integrable. The transition between the continuous and discrete models in the sine-Gordon case has been extensively discussed in \cite{SGchapter}. The discrete sine-Gordon model, also known as the Frenkel-Kontorova model, describes the dynamics of a crystal lattice near a dislocation core \cites{braun1998,braun2004}, and has been used in numerous applications (see, for example, \cite{braun2004}*{Chapter 2}), including a mechanical model for a chain of pendula \cites{Scott1969,english}, arrays of Josephson junctions \cites{Ustinov1992,Floria1998}, and DNA dynamics \cites{Yomosa1983,Yakushevich1998,DeLeo2011}.
+
+Two major classes of coherent structures in the nonlinear Klein-Gordon equation (both discrete and continuous) are of particular interest: kinks, which are heteroclinic structures resembling ``wave fronts'' which connect two adjacent minima of the potential $V(u)$, and breathers, which are structures that are spatially localized and oscillatory in time. For the continuum sine-Gordon equation, exact, analytical solutions for both of these structures have been found \cite{SGchapter}. For discrete systems, the existence and stability of static kinks have been well-studied (see \cites{KevrekidisWeinstein2000,SGchapter}, as well as \cite{Parker2021} for results on multi-kink solutions), and there has also been interest in moving kinks \cites{Aigner2003,Iooss2006,Cisneros2008}. We will concern ourselves herein with discrete breather solutions.
+
+Discrete breathers have been studied in Hamiltonian \cite{Flach1998} and dissipative systems \cite{Flach2008a}, and have applications in areas such as laser scanning microscopy and coupled optical waveguides \cite{Flach2008}. Existence and stability of discrete breather solutions in Klein-Gordon lattices were first studied by MacKay and Aubry \cites{MacKay1994,Aubry1997} by considering the system near the anti-continuum (AC) limit ($d=0$), in which the individual sites in the lattice are uncoupled. The advantage of this approach is that the solution for a single site is known at the AC limit, and this can be continued to small $d>0$ using the implicit function theorem. A similar approach has been used for multi-site solitons in the discrete nonlinear Schr\"odinger equation (DNLS) \cite{Pelinovsky2005}, which demonstrated that the only stable multi-solitons are those in which adjacent peaks are excited out-of-phase. Analysis of multi-breathers in DKG, in which a finite number of sites in the integer lattice are excited at the AC limit, was done in \cites{Archilla2003,Koukouloyannis2009}, but this was restricted the case where excited sites are adjacent; in this situation, for small $d>0$, out-of-phase multibreathers are stable for soft potentials, and in-phase multi-breathers are stable for hard potentials \cite{Archilla2003}*{Theorem 6}. Results on existence and spectral stability of multibreathers were extended in \cite{Pelinovsky2012} to multi-site breathers where any arbitrary finite set of lattice points are excited at the AC limit; in particular, this allows the excited sites to be separated in the lattice. However, spectral stability of multibreathers does not necessarily imply nonlinear stability; even if the multi-breather is spectrally stable, nonlinear instabilities can result from resonance between internal eigenmodes and the continuous spectrum band, as long as the two have opposite Krein signatures \cite{cuevas-maraver2016}.
+
+In this paper, we take a different approach to multibreathers. We start with a single-site breather, which we call the primary breather. We then construct a multibreather by joining together multiple, well-separated copies of this primary breather. Consecutive copies of the primary breather can be either in-phase or out-of-phase. In effect, we replace the condition that the coupling parameter $d>0$ is small with the condition that the individual copies of the primary breather are well separated. The construction of complex coherent structures from simple building blocks has a rich mathematical history (see \cite{Sandstede1998}, and the references therein). One set of mathematical techniques that can be used to accomplish this is an implementation of the Lyapunov-Schmidt reduction known as Lin's method. This method has been successfully employed in many systems, including semilinear parabolic PDEs \cite{Sandstede1998} and discrete dynamical systems \cite{Knobloch2000}. We used a similar method to study  multi-solitons in DNLS \cite{Parker2020} and multikinks in DKG \cite{Parker2021}. Lin's method can also be used to determine spectral stability. For a multipulse, multikink, or multibreather, there are elements in the point spectrum which we call interaction eigenvalues, since they result from nonlinear interactions between neighboring copies of the primary coherent structure. These can be found by constructing the corresponding eigenfunction as a piecewise linear combination of the kernel eigenfunctions of the primary coherent structure. This reduces the spectral problem to a finite-dimensional matrix eigenvalue problem, which can then be solved.
+
+For the DKG, we follow a similar approach to that which we used in \cite{Parker2020}. We reformulate the equation using a spatial dynamics approach, by recasting it as a lattice dynamical system on an appropriate function space, and then we use Lin's method to both construct multibreathers and determine the interaction eigenvalues associated with these solutions. The major limitation with this method, however, is that for a periodic breather on $[0,T]$, the most appropriate function space for this approach is $C^\infty_\per([0,T])$, which is not a closed subspace of $L^2_\per([0,T])$; it is not straightforward to adapt the necessary mathematical tools, such as the stable manifold theorem and exponential dichotomies. As an alternative, since we are interested in smooth solutions, we formulate Lin's method on a finite-dimensional subspace of $L^2_\per([0,T])$ consisting of the first $N$ Fourier modes of the standard orthonormal basis. Although this means the results we obtain are only approximate, since the Fourier coefficients decay exponentially for smooth functions, and this method is valid for arbitrary finite $N$, we believe this is a reasonable approximation. Furthermore, numerical discretization of periodic solutions is often done using a Fourier spectral method, thus this approximation applies directly to this discretization. Finally, these results from this method are in very good agreement with the results obtained by directly computing the Floquet spectrum of the corresponding multibreather, both for hard and soft potentials. 
+
+This paper is organized as follows. In \cref{sec:bg}, we present the mathematical background for the discrete Klein-Gordon equation, including breather solutions, the continuous spectrum, and the reformulation using spatial dynamics. In \cref{sec:findim}, we formulate our finite-dimensional approximation, which we then use in \cref{sec:multi} to prove results about the existence and spectrum of multi-breathers in the approximate system. The proof of the spectral results is deferred to \cref{app:specproof}. Numerical results are presented in \cref{sec:numerics}, which are in excellent agreement with the predictions from the main theorems. Results are presented for both the soft sine-Gordon potential and the hard $\phi^4$ potential. In addition, we present results from timestepping simulations to illustrate the effect of the spectrum on the dynamical evolution of the system. We end with a brief concluding section, which suggest avenues for future research.
+
+\section{Mathematical background}\label{sec:bg}
+
+We will consider the discrete Klein-Gordon (DKG) equation with on-site nonlinearity $f(u)$
+\begin{equation}\label{eq:DKG}
+\ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
+\end{equation}
+on the integer lattice $\Z$, where $t \in \R$ is the evolution time, $u_n(t) \in \R$ is the displacement of the $n$th particle in the lattice, $(\Delta_2 u)_n = u_{n+1} - 2 u_n + u_{n-1}$ is the discrete second difference operator, and $f(u) = V'(u)$ for a smooth, on-site potential function $V(u)$. We take the following assumptions for the potential $V$:
+\begin{enumerate}[(i)\leftmargin=2\parindent]
+\item $V$ is an even function, and $V(0) = 0$. This implies $V'(0) = 0$.
+\item $V''(0)>0$.
+\end{enumerate}
+We note that the Morse potential, which is considered in \cite{cuevas-maraver2016}, does not satisfy the first assumption, since it is not an even function. For any time $t$, we take the displacements $\{u_n(t)\}_{n \in \Z} \in \ell^2(\Z)$, and we denote this sequence by $\uvec(t)$. Existence and uniqueness of solutions to \cref{eq:DKG} is discussed in \cite{cuevas-maraver2016}. Since $f(u)$ is an odd function, if $\uvec(t)$ is a solution to \cref{eq:DKG}, then $-\uvec(t)$ is as well. Equation \cref{eq:DKG} is Hamiltonian \cites{KevrekidisWeinstein2000,cuevas-maraver2016}, and can be written as
+\begin{equation}\label{eq:Hform}
+\frac{d}{dt}\begin{pmatrix} u_n \\ v_n \end{pmatrix} = 
+\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} \partial \calH / \partial u_n \\ \partial \calH / \partial v_n \end{pmatrix},
+\end{equation}
+where $v_n = \dot{u}_n$ is the velocity of the $n$th particle in the lattice, and $\calH$ is the conserved energy
+\begin{equation}\label{eq:H}
+	\calH(\uvec) = \sum_{n=-\infty}^\infty 
+	\left( \frac{1}{2} v_n^2 + \frac{d}{2} (u_{n+1} - u_n)^2 + V(u_n) \right).
+\end{equation}
 
 \subsection{Breathers}\label{sec:DKGbreather}
 
@@ -377,7 +383,7 @@ The coupling constant $d$ and period $T$ are chosen so that the spectrum of $DF(
 % \end{proof}
 % \end{lemma}
 
-\section{Finite dimensional approximation}
+\section{Finite dimensional approximation}\label{sec:findim}
 
 In this section, we define our finite dimensional approximation for \cref{eq:dynEq}. For $M \geq 1$, let 
 \begin{equation}\label{eq:XM}
@@ -439,7 +445,7 @@ Finally, let $\{\tau(s) : s \in \R\}$ be the one-parameter group of unitary tran
 \]
 i.e. the group action multiplies a basis element by a constant. In fact, the eigenvalue of \cref{eq:DKGMeig} at 0 is a result of this translational symmetry. The function $F_M$ from \cref{eq:dynEqM} (as well as $F$ from the full system \cref{eq:dynEq}) commutes with this one-parameter group, i.e. $F(\tau(s) U) = \tau(s) F(U)$. It is cruicial to note that this symmetry is lost if we consider the problem \cref{eq:dynEqM} on $X_{M,e}^2$, since the space of even functions is not translation invariant. 
 
-\section{Multi-breathers}
+\section{Multi-breathers}\label{sec:multi}
 
 Our strategy will be to first prove that multi-breathers exist on the subspace $X_{M,e}^2$ of even functions. Since there is no translational symmetry, the stable and unstable manifolds of the origin will intersect transversely, which greatly simplifies the analysis. This parallels the restriction in \cite{Pelinovsky2012} to breathers which are even in $t$, and is consistent with the odd symmetry of the nonlinearity $f$. 
 Once that is accomplished, we will return to the full space $X_{M}^2$ for the eigenvalue problem, and use Lin's method as in \cites{Parker2021,Parker2020,Sandstede1998} to construct interaction eigenfunctions as piecewise linear combinations of the eigenfunction corresponding to translation symmetry. This technique is similar to the one we employed in \cite{Parker2020} for DNLS, where, to prove the existence of multi-pulses, we removed the gauge symmetry by restricting the problem to real-valued solutions.
@@ -878,7 +884,7 @@ The results for the soft $\phi^4$ potential are similar to those for sine-Gordon
 	\label{fig:phi4eigerror}
 \end{figure}
 
-\section{Conclusions and future directions}
+\section{Conclusions and future directions}\label{sec:conc}
 
 \paragraph{\textbf{Acknowledgments}}
 
