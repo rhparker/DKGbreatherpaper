@@ -676,7 +676,7 @@ where $u_k^\text{old}$ refers to the function at the previous continuation step.
 
 \subsection{Discrete sine-Gordon equation}
 
-We first consider the discrete sine-Gordon equation, where the nonlinearity is $f(u) = \sin u$. For all of the plots in the section, we use a lattice size $L = 15$, the energy at AC limit is $E = 0.25$, and the period is $T = 7.91$. We note that $2 \pi < T < 3 \pi$, thus the upper continuous spectrum band has positive Krein signature, and the lower band has negative Krein signature (\cref{fig:bands}, left).
+We first consider the discrete sine-Gordon equation, where the nonlinearity is $f(u) = \sin u$. For all of the plots in the section, unless otherwise noted, we use a lattice size $L = 15$, the energy at AC limit is $E = 0.25$, and the period is $T = 7.91$. We note that $2 \pi < T < 3 \pi$, thus the upper continuous spectrum band has positive Krein signature, and the lower band has negative Krein signature (\cref{fig:bands}, left).
 \cref{fig:singlea} shows the primary breather solution for $d = 0.25$ at $t = 0$, which is symmetric on the spatial lattice. The corresponding Floquet spectrum is shown in \cref{fig:singleb}. There is a single Floquet multiplier (with multiplicity 2) at 1, which is from translation symmetry. The continuous spectrum bands are a discrete set of points, which is a result of the spatial discretization, and have merged into a single band by this value of $d$. \cref{fig:singlec} shows the exponential decay of the breather with increasing $n$; \cref{fig:singled} shows the relative error of this decay rate compared to $r_M$, which is defined in \cref{eq:defrM}. The exponential decay of the Fourier frequencies (in $t$) of the primary breather is shown in \cref{fig:freqdecay}. As expected, since the breather is even in $t$, only even frequencies are represented in the frequency spectrum. Furthermore, the scaled amplitudes for all frequencies $k\geq 20$ are below $10^{-10}$, suggesting that the finite dimensional approximation is reasonable.
 
 \begin{figure}
@@ -833,25 +833,64 @@ As predicted by \cite{cuevas-maraver2016}, the in-phase adjacent breather is uns
 \end{figure}
 
 Finally, we demonstrate the effect of the interaction eigenmodes on the dynamics of the double breathers by performing long-term timestepping experiments. For a timestepping scheme, we use a symplectic and symmetric implicit Runge-Kutta method \cite{HairerBook} to preserve the symplectic structure of the Hamiltonian system. Specifically, we use the MATLAB implementation of the \texttt{irk2} scheme of order 12 from \cite{Hairer2003}.
-For each experiment, we perturb the stationary breather by adding a small multiple of the eigenvector $(v_n, w_n)$ corresponding to the interaction eigenmode $\mu$. For a double breather $u_n(t)$, let $u_L(t) = u_{-N_1^-}(t)$ and $u_R(t) = u_{N_1^+}(t)$ be the center sites of the left and the right breather, respectively. When the out-of-phase double breather is perturbed, the peak amplitudes of $u_L(t)$ and $u_R(t)$ oscillate in opposite directions with frequency given by the imaginary part of $\log(\mu)/T$ (see \cref{fig:timestepSGstable}), with relative error less than 0.001. 
+For each experiment, we perturb the stationary breather by adding the eigenvector $(v_n, w_n)$ corresponding to the interaction eigenmode $\mu$, multiplied by a small factor $\delta$. (If the eigenvector is complex, we use the real part of the eigenvector for the perturbation).
+For a double breather $u_n(t)$, let $u_L(t) = u_{-N_1^-}(t)$ and $u_R(t) = u_{N_1^+}(t)$ be the center sites of the left and the right breather, respectively. First, we look at the out-of-phase double breather. We choose the coupling parameter $d=0.2$ and separation distance $N_1 = 4$ so that we avoid the 1:2 resonance between the interaction eigenmode and the continuous spectrum bands \cref{fig:timestepSGstablea}, which leads to a nonlinear instability (see \cite{cuevas-maraver2016} for details); although higher order resonances (1:3, 1:4, etc) can occur, they will be seen at times beyond the time interval of our simulation. When the out-of-phase double breather is perturbed, the peak amplitudes of $u_L(t)$ and $u_R(t)$ oscillate in opposite directions with frequency given by the imaginary part of $\log(\mu)/T$ (see \cref{fig:timestepSGstable}), with relative error less than 0.005. In \cref{fig:timestepSGpmlong}, we take $d=0.25$ and $N_1 = 4$, so that twice the frequency of the interaction eigenmode falls inside the continuous spectrum bands, causing a 1:2 resonance. While this does cause the expected nonlinear instability (compare to Figures 3 and 4 in \cite{cuevas-maraver2016}), it does not occur until after $t = 15000$, at which point the energy density collapses into a single site located between the two original breather sites. The energy density at lattice site $n$ is given by
+\begin{equation}\label{eq:Hn}
+h_n = \frac{1}{2}v_n + V(u_n) 
++ \frac{d}{4}\left[ (u_n - u_{n+1})^2 + (u_n - u_{n-1})^2\right],
+\end{equation}
+where $v_n = \dot{u}_n$, so that the Hamiltonian \cref{eq:H} is the sum of the energy densities over the entire lattice. 
 
-When the in-phase double breather is perturbed in the same way, the oscillations in $u_L(t)$ initially increase in both amplitude and period, while those in $u_R(t)$ decrease in both amplitude and period (\cref{fig:timestepSGunstabled}). (These are reversed if the perturbation is in the opposite direction). At $t$ evolves, we see that the periods of $u_L(t)$ and $u_R(t)$ vary periodically in opposite directions (\cref{fig:timestepSGunstablec}), thus the phase differences between the two breathers vary periodically as well (\cref{fig:timestepSGunstablea} and \cref{fig:timestepSGunstableb}). The amplitudes of $u_L(t)$ and $u_R(t)$ also vary periodically in opposite directions (\cref{fig:timestepSGunstablee}). The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstablef}).
+When the in-phase double breather is perturbed in the same way, the oscillations in $u_L(t)$ initially increase in both amplitude and period, while those in $u_R(t)$ decrease in both amplitude and period (\cref{fig:timestepSGunstabled}). (These are reversed if the perturbation is in the opposite direction). For separation distance $N_1 = 6$, as $t$ evolves, we see that the periods of $u_L(t)$ and $u_R(t)$ vary periodically in opposite directions (\cref{fig:timestepSGunstablec}), thus the phase differences between the two breathers vary periodically as well (\cref{fig:timestepSGunstablea} and \cref{fig:timestepSGunstableb}). The amplitudes of $u_L(t)$ and $u_R(t)$ also vary periodically in opposite directions (\cref{fig:timestepSGunstablee}). In effect, the perturbed in-phase double breather is oscillating about the neutrally stable, out-of-phase double breather. The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstable}). A different behavior is observed if the separation distance $N_1$ is smaller (\cref{fig:timestepSGpplong}). In this case, the two breathers attract each other, and eventually merge into a localized, single-site breather state, which is located between the starting sites for the two breathers; this limiting solution is close to a higher energy, single-site breather.
+
+\begin{figure}
+	\begin{center}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.5cm]{timestepN6spec.eps}
+		\label{fig:timestepSGstablea}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.45cm]{timestepN6.eps}
+		\label{fig:timestepSGstableb}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.45cm]{timestepN6pks.eps}
+		\label{fig:timestepSGstablec}
+	\end{subfigure}
+	\end{center}
+	\caption{(a) out-of-phase double breather with Floquet spectrum in inset. Time evolution of perturbation of out-of-phase breather, showing amplitude of the peaks of $u_L$ and $u_R$ vs. $t$ (b), and difference in this amplitude from the unperturbed breather (c).  
+	Coupling parameter $d=0.2$, separation distance $N_1 = 4$, perturbation parameter $\delta = 0.01$.}
+	\label{fig:timestepSGstable}
+\end{figure}
 
 \begin{figure}
 	\begin{center}
 	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=7.5cm]{timestepN6.eps}
-		\label{fig:timestepSGstablea}
+		\includegraphics[width=7.5cm]{timestepN4longspec.eps}
+		\label{fig:timestepSGpmlonga}
 	\end{subfigure}
 	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=7.5cm]{timestepN6pks.eps}
-		\label{fig:timestepSGstableb}
+		\includegraphics[width=7.5cm]{N4pmcolormap.eps}
+		\label{fig:timestepSGpmlongb}
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{N4pmh1.eps}
+		\label{fig:timestepSGpmlongc}
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{N4pmh2.eps}
+		\label{fig:timestepSGpmlongd}
 	\end{subfigure}
 	\end{center}
-	\caption{Time evolution of perturbation of out-of-phase breather, showing amplitude of the peaks of $u_L$ and $u_R$ vs. $t$ (a), and difference in this amplitude from the unperturbed breather (b). Coupling parameter $d=0.25$, separation distance $N_1 = 4$.}
-	\label{fig:timestepSGstable}
+	\caption{(a) out-of-phase double breather with Floquet spectrum in inset. (b) colormap showing evolution in $t$ of $|u_n|$ for sites -4 to 4. (c) and (d) energy density vs. time for central sites of breather. Coupling parameter $d=0.25$, separation distance $N_1 = 4$, perturbation parameter $\delta = 0.25$, lattice size parameter $L=150$.}
+	\label{fig:timestepSGpmlong}
 \end{figure}
 
 \begin{figure}
@@ -887,8 +926,46 @@ When the in-phase double breather is perturbed in the same way, the oscillations
 		\label{fig:timestepSGunstablef}
 	\end{subfigure}
 	\end{center}
-	\caption{Time evolution of perturbation of in-phase breather. (a) colormap showing $u_n$ vs. $t$ for sites -5 to 5; breathers start in-phase (top) and are out-of-phase at approximately $t = 215$ (bottom). (b) phase difference between two breathers vs $t$; 0 is in-phase, $\pi$ is out-of-phase. (c) period of two breathers vs. $t$; the period $T$ is measured as the distance between consecutive peaks. (d) time evolution of $u_L$ and $u_R$ for unperturbed breather (dotted blue lines) and perturbed breather (solid orange lines). (e) maximum amplitude of $u_L$ and $u_R$ vs. $t$. (f) semilog plot showing time evolution in difference of $\ell^2$ norm of perturbed and unperturbed breather, together with least squares regression line. Coupling parameter $d=0.25$ and separation distance $N_1 = 6$.}
+	\caption{Time evolution of perturbation of in-phase breather. (a) colormap showing $u_n$ vs. $t$ for sites -5 to 5; breathers start in-phase (top) and are out-of-phase at approximately $t = 215$ (bottom). (b) phase difference between two breathers vs $t$; 0 is in-phase, $\pi$ is out-of-phase. (c) period of two breathers vs. $t$; the period $T$ is measured as the distance between consecutive peaks. (d) time evolution of $u_L$ and $u_R$ for unperturbed breather (dotted blue lines) and perturbed breather (solid orange lines). (e) maximum amplitude of $u_L$ and $u_R$ vs. $t$. (f) semilog plot showing time evolution in difference of $\ell^2$ norm of perturbed and unperturbed breather, together with least squares regression line. Coupling parameter $d=0.25$, separation distance $N_1 = 6$, perturbation parameter $\delta = 0.005$.}
 	\label{fig:timestepSGunstable}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.5cm]{N3ppcolormap.eps}
+		\label{fig:timestepSGpplonga}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.25cm]{N3pph1.eps}
+		\label{fig:timestepSGpplongb}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.25cm]{N3pph2.eps}
+		\label{fig:timestepSGpplongc}
+	\end{subfigure}
+		\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.5cm]{N4ppcolormap.eps}
+		\label{fig:timestepSGpplongd}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.25cm]{N4pph1.eps}
+		\label{fig:timestepSGpplonge}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\caption{}
+		\includegraphics[width=5.25cm]{N4pph2.eps}
+		\label{fig:timestepSGpplongf}
+	\end{subfigure}
+	\end{center}
+	\caption{Colormap showing evolution in $t$ of $|u_n|$ (left), energy density vs. time for central sites of breather (center and right). Labels $n$ of sites correspond to those in left panel. Separation distance $N_1 = 3$ (top), $N_1 = 4$ (bottom).
+	Coupling parameter $d=0.25$, perturbation parameter $\delta = 0.01$, lattice size parameter $L=150$.}
+	\label{fig:timestepSGpplong}
 \end{figure}
 
 \subsection{Hard \texorpdfstring{$\phi^4$}{phi-4} potential}
@@ -972,7 +1049,15 @@ $\phi^4$ (hard)    & even & $+$ & $+$ & unstable & stable \\
 
 In this paper, we studied the existence and spectral stability of multi-breather solutions to the discrete Klein-Gordon equation. Specifically, we looked at an approximation of the system on a finite-dimensional Hilbert space, and used Lin's method to construct multi-breather solutions to this system. Furthermore, we used Lin's method again to reduce the eigenvalue problem to a low-dimensional, matrix equation, which can then be solved. This can be done as long as the distances between copies of the primary breather are sufficiently large. The results from this approximation are in very good agreement with direct numerical computation of the Floquet spectrum, both for hard and soft potentials. The key determining factor for the Floquet spectral pattern is the phase differences between adjacent copies of the primary, single-site breather. In addition, we found a crucial difference between the soft sine-Gordon equation and the hard $\phi^4$ equation; in the latter case, the Floquet spectral pattern depends in addition on the whether the distances in lattice points between consecutive copies of the primary breather are even or odd, while in the former case, it does not. 
 
-Further avenues of research include exploring breathers and multi-breathers either in Klein-Gordon lattices with asymmetric potentials, such as the Morse potential, or in other models entirely. One direction would be to explore one-dimensional models such as the FPUT lattice, in which the potential involves off-site terms. Another direction would be to look at higher dimensional lattices, both for on-site potentials such as in a higher dimensional Klein-Gordon model, and more complex potentials, such as higher dimensional FPUT lattices. In addition, in two dimensions, there are many possible regular lattice models, including square, triangular, and honeycomb, and these different geometries may exhibit qualitatively different behavior. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction, although it would most likely involve a different approach entirely.
+Further avenues of research include exploring breathers and multi-breathers either in Klein-Gordon lattices with asymmetric potentials, such as the Morse potential, or in other models entirely. One class of models which would be interesting to study is equations in which the potential involves off-site terms, such as the FPUT lattice. A natural extension of this would be to look at higher dimensional lattices, both for on-site potentials such as in a higher dimensional Klein-Gordon model, and more complex potentials, such as higher dimensional FPUT lattices. In two dimensions, there are many possible regular lattice models, including square, triangular, and honeycomb, and these different geometries may exhibit qualitatively different behavior. Another possibility would be to look at more complex solutions. Two fundamental coherent structures in Klein-Gordon lattices are kinks and breathers. Preliminary numerical experiments suggest that there solutions comprising both breathers and kinks; see \cref{fig:brk} for an example for a solution to the discrete sine-Gordon equation in which a breather is connected to a kink. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction, although it would most likely involve a different approach entirely.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=9cm]{images/brk1.eps} 
+	\end{center}
+	\caption{Solution to discrete sine-Gordon equation comprising one breather and one kink. Coupling parameter $d = 0.25$.}
+	\label{fig:brk}
+\end{figure}
 
 \vspace{0.5cm}
 
@@ -1029,7 +1114,11 @@ A solution to \cref{eq:EVPsystem} is an eigenfunction if and only if the $m$ jum
 \end{equation}
 are satisfied.
 
-We proceed as in the proof of \cite{Parker2020}*{Theorem 2}. Since $DF(0)$ is hyperbolic, and $\| Q_M(n) \|_{L^2_\per([0,T])} \leq C r_M^{-|n|}$ by the stable manifold theorem, we can adapt the results of \cite{Palmer1988} to decompose the evolution operator $\Phi(m,n)$ of the variational equation \cref{eq:vareq} in exponential dichotomies on $\Z^\pm$. We then rewrite \cref{eq:EVPpiecewise} as a fixed point problem using the discrete variation of constants formula (see, for example, \cite{Parker2020}*{Lemma 3}), and project onto the stable and unstable subspaces of the exponential dichotomy. From there, we follow the steps in \cite{Parker2020}, using the estimates \cref{eq:Uestimates}, to obtain a unique solution to \cref{eq:EVPsystem}. The jump conditions \cref{eq:jump1} become
+We proceed as in the proof of \cite{Parker2020}*{Theorem 2}. Since $DF(0)$ is hyperbolic, and 
+\[
+\| Q_M(n) \|_{L^2_\per([0,T])} \leq C r_M^{-|n|}
+\]
+by the stable manifold theorem, we can adapt the results of \cite{Palmer1988} to decompose the evolution operator $\Phi(m,n)$ of the variational equation \cref{eq:vareq} in exponential dichotomies on $\Z^\pm$. We then rewrite \cref{eq:EVPpiecewise} as a fixed point problem using the discrete variation of constants formula (see, for example, \cite{Parker2020}*{Lemma 3}), and project onto the stable and unstable subspaces of the exponential dichotomy. From there, we follow the steps in \cite{Parker2020}, using the estimates \cref{eq:Uestimates}, to obtain a unique solution to \cref{eq:EVPsystem}. The jump conditions \cref{eq:jump1} become
 \begin{equation}\label{eq:jump2}
 \begin{aligned}
 \xi_i &= \sigma_i \sigma_{i+1} \langle Z_M(N_i^+), \dot{Q}_M (-N_i^-) \rangle (c_{i+1} - c_i) 
