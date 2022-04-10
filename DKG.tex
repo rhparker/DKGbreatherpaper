@@ -97,8 +97,7 @@
 
 \begin{document}
 
-\title{Revisiting Multi-breathers in the discrete Klein-Gordon equation: A Spatial Dynamics Approach}
-%\runningtitle{Revisiting Multi-breathers in the discrete Klein-Gordon equation}
+\title[Revisiting Multi-breathers in the discrete Klein-Gordon equation]{Revisiting Multi-breathers in the discrete Klein-Gordon equation: A Spatial Dynamics Approach}
 
 \author{Ross Parker}
 \address{Department of Mathematics, Southern Methodist University, 
@@ -291,11 +290,11 @@ d (\Delta_2 w)_n - f'(0)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n,
 has a solution. Following the procedure in \cite{cuevas-maraver2016}*{Section 2.1}, the continuous spectrum is the bands
 \begin{equation}\label{eq:contspec}
 \begin{aligned}
-\lambda &= i\left( \pm \omega(\theta) - \frac{2 \pi m}{T} \omega_0 \right) && m \in \Z \\
+\lambda &= i\left( \pm \omega(\theta) - \frac{2 \pi m}{T} \right) && m \in \Z \\
 \omega(\theta) &= \sqrt{ f'(0) + 4 d \sin^2\left( \frac{\theta}{2} \right) } && \theta \in [-\pi, \pi]
 \end{aligned}
 \end{equation}
-{\bf Ross: isn't this the first appearance of $\omega_0$? Clarify?}
+{\bf Ross: isn't this the first appearance of $\omega_0$? Clarify? This was a typo, and has been removed. (In the 2016 paper, $\omega_0 = 2\pi/T$.)}
 on the imaginary axis. The corresponding Floquet multipliers comprise two bands on the unit circle,  which are symmetric about the real axis, and are given by
 \begin{equation}\label{eq:contspecmult}
 \begin{aligned}
@@ -506,7 +505,7 @@ By symmetry, $|S_M^s| = |S_M^u| = M+1$. Define
 \begin{equation}\label{eq:defrM}
 r_M = \min \{ |\lambda| : \lambda \in S_M^u, |\lambda| > 1 \}.
 \end{equation}
-Since $X_{M,e}^2$ is finite-dimensional, the stable manifold holds. For each $M \geq 1$, let $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ be the $(M+1)$-dimensional stable and unstable manifolds of the equilibrium at 0, which are subsets of $X_{M,e}^2$. A breather solution to \cref{eq:dynEqM} is a homoclinic orbit which lies in the intersection of the stable and unstable manifolds. We take the existence of such a solution as a hypothesis.
+Since $X_{M,e}^2$ is finite-dimensional, the stable manifold theorem holds. For each $M \geq 1$, let $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ be the $(M+1)$-dimensional stable and unstable manifolds of the equilibrium at 0, which are subsets of $X_{M,e}^2$. A breather solution to \cref{eq:dynEqM} is a homoclinic orbit which lies in the intersection of the stable and unstable manifolds. We take the existence of such a solution as a hypothesis.
 
 \begin{hypothesis}\label{hyp:breather}
 Let $d$ and $T$ be chosen according to \cref{hyp:hyp}. There exists a positive integer $M_0$ such that for all $M \geq M_0$, the stable and unstable manifolds $W_{M,e}^s(0)$ and $W_{M,e}^u(0)$ intersect transversely in $X_{M,e}^2$ in a homoclinic orbit $Q_M(n) = (q(n), \tilde{q}(n))^T = (q_n, q_{n-1})^T$. 
@@ -598,7 +597,7 @@ As in \cites{Parker2020,Sandstede1998}, we locate these eigenmodes by using Lin'
 Assume \cref{hyp:hyp}, \cref{hyp:breather}, and \cref{hyp:breathernondegen}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Let $Q_M(n) = (q_n, q_{n-1})$ be the primary breather solution from \cref{hyp:breather}, and let $Y(n) = (y_n, y_{n-1}) = \omega \partial_\omega Q_M(n)$.
 Let $U(n)$ be an $m$-component multi-breather constructed as in \cref{th:multi-breathers} with distances $N_i$ and orientation parameters $\sigma_i$. Then there exists $\delta > 0$ with the following property. There exists a bounded, nonzero solution $W(n)$ of the eigenvalue problem \cref{eq:dynEVPM} on $X_M^2$ for $|\lambda| < \delta$ if and only if $E(\lambda) = 0$, where
 \begin{equation}\label{Elambda}
-E(\lambda) = \det\left(A + \frac{1}{d}M \lambda^2 I + R(\lambda)\right).
+E(\lambda) = \det\left(A + \frac{1}{d}K \lambda^2 I + R(\lambda)\right).
 \end{equation}
 $A$ is the tri-diagonal $m \times m$ matrix
 \begin{align}\label{eq:matrixA}
@@ -620,7 +619,7 @@ a_i &= \sigma_i \sigma_{i+1} \int_0^T \left( \dot{q}_{N_i^+}\dot{q}_{-N_i^- - 1}
 \end{aligned}
 \end{equation}
 \begin{align}\label{eq:M}
-M =
+K =
 \sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n^2 + 2 \dot{y}_n \dot{q}_n \right) dt,
 \end{align}
 and the remainder term has uniform bound
@@ -632,25 +631,25 @@ and the remainder term has uniform bound
 \begin{remark}\label{remark:solvability}
 Substituting $y_n = \omega \partial_\omega q_n$, we can write \cref{eq:M} as 
 \begin{align}\label{eq:M2}
-M =
+K =
 \sum_{n = -\infty}^\infty \int_0^T \dot{q}_n \left( 2 \omega \partial_\omega \dot{q}_n + \dot{q}_n \right) dt,
 \end{align}
 which is the solvability condition from \cite{kevrekidis2016}. Integrating by parts, we can also write \cref{eq:M} as 
 \begin{align}\label{eq:M3}
-M =
+K =
 \sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n^2 - 2 y_n \ddot{q}_n \right) dt =
-\sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n^2 - 2 (\partial_\omega q_n) \ddot{q}_n \right) dt.
+\sum_{n = -\infty}^\infty \int_0^T \left( \dot{q}_n^2 - 2 \omega (\partial_\omega q_n) \ddot{q}_n \right) dt.
 \end{align}
 {\bf Ross: Is there an $\omega$ missing in the final expression? Pls.
-compare with the definition of $y_n$ before and the formula above.}
+compare with the definition of $y_n$ before and the formula above. Yes, the $\omega$ is missing. I put it back. I fixed it below as well.}
 In the AC limit, since the primary breather comprises a single excited site $\phi(t)$ at one of the lattice points, equation \cref{eq:M3} becomes
 \begin{align}\label{eq:MAC}
-M = \int_0^T \left( \dot{\phi}^2 - 2 (\partial_\omega \phi) \ddot{\phi} \right) dt = - \frac{T^2(E)}{T'(E)},
+K = \int_0^T \left( \dot{\phi}^2 - 2 \omega(\partial_\omega \phi) \ddot{\phi} \right) dt = - \frac{T^2(E)}{T'(E)},
 \end{align}
-by the proof of \cite{Pelinovsky2012}*{Lemma 2}, where $T(E)$ is defined in \cref{eq:TE}, noting that $-\partial_\omega \phi$ corresponds to $v$ in that reference.
+by the proof of \cite{Pelinovsky2012}*{Lemma 2}, where $T(E)$ is defined in \cref{eq:TE}, noting that $-\omega \partial_\omega \phi$ corresponds to $v$ in that reference.
 \end{remark}
 
-{\bf We have used $M$ previously as the maximum Fourier coefficient}
+{\bf We have used $M$ previously as the maximum Fourier coefficient. I changed this to $K$.}
 
 
 \begin{corollary}\label{corr:even}
@@ -673,7 +672,7 @@ b_i &= \begin{cases}
 \end{align*}
 The matrix $A$ has one eigenvalue at 0, and the remaining $(m-1)$ eigenvalues $\{\mu_1, \dots, \mu_{m-1}\}$ are real and distinct. As long as the continuous spectrum does not interfere, there are $(m-1)$ pairs of interaction eigenmodes, which are given by 
 \begin{align}\label{eq:inteigs}
-\lambda_j &= \pm \sqrt{-\frac{d \mu_j}{M}} + \mathcal{O}(r^{-2N}) && j = 1, \dots, m-1.
+\lambda_j &= \pm \sqrt{-\frac{d \mu_j}{K}} + \mathcal{O}(r^{-2N}) && j = 1, \dots, m-1.
 \end{align}
 These are either real or imaginary by Hamiltonian symmetry.
 \begin{proof}
@@ -683,9 +682,9 @@ This follows from \cref{th:spectrum} using same argument as in \cite{Parker2020}
 
 Two special cases to consider are the double breather ($m=2$), and the multi-breather where all copies of the primary breather are equally spaced. For a double breather, the pair of interaction eigenmodes is given by
 \begin{align}\label{eq:inteigsdouble}
-\lambda &= \sqrt{\frac{2 \sigma_1 \sigma_2 b_1 d}{M}} + \mathcal{O}(r^{-2N}).
+\lambda &= \sqrt{\frac{2 \sigma_1 \sigma_2 b_1 d}{K}} + \mathcal{O}(r^{-2N}).
 \end{align}
-If $b_1$ and $M$ have the same sign, the in-phase double breather is spectrally unstable and the out-of-phase double breather is spectrally neutrally stable. The reverse is true if $b_1$ and $M$ have opposite signs. For an $m$-site multi-breather, if $N_i = N_1$ for all $i$, i.e., the excited sites are equally spaced, then $b_i = b_1$ for all $b$. The matrix $A$ from \cref{eq:matrixAsymm} reduces to $A = b_1 S$, where 
+If $b_1$ and $K$ have the same sign, the in-phase double breather is spectrally unstable and the out-of-phase double breather is spectrally neutrally stable. The reverse is true if $b_1$ and $K$ have opposite signs. For an $m$-site multi-breather, if $N_i = N_1$ for all $i$, i.e., the excited sites are equally spaced, then $b_i = b_1$ for all $b$. The matrix $A$ from \cref{eq:matrixAsymm} reduces to $A = b_1 S$, where 
 \begin{align}\label{eq:matrixequal}
 S &= \begin{pmatrix}
 -\sigma_1 \sigma_2 & \sigma_1 \sigma_2 & & & \\
@@ -695,13 +694,13 @@ S &= \begin{pmatrix}
 & & & \sigma_{m-1}\sigma_m & -\sigma_{m-1}\sigma_m  \\
 \end{pmatrix}.
 \end{align}
-The eigenvalues of $S$ depend only on the phase differences $\sigma_i \sigma_{i+1}$ between consecutive excited sites, and not on the individual phases $\sigma_i$. We note that the matrix reduction of the eigenvalue problem has the same form as that in equation (35) of \cite{Pelinovsky2012}*{Lemma 2}. In particular, the matrices $S$ in \cref{eq:matrixequal} and that lemma are similar (with similarity transformation given by the matrix $P = \text{diag}(\sigma_1, \dots, \sigma_m)$), and thus have the same eigenvalues. The quantity $b_1$ corresponds to $K_N$ in that lemma. For $i = 1, \dots, m-1$, let $p_i = \sigma_i\sigma_{i+1}$ be the phase differences between consecutive copies of the primary breather, where $p_i = 1$ indicates in-phase, and $p_i = -1$ indicates out-of-phase. Let $n_-$ be the number of negative $p_i$, and $n_+$ the number of positive $p_i$. By \cite{Sandstede1998}*{Lemma 4} (see also the proof of \cite{Pelinovsky2012}*{Lemma 3}), $S$ has a single eigenvalue at 0, $n_+$ positive eigenvalues, and $n_-$ negative eigenvalues. If $b_1$ and $M$ have the same sign, there are $n_+$ pairs of unstable interaction eigenmodes, and $n_-$ pairs of neutrally stable interaction eigenmodes. Thus the only neutrally stable multi-breather is one in which each pair of consecutive copies of the primary breather is out-of-phase. The reverse is true if $b_1$ and $M$ have opposite signs. For multi-breathers in which the excited sites are not equally spaced, the stability pattern depends on the relative signs of each $b_i$ and $M$, following \cite{Sandstede1998}*{Lemma 4}.
+The eigenvalues of $S$ depend only on the phase differences $\sigma_i \sigma_{i+1}$ between consecutive excited sites, and not on the individual phases $\sigma_i$. We note that the matrix reduction of the eigenvalue problem has the same form as that in equation (35) of \cite{Pelinovsky2012}*{Lemma 2}. In particular, the matrices $S$ in \cref{eq:matrixequal} and that lemma are similar (with similarity transformation given by the matrix $P = \text{diag}(\sigma_1, \dots, \sigma_m)$), and thus have the same eigenvalues. The quantity $b_1$ corresponds to $K_N$ in that lemma. For $i = 1, \dots, m-1$, let $p_i = \sigma_i\sigma_{i+1}$ be the phase differences between consecutive copies of the primary breather, where $p_i = 1$ indicates in-phase, and $p_i = -1$ indicates out-of-phase. Let $n_-$ be the number of negative $p_i$, and $n_+$ the number of positive $p_i$. By \cite{Sandstede1998}*{Lemma 4} (see also the proof of \cite{Pelinovsky2012}*{Lemma 3}), $S$ has a single eigenvalue at 0, $n_+$ positive eigenvalues, and $n_-$ negative eigenvalues. If $b_1$ and $K$ have the same sign, there are $n_+$ pairs of unstable interaction eigenmodes, and $n_-$ pairs of neutrally stable interaction eigenmodes. Thus the only neutrally stable multi-breather is one in which each pair of consecutive copies of the primary breather is out-of-phase. The reverse is true if $b_1$ and $K$ have opposite signs. For multi-breathers in which the excited sites are not equally spaced, the stability pattern depends on the relative signs of each $b_i$ and $K$, following \cite{Sandstede1998}*{Lemma 4}.
 
 \section{Numerical results}\label{sec:numerics}
 
-We construct both the primary breather and multi-breathers by numerical parameter continuation from the AC limit using the software package AUTO \cite{auto07p}. To do this, we first choose an energy level $E$, from which we compute the period $T$ using \cref{eq:TE}, and then determine the AC breather solution $\phi(t)$ by solving \cref{eq:singlesiteAC} with the initial conditions given in \cref{sec:DKGbreather}. For the initial condition at $d = 0$, we take $u_k(t) = \phi(t)$ at a finite set of lattice points, and $u_k = 0$ everywhere else. 
+We construct both the primary breather and multi-breathers by numerical parameter continuation from the AC limit using the software package AUTO \cite{auto07p}. To do this, we first choose an energy level $E$, from which we compute the period $T$ using \cref{eq:TE}, and then determine the AC breather solution $\phi(t)$ by solving \cref{eq:singlesiteAC} with the initial conditions given in \cref{sec:DKGbreather}. For the initial condition at $d = 0$, we take $u_k(t) = \pm \phi(t)$ at a finite set of lattice points, and $u_k = 0$ everywhere else. In general, we will take the initial excited sites to be to be well separated, since the results above only hold for well-separated copies of the primary breather. That being said, this method is effective for any starting configuration at the AC limit (see \cref{fig:SGintersite}, for example, for a double breather comprising two adjacent excited sites).
 {\bf Ross: do you mean a finite set of **well-separated** points?
-So that each of them will ``spring up'' an individual breather?}
+So that each of them will ``spring up'' an individual breather? Not necessarily. See comment I added immediately above this.}
 For the parameter continuation, we use the equation
 \begin{equation}\label{eq:HformAUTO}
 \frac{d}{dt}\begin{pmatrix} u_n \\ v_n \end{pmatrix} = 
@@ -719,7 +718,8 @@ where $u_k^\text{old}$ refers to the function at the previous continuation step.
 
 We first consider the discrete sine-Gordon equation, where the nonlinearity is $f(u) = \sin u$. For all of the plots in the section, unless otherwise noted, we use a lattice size $L = 15$, the energy at the AC limit is $E = 0.25$, and the period is $T = 7.91$. We note that $2 \pi < T < 3 \pi$, thus the upper continuous spectrum band has positive Krein signature, and the lower band has negative Krein signature (\cref{fig:bands}, left).
 \cref{fig:singlea} shows the primary breather solution for $d = 0.25$ at $t = 0$, which is symmetric on the spatial lattice. The corresponding Floquet spectrum is shown in \cref{fig:singleb}. There is a single Floquet multiplier (with multiplicity 2) at 1, which is from translation symmetry. The continuous spectrum bands are a discrete set of points, which is a result of the finiteness
-of the lattice and of the spatial discretization, and have merged into a single band by this value of $d$. \cref{fig:singlec} shows the exponential decay of the breather with increasing $n$; \cref{fig:singled} shows the relative error of this decay rate compared to $r_M$, which is defined in \cref{eq:defrM}. The exponential decay of the Fourier frequencies (in $t$) of the primary breather is shown in \cref{fig:freqdecay}. As expected, since the breather is even in $t$, only even frequencies are represented in the frequency spectrum. Furthermore, the scaled amplitudes for all frequencies $k\geq 20$ are below $10^{-10}$, suggesting that the finite dimensional approximation is reasonable.
+of the lattice and of the spatial discretization, and have effectively merged into a single band by this value of $d$. 
+\cref{fig:singlec} shows the exponential decay of the $L^2$ norm on $[0,T]$ of the breather solution $u_n(t)$ at lattice site $n$ as $n$ is increased. \cref{fig:singled} plots the relative error of this decay rate compared to $r_M$, which is defined in \cref{eq:defrM}. The exponential decay of the Fourier frequencies (in $t$) of the primary breather is shown in \cref{fig:freqdecay}. As expected, since the breather is even in $t$, only even frequencies are represented in the frequency spectrum. Furthermore, the scaled amplitudes for all frequencies $k\geq 20$ are below $10^{-10}$, suggesting that the finite dimensional approximation is reasonable.
 
 \begin{figure}
 	\begin{center}
@@ -744,11 +744,10 @@ of the lattice and of the spatial discretization, and have merged into a single 
 		\label{fig:singled}
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Initial condition $u_n(0)$, and (b) Floquet spectrum, for primary breather for $d = 0.25$. (c) Semilog plot showing exponential decay rate of $L^2$ norm of breather solution with increasing $n$ for varying $d$. 
+	\caption{(a) Initial condition $u_n(0)$, and (b) Floquet spectrum, for primary breather for $d = 0.25$. (c) Semilog plot of $L^2$ norm of solution $u_n(t)$ over one period $[0,T]$ vs. the lattice index $n$ for varying coupling parameter $d$. (d) Relative error of exponential decay rate seen in (c) versus that predicted by equation \cref{eq:U1decayest}.
 	{\bf Ross: just to clarify: the norm is over one period? (for 
 	different sites). Right? Also can you clarify panel (d) ---
-	decay rate of what exactly??}
-	(d) Relative error in exponential decay rate. }
+	decay rate of what exactly?? I have added clarification here and in the text.} }
 	\label{fig:single}
 \end{figure}
 
@@ -760,7 +759,7 @@ of the lattice and of the spatial discretization, and have merged into a single 
 	\label{fig:freqdecay}
 \end{figure}
 
-\cref{fig:double} shows the initial conditions (solution at $t=0$) for the out-of-phase (top) and in-phase (bottom) double breather for $N_1 = 6$ at $d = 0.25$, together with their Floquet spectra and the eigenfunction corresponding to the interaction eigenmode. The out-of-phase double breather has a pair of interaction eigenmodes on the unit circle, thus is spectrally neutrally stable, while the in-phase double breather has a pair of real interaction eigenmodes off of the unit circle and on the positive real axis, thus is spectrally unstable. This same pattern holds for all $N_1$, both even and odd. We note that the solvability condition $M < 0$ for the sine-Gordon potential, and that the quantity $b_1 < 0$ in \cref{eq:inteigsdouble} for both $N_1$ even and $N_1$ odd. Since $M$ and $b_1$ have the same sign for all $N_1$, this agrees with the stability predictions following equation \cref{eq:inteigsdouble}.
+\cref{fig:double} shows the initial conditions (solution at $t=0$) for the out-of-phase (top) and in-phase (bottom) double breather for $N_1 = 6$ at $d = 0.25$, together with their Floquet spectra and the eigenfunction corresponding to the interaction eigenmode. The out-of-phase double breather has a pair of interaction eigenmodes on the unit circle, thus is spectrally neutrally stable, while the in-phase double breather has a pair of real interaction eigenmodes off of the unit circle and on the positive real axis, thus is spectrally unstable. This same pattern holds for all $N_1$, both even and odd. We note that the solvability condition $M < 0$ for the sine-Gordon potential, and that the quantity $b_1 < 0$ in \cref{eq:inteigsdouble} for both $N_1$ even and $N_1$ odd. Since $K$ and $b_1$ have the same sign for all $N_1$, this agrees with the stability predictions following equation \cref{eq:inteigsdouble}.
 
 \cref{fig:eigerrora} shows the exponential decay of the Floquet exponents $\lambda$ (as computed from the monodromy matrix) for in-phase double breathers as the separation distance $N$ is increased. (Recall that the Floquet exponents $\lambda$ and Floquet multipliers $\mu$ are related by $\mu = e^{\lambda T}$).
 This is similar for out-of-phase double breathers (not shown). The remaining panels in \cref{fig:eigerror} show the relative error between the computation of these Floquet eigenmodes using the formula \cref{eq:inteigsdouble} and the computation of these modes from the monodromy matrix. As expected, the relative error increases with the coupling parameter $d$, and decreases with the separation distance $N$. \cref{fig:SGintersite} shows the initial condition $u_n(0)$ and Floquet spectra for two special two-site breathers, for which the two excited sites at the AC limit are in adjacent lattice nodes. We will call these adjacent breathers.
@@ -773,43 +772,63 @@ described above.
 
 \begin{figure}
 	\begin{center}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{doubleun0.eps} \hspace{-0.5cm}
+		\includegraphics[width=7.5cm]{doublepmun0insetspec.eps} \hspace{-0.5cm}
 		\label{fig:doublea}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{doublespec.eps} \hspace{-0.5cm}
+		\includegraphics[width=7.5cm]{doubleppun0insetspec.eps}
 		\label{fig:doubleb}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{doubleinteig.eps} 
+		\includegraphics[width=7.5cm]{doubleinteig.eps} \hspace{-0.5cm}
 		\label{fig:doublec}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{doubleppun0.eps} \hspace{-0.5cm}
+		\includegraphics[width=7.5cm]{doubleppinteig.eps}
 		\label{fig:doubled}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
-		\caption{}
-		\includegraphics[width=5.5cm]{doubleppspec.eps} \hspace{-0.5cm}
-		\label{fig:doublee}
-	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
-		\caption{}
-		\includegraphics[width=5.5cm]{doubleppinteig.eps}
-		\label{fig:doublef} 
-	\end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doubleun0.eps} \hspace{-0.5cm}
+	% 	\label{fig:doublea}
+	% \end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doublespec.eps} \hspace{-0.5cm}
+	% 	\label{fig:doubleb}
+	% \end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doubleinteig.eps} 
+	% 	\label{fig:doublec}
+	% \end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doubleppun0.eps} \hspace{-0.5cm}
+	% 	\label{fig:doubled}
+	% \end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doubleppspec.eps} \hspace{-0.5cm}
+	% 	\label{fig:doublee}
+	% \end{subfigure}
+	% \begin{subfigure}{0.3\linewidth}
+	% 	\caption{}
+	% 	\includegraphics[width=5.5cm]{doubleppinteig.eps}
+	% 	\label{fig:doublef} 
+	% \end{subfigure}
 	\end{center}
-	\caption{Initial condition $u_n(0)$, Floquet spectrum, and eigenfunction $(v_n, w_n)$ corresponding to interaction eigemode for out-of-phase double breather (top) and in-phase double breather (bottom). Coupling parameter $d = 0.25$, breather distance $N_1 = 6$.
+	\caption{Initial condition $u_n(0)$ with Floquet spectrum in inset (top) and eigenfunction $(v_n, w_n)$ corresponding to interaction eigenmode (bottom) for out-of-phase double breather (left) and in-phase double breather (right). Orange solid line in Floquet spectrum plot corresponds to unit circle. Coupling parameter $d = 0.25$, breather distance $N_1 = 6$.
 	{\bf Ross: One of the concerns for the interaction eigenmodes
 	is that we cannot distinguish what they are doing unless
 	you show them ``superposed'' to the solution (in comparison
 	with the solution without them). Perhaps you see what
-	I mean, or else I may need to explain.}}
+	I mean, or else I may need to explain. I made them larger and lined them up vertically. Perhaps this is better? I think it would be cluttered to put them on the same plot.}}
 	\label{fig:double}
 \end{figure}
 
@@ -838,7 +857,7 @@ described above.
 	\end{center}
 	\caption{(a) Semilog plot of magnitude of Floquet exponents $\lambda$ vs. $N$ for in-phase double breather with $d = 0.1, 0.15, 0.2, 0.25$. (b) Semilog plot of the relative error Floquet multipliers of double breathers vs. $N$ for the case of 
 	coupling parameter $d = 0.25$.
-	Semilog plot of the relative error of interaction eigenmode computation vs. $d$ for out-of-phase double breathers (c) and in-phase double breathers (d) for breather distance $N_1 = 4,5,6,7$. {\bf shouldn't it be $N_1$ too in upper panels?}}
+	Semilog plot of the relative error of interaction eigenmode computation vs. $d$ for out-of-phase double breathers (c) and in-phase double breathers (d) for breather distance $N_1 = 4,5,6,7$. {\bf shouldn't it be $N_1$ too in upper panels? Fixed.}}
 	\label{fig:eigerror}
 \end{figure}
 
@@ -862,9 +881,9 @@ described above.
 For completeness here, and also per its intrinsic interest,
 we also show in 
 \cref{fig:bifdiagSGoop1} the bifurcation diagram for an out-of-phase double breather, starting from the AC limit. The parameter continuation starts on the lower branch, where the double breather has a pair of interaction eigenmodes on the unit circle (1). The upper branch is a double breather whose constituent breathers
-are out-of-phase between them, yet each encompasses two in-phase adjacent excited sites (see label (7)), which we recall lead
-to instability; this breather has two pairs of real interaction eigenmodes {\bf Ross: isn't there also one on unit circle (three
-in total)?}. The middle branch is an asymmetric double breather, comprising one single-site breather and another which is out-of-phase with it, yet involves two in-phase adjacent excited sites (8); this breather has one pair of real interaction eigenmodes, and one pair of interaction eigenmodes on the unit circle. There is a corresponding branch (not shown) where the order of the two breathers is reversed. As $d$ is increased along the lower branch, a pair of internal modes appears on the unit circle (2); these have opposite Krein signature from the nearby interaction eigenmode. These collide and move off of the unit circle (3) in the form of a complex quartet (corresponding
+are out-of-phase between them, yet each encompasses two in-phase adjacent excited sites (see label (7)), which we recall leads
+to instability; this breather has two pairs of real interaction eigenmodes, in addition to a pair of interaction eigenmodes on the unit circle {\bf Ross: isn't there also one on unit circle (three
+in total)? Yes, this is fixed now}. The middle branch is an asymmetric double breather, comprising one single-site breather and another which is out-of-phase with it, yet involves two in-phase adjacent excited sites (8); this breather has one pair of real interaction eigenmodes, and one pair of interaction eigenmodes on the unit circle. There is a corresponding branch (not shown) where the order of the two breathers is reversed. As $d$ is increased along the lower branch, a pair of internal modes appears on the unit circle (2); these have opposite Krein signature from the nearby interaction eigenmode. These collide and move off of the unit circle (3) in the form of a complex quartet (corresponding
 to an oscillatory instability). At this point, a second pair of internal modes has appeared on the unit circle, which then passes between the first pair of Floquet modes (not shown). By (4), the pair of eigenmodes which left the unit circle has rejoined the unit circle. Between (4) and (5), the second pair of internal modes collides (with the branch traced by (8) and (9)) at (1,0) in a {\it subcritical} pitchfork bifurcation and moves off of the unit circle. This pitchfork is symmetry-breaking, and produces the asymmetric middle branches of the bifurcation diagram, indicated by the
 dashed line. Between (5) and (6), there is a turning point (fold bifurcation), in which the first pair of internal modes collides and moves off of the unit circle. 
 This collision represents a saddle-center bifurcation with the
@@ -923,17 +942,17 @@ each other, so their collapsing into something in the middle
 seems unexpected. Are you sure that your energy is well-conserved
 and the interaction result (upon zooming etc.) makes sense? Esp.
 the right breather more or less "annihilating" seems a bit 
-unexpected...}
+unexpected... Energy is unfortunately not conserved for the entire time interval; energy conservation is lost at about the time when the solution breaks down.}
 The energy density at lattice site $n$ is given by
 \begin{equation}\label{eq:Hn}
 h_n = \frac{1}{2}v_n^2 + V(u_n) 
 + \frac{d}{4}\left[ (u_n - u_{n+1})^2 + (u_n - u_{n-1})^2\right],
 \end{equation}
-{\bf Ross: please check if the $v_n^2$ change is OK with you?}
+{\bf Ross: please check if the $v_n^2$ change is OK with you? This is fine.}
 where $v_n = \dot{u}_n$, so that the Hamiltonian \cref{eq:H} is the sum of the energy densities over the entire lattice. 
 
 When the in-phase double breather is perturbed in the same way, the oscillations in $u_L(t)$ initially increase in both amplitude and period, while those in $u_R(t)$ decrease in both amplitude and period (\cref{fig:timestepSGunstabled}). (These are reversed if the perturbation is in the opposite direction). For separation distance $N_1 = 6$, as $t$ evolves, we see that the periods of $u_L(t)$ and $u_R(t)$ vary periodically in opposite directions (\cref{fig:timestepSGunstablec}), thus the phase differences between the two breathers vary periodically as well (\cref{fig:timestepSGunstablea} and \cref{fig:timestepSGunstableb}). The amplitudes of $u_L(t)$ and $u_R(t)$ also vary periodically in opposite directions (\cref{fig:timestepSGunstablee}). In effect, the perturbed in-phase double breather appears to be oscillating about the neutrally stable, out-of-phase double breather, a feature
-that persists robustly over longer time scales. The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given by $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstable}). A different behavior is observed if the separation distance $N_1$ is smaller (\cref{fig:timestepSGpplong}) {\bf Ross: than what?}. In this case, the two breathers attract each other, and eventually merge into a localized, single-site breather state, which is located between the starting sites for the two breathers; this limiting solution is close to a higher energy, single-site breather.
+that persists robustly over longer time scales. The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given by $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstable}). {\bf Ross: than what? I describe it here.}. If the separation distance $N_1$ is smaller, the two breathers attract each other, and eventually merge into a localized, single-site breather state (see \cref{fig:timestepSGpplong} for separation distance $N_1 = 4$). This limiting solution is close to a higher energy, single-site breather, and is located between the initial starting sites for the pair of breathers. A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates that energy is converved by the numerical scheme over the simulation time, providing validation of this result.
 
 \begin{figure}
 	\begin{center}
@@ -1024,39 +1043,29 @@ that persists robustly over longer time scales. The growth rate of the differenc
 
 \begin{figure}
 	\begin{center}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{N3ppcolormap.eps}
+		\includegraphics[width=7.5cm]{N4ppcolormap.eps}
 		\label{fig:timestepSGpplonga}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.25cm]{N3pph1.eps}
+		\includegraphics[width=7.5cm]{N4ppH.eps}
 		\label{fig:timestepSGpplongb}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.25cm]{N3pph2.eps}
+		\includegraphics[width=7.5cm]{N4pph1.eps}
 		\label{fig:timestepSGpplongc}
 	\end{subfigure}
-		\begin{subfigure}{0.3\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=5.5cm]{N4ppcolormap.eps}
+		\includegraphics[width=7.5cm]{N4pph2.eps}
 		\label{fig:timestepSGpplongd}
 	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
-		\caption{}
-		\includegraphics[width=5.25cm]{N4pph1.eps}
-		\label{fig:timestepSGpplonge}
-	\end{subfigure}
-	\begin{subfigure}{0.3\linewidth}
-		\caption{}
-		\includegraphics[width=5.25cm]{N4pph2.eps}
-		\label{fig:timestepSGpplongf}
-	\end{subfigure}
 	\end{center}
-	\caption{Colormap showing the evolution in $t$ of $|u_n|$ (left), energy density vs. time for central sites of breather (center and right). Labels $n$ of sites correspond to those in left panel. Separation distance $N_1 = 3$ (top), $N_1 = 4$ (bottom).
-	Coupling parameter $d=0.25$, perturbation parameter $\delta = 0.01$, lattice size parameter $L=150$.}
+	\caption{(a) Colormap showing the evolution in $t$ of $|u_n|$. (b) Total energy $H(\uvec(t))$ vs. $t$ ($H$ is given by \cref{eq:H}). (c) and (d) Energy density vs. time for central sites of breather. Labels of sites correspond to those in (a). Separation distance $N_1 = 4$
+	, coupling parameter $d=0.25$, perturbation parameter $\delta = 0.01$, lattice size parameter $L=150$.}
 	\label{fig:timestepSGpplong}
 \end{figure}
 
@@ -1126,7 +1135,7 @@ The results for the soft $\phi^4$ potential are similar to those for sine-Gordon
 
 \begin{table}
 \begin{tabular}{llccll}\toprule
-Potential & $N_1$ & sign of $M$ & sign of $b_1$ & in-phase & out-of-phase \\ \midrule
+Potential & $N_1$ & sign of $K$ & sign of $b_1$ & in-phase & out-of-phase \\ \midrule
 sine-Gordon (soft) & even & $-$ & $-$ & unstable & stable \\ 
                    & odd  & $-$ & $-$ & unstable & stable \\
 $\phi^4$ (hard)    & even & $+$ & $+$ & unstable & stable \\
@@ -1234,7 +1243,7 @@ Evaluating the inner products, we obtain
 \xi_i &= a_i (c_{i+1} - c_i) + \tilde{a}_{i-1} (c_i - c_{i-1}) + \frac{1}{d} \lambda^2 M + R(\lambda)_i(c),
 \end{aligned}
 \end{equation}
-where $a_i$ and $\tilde{a}_{i-1}$ are defined by \cref{eq:ai} and $M$ is defined by \cref{eq:M}. Equation \cref{Elambda} follows by writing the jump conditions \cref{eq:jump3} in matrix form as
+where $a_i$ and $\tilde{a}_{i-1}$ are defined by \cref{eq:ai} and $K$ is defined by \cref{eq:M}. Equation \cref{Elambda} follows by writing the jump conditions \cref{eq:jump3} in matrix form as
 \begin{equation}\label{eq:matrixform}
 \left( A + \frac{1}{d} M \lambda^2 I + R(\lambda) \right) c = 0
 \end{equation}
