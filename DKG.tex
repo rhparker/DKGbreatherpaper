@@ -1118,7 +1118,7 @@ The results for the soft $\phi^4$ potential are similar to those for sine-Gordon
 
 \begin{figure}
 	\begin{center}
-		\begin{subfigure}{0.45\linewidth}
+	\begin{subfigure}{0.45\linewidth}
 		\caption{}
 		\includegraphics[width=7.5cm]{images/doublephi4eigerrorpp.eps} 
 		\label{fig:phi4eigerrora} 
@@ -1157,13 +1157,23 @@ not (see also, e.g., the analogy  with the interaction of dark
 solitons in the defocusing DNLS model of~\cite{Pelinovsky_2008}). 
 
 Avenues of further research include exploring breathers and multi-breathers either in Klein-Gordon lattices with asymmetric potentials, such as the Morse potential, or in other models 
-involving beyond-nearest-neighbor interactions, discussed, e.g., in~\cite{PENATI201992} and references therein. One class of models which would be interesting to study is equations in which the potential involves off-site terms, such as the FPUT lattice. A natural extension of this would be to look at higher dimensional lattices, both for on-site potentials such as in a higher dimensional Klein-Gordon model, and more complex potentials, such as higher dimensional FPUT lattices. In two dimensions, there are many possible regular lattice models, including square, triangular, and honeycomb, and these different geometries may exhibit qualitatively different behavior. Another possibility would be to look at more complex solutions. Two fundamental coherent structures in Klein-Gordon lattices are kinks and breathers. Preliminary numerical experiments suggest that there solutions comprising both breathers and kinks; see \cref{fig:brk} for an example for a solution to the discrete sine-Gordon equation in which a breather is connected to a kink. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction, although it would most likely involve a different approach entirely.
+involving beyond-nearest-neighbor interactions, discussed, e.g., in~\cite{PENATI201992} and references therein. One class of models which would be interesting to study is equations in which the potential involves off-site terms, such as the FPUT lattice. A natural extension of this would be to look at higher dimensional lattices, both for on-site potentials such as in a higher dimensional Klein-Gordon model, and more complex potentials, such as higher dimensional FPUT lattices. In two dimensions, there are many possible regular lattice models, including square, triangular, and honeycomb, and these different geometries may exhibit qualitatively different behavior. Another possibility would be to look at more complex solutions. One class of solutions which remains unexplored is asymmetric multi-breathers, solutions comprising breathers which have different, but commensurate, fundamental periods. \cref{fig:brka} shows an example of a asymmetric double breather solution to the discrete sine-Gordon equation; the left breather has a fundamental period of 8, and the right breather has a fundamental period of 16, so the overall breather has a period of 16. While these solutions can be constructed numerically by parameter continuation from the AC limit, preliminary numerical experiments suggest that they only exist for small values of the coupling parameter $d$, and that they are spectrally unstable.
+In addition, preliminary numerical experiments suggest that there solutions comprising both breathers and kinks; see \cref{fig:brkb} for an example for a solution to the discrete sine-Gordon equation in which a breather is connected to a kink. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction, although it would most likely involve a different approach entirely.
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=9cm]{images/brk1.eps} 
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{images/doubleasymm.eps} 
+		\label{fig:brka} 
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{images/brk1.eps} 
+		\label{fig:brkb} 
+	\end{subfigure}
 	\end{center}
-	\caption{Solution to discrete sine-Gordon equation comprising one breather and one kink. Coupling parameter $d = 0.25$.}
+	\caption{(a) Initial condition for asymmetric double breather solution with Floquet spectrum in inset, coupling parameter $d = 0.075$. (b) Solution to discrete sine-Gordon equation comprising one breather and one kink, coupling parameter $d = 0.25$.}
 	\label{fig:brk}
 \end{figure}
 
