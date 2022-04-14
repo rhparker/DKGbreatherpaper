@@ -935,24 +935,20 @@ breather in-phase between the two (see inset in \cref{fig:bifdiagSGip1}). A plot
 
 Finally, we demonstrate the effect of the interaction eigenmodes on the dynamics of the double breathers by performing long-term timestepping experiments. For a timestepping scheme, we use a symplectic and symmetric implicit Runge-Kutta method \cite{HairerBook} to preserve the symplectic structure of the Hamiltonian system. Specifically, we use the MATLAB implementation of the \texttt{irk2} scheme of order 12 from \cite{Hairer2003}.
 For each experiment, we perturb the stationary breather by adding the eigenvector $(v_n, w_n)$ corresponding to the interaction eigenmode $\mu$, multiplied by a small factor $\delta$. (If the eigenvector is complex, we use the real part of the eigenvector for the perturbation).
-For a double breather $u_n(t)$, let $u_L(t) = u_{-N_1^-}(t)$ and $u_R(t) = u_{N_1^+}(t)$ be the center sites of the left and the right breather, respectively. First, we look at the out-of-phase double breather. We choose the coupling parameter $d=0.2$ and separation distance $N_1 = 4$ so that we avoid the (nonlinearity induced) 1:2 resonance between the interaction eigenmode and the continuous spectrum bands \cref{fig:timestepSGstablea}, which leads to a nonlinear instability (see \cite{cuevas-maraver2016} for details). Although higher order resonances (1:3, 1:4, etc) can occur, they will be manifested at times beyond the time interval of our simulation. When the out-of-phase double breather is perturbed, the peak amplitudes of $u_L(t)$ and $u_R(t)$ oscillate in opposite directions with frequency given by the imaginary part of $\log(\mu)/T$ (see \cref{fig:timestepSGstable}), with relative error less than 0.005. In \cref{fig:timestepSGpmlong}, we take $d=0.25$ and $N_1 = 4$, so that twice the frequency of the interaction eigenmode falls inside the continuous spectrum bands, causing a 1:2 resonance. While this does cause the expected nonlinear instability (compare to Figures 3 and 4 in \cite{cuevas-maraver2016}), it does not occur until after $t = 15000$, at which point the energy density collapses into a single site located between the two original breather sites.
-{\bf Ross: this is not a very straightforwardly natural
-outcome of this interaction. These are waveforms that repeal
-each other, so their collapsing into something in the middle
-seems unexpected. Are you sure that your energy is well-conserved
-and the interaction result (upon zooming etc.) makes sense? Esp.
-the right breather more or less "annihilating" seems a bit 
-unexpected... Energy is unfortunately not conserved for the entire time interval; energy conservation is lost at about the time when the solution breaks down.}
-The energy density at lattice site $n$ is given by
+For a double breather $u_n(t)$, let $u_L(t) = u_{-N_1^-}(t)$ and $u_R(t) = u_{N_1^+}(t)$ be the center sites of the left and the right breather, respectively. First, we look at the out-of-phase double breather. We choose the coupling parameter $d=0.2$ and separation distance $N_1 = 4$ so that we avoid the (nonlinearity induced) 1:2 resonance between the interaction eigenmode and the continuous spectrum bands \cref{fig:timestepSGstablea}, which leads to a nonlinear instability (see \cite{cuevas-maraver2016} for details). 
+Although we expect that nonlinear instabilities due to these higher order resonances will occur, they will be manifested at times beyond the time intervals of our simulations. 
+When the out-of-phase double breather is perturbed, the peak amplitudes of $u_L(t)$ and $u_R(t)$ oscillate in opposite directions with frequency given by the imaginary part of $\log(\mu)/T$ (see \cref{fig:timestepSGstable}), with relative error less than 0.005. 
+
+When the in-phase double breather is perturbed in the same way, the oscillations in $u_L(t)$ initially increase in both amplitude and period, while those in $u_R(t)$ decrease in both amplitude and period (\cref{fig:timestepSGunstabled}). (These are reversed if the perturbation is in the opposite direction). For separation distance $N_1 = 6$, as $t$ evolves, we see that the periods of $u_L(t)$ and $u_R(t)$ vary periodically in opposite directions (\cref{fig:timestepSGunstablec}), thus the phase differences between the two breathers vary periodically as well (\cref{fig:timestepSGunstablea} and \cref{fig:timestepSGunstableb}). The amplitudes of $u_L(t)$ and $u_R(t)$ also vary periodically in opposite directions (\cref{fig:timestepSGunstablee}). In effect, the perturbed in-phase double breather appears to be oscillating about the neutrally stable, out-of-phase double breather, a feature
+that persists robustly over longer time scales. The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given by $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstable}). {\bf Ross: than what? I describe it here.}. If the separation distance $N_1$ is smaller, the two breathers attract each other, and eventually merge into a localized, single-site breather state (see \cref{fig:timestepSGpplong} for separation distance $N_1 = 4$). 
+This limiting solution is close to a higher energy, single-site breather, and is located between the initial starting sites for the pair of breathers. 
+The energy density at lattice site $n$, which is plotted in the bottom panels of \cref{fig:timestepSGpplong}, is given by
 \begin{equation}\label{eq:Hn}
 h_n = \frac{1}{2}v_n^2 + V(u_n) 
 + \frac{d}{4}\left[ (u_n - u_{n+1})^2 + (u_n - u_{n-1})^2\right],
 \end{equation}
-{\bf Ross: please check if the $v_n^2$ change is OK with you? This is fine.}
 where $v_n = \dot{u}_n$, so that the Hamiltonian \cref{eq:H} is the sum of the energy densities over the entire lattice. 
-
-When the in-phase double breather is perturbed in the same way, the oscillations in $u_L(t)$ initially increase in both amplitude and period, while those in $u_R(t)$ decrease in both amplitude and period (\cref{fig:timestepSGunstabled}). (These are reversed if the perturbation is in the opposite direction). For separation distance $N_1 = 6$, as $t$ evolves, we see that the periods of $u_L(t)$ and $u_R(t)$ vary periodically in opposite directions (\cref{fig:timestepSGunstablec}), thus the phase differences between the two breathers vary periodically as well (\cref{fig:timestepSGunstablea} and \cref{fig:timestepSGunstableb}). The amplitudes of $u_L(t)$ and $u_R(t)$ also vary periodically in opposite directions (\cref{fig:timestepSGunstablee}). In effect, the perturbed in-phase double breather appears to be oscillating about the neutrally stable, out-of-phase double breather, a feature
-that persists robustly over longer time scales. The growth rate of the difference in $L^2$ norm between the perturbed and unperturbed solutions is given by $\mu^{1/T}$, with a relative error of less than 0.001, where $\mu > 1$ is the larger of the Floquet multiplier pair (\cref{fig:timestepSGunstable}). {\bf Ross: than what? I describe it here.}. If the separation distance $N_1$ is smaller, the two breathers attract each other, and eventually merge into a localized, single-site breather state (see \cref{fig:timestepSGpplong} for separation distance $N_1 = 4$). This limiting solution is close to a higher energy, single-site breather, and is located between the initial starting sites for the pair of breathers. A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates that energy is converved by the numerical scheme over the simulation time, providing validation of this result.
+A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates that energy is conserved by the numerical scheme over the simulation time, providing validation of this result.
 
 \begin{figure}
 	\begin{center}
@@ -975,33 +971,6 @@ that persists robustly over longer time scales. The growth rate of the differenc
 	\caption{(a) out-of-phase double breather with the Floquet spectrum shown in the inset. Time evolution of the perturbation of the out-of-phase breather, showing the amplitude of the peaks of $u_L$ and $u_R$ vs. $t$ (b), and difference in this amplitude from the unperturbed breather (c).  
 	Coupling parameter $d=0.2$, separation distance $N_1 = 4$, perturbation parameter $\delta = 0.01$.}
 	\label{fig:timestepSGstable}
-\end{figure}
-
-\begin{figure}
-	\begin{center}
-	\begin{subfigure}{0.45\linewidth}
-		\caption{}
-		\includegraphics[width=7.5cm]{timestepN4longspec.eps}
-		\label{fig:timestepSGpmlonga}
-	\end{subfigure}
-	\begin{subfigure}{0.45\linewidth}
-		\caption{}
-		\includegraphics[width=7.5cm]{N4pmcolormap.eps}
-		\label{fig:timestepSGpmlongb}
-	\end{subfigure}
-	\begin{subfigure}{0.45\linewidth}
-		\caption{}
-		\includegraphics[width=7.5cm]{N4pmh1.eps}
-		\label{fig:timestepSGpmlongc}
-	\end{subfigure}
-	\begin{subfigure}{0.45\linewidth}
-		\caption{}
-		\includegraphics[width=7.5cm]{N4pmh2.eps}
-		\label{fig:timestepSGpmlongd}
-	\end{subfigure}
-	\end{center}
-	\caption{(a) out-of-phase double breather with the Floquet spectrum in  the inset. (b) colormap showing the evolution in $t$ of $|u_n|$ for sites -4 to 4. (c) and (d) energy density vs. time for the central sites of breather. Coupling parameter $d=0.25$, separation distance $N_1 = 4$, perturbation parameter $\delta = 0.25$, lattice size parameter $L=150$.}
-	\label{fig:timestepSGpmlong}
 \end{figure}
 
 \begin{figure}
@@ -1169,11 +1138,11 @@ In addition, preliminary numerical experiments suggest that there solutions comp
 	\end{subfigure}
 	\begin{subfigure}{0.45\linewidth}
 		\caption{}
-		\includegraphics[width=7.5cm]{images/brk1.eps} 
+		\includegraphics[width=7.5cm]{images/brk1colormap.eps} 
 		\label{fig:brkb} 
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Initial condition for asymmetric double breather solution with Floquet spectrum in inset, coupling parameter $d = 0.075$. (b) Solution to discrete sine-Gordon equation comprising one breather and one kink, coupling parameter $d = 0.25$.}
+	\caption{(a) Initial condition for asymmetric double breather solution with Floquet spectrum in inset, coupling parameter $d = 0.075$. (b) Colormap showing solution to discrete sine-Gordon equation comprising one breather (on left) and one kink (on right), coupling parameter $d = 0.25$. Time evolution is over one period $T$ of the breather.}
 	\label{fig:brk}
 \end{figure}
 
