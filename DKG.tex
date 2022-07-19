@@ -120,9 +120,12 @@ Dallas, TX 75275, USA}
 \email{aaceves@smu.edu}
 
 \begin{abstract}
-	We consider the existence and spectral stability of multi-breather structures in the discrete Klein-Gordon equation, both for soft and hard symmetric potentials. By taking a spatial dynamics approach and an appropriate approximation of the system on a finite-dimensional Hilbert space, we use Lin's method to construct multi-breathers from a sequence of well-separated copies of a primary, single-site breather. We then locate the eigenmodes in the Floquet spectrum associated with the interaction between the
-	individual breathers of such multi-breather
-	states by reducing the spectral problem to a matrix equation. Analytical expressions for these eigenmodes for the approximate system are obtained in terms of the primary breather and its kernel eigenfunctions, and these are found to be in very good agreement with the numerical Floquet spectrum results. This is supplemented with results from numerical timestepping experiments, which are interpreted using the spectral computations.
+	We consider the existence and spectral stability of multi-breather structures in the discrete Klein-Gordon equation, both for soft and hard symmetric potentials. 
+	\revised{
+	To obtain analytical results, we project the system onto a finite-dimensional Hilbert space consisting of the first $M$ Fourier modes, for arbitrary $M$. On this approximate system, we then take a spatial dynamics approach and use Lin's method
+	}
+	to construct multi-breathers from a sequence of well-separated copies of the primary, single-site breather. We then locate the eigenmodes in the Floquet spectrum associated with the interaction between the individual breathers of such multi-breather	states by reducing the spectral problem to a matrix equation. Expressions for these eigenmodes for the \revised{approximate, finite-dimensional
+	} system are obtained in terms of the primary breather and its kernel eigenfunctions, and these are found to be in very good agreement with the numerical Floquet spectrum results. This is supplemented with results from numerical timestepping experiments, which are interpreted using the spectral computations.
 \end{abstract}
 
 \maketitle
@@ -130,9 +133,9 @@ Dallas, TX 75275, USA}
 \section{Introduction}
 
 Dynamical models on a one-dimensional lattice have been an topic of interest for well over 50 years. Perhaps the most famous example is the Fermi–Pasta–Ulam–Tsingou (FPUT) model \cites{FPUT,Zabusuy1965}, which was one of the first problems to be studied using numerical simulations. In this work, we will examine the discrete Klein-Gordon (DKG) equation~\cites{braun2004,SGbook,p4book,kivsharmalomed}
-\begin{equation*}
+\begin{equation}\label{eq:introDKG}
 \ddot{u}_n = d (\Delta_2 u)_n - f(u_n),
-\end{equation*}
+\end{equation}
 which describes the dynamics of an infinitely long, one-dimensional lattice of particles. The quantity $u_n$ represents the displacement of $n$th particle in the integer lattice as a function of the time $t$. Each particle is harmonically coupled to its two nearest neighbors via the discrete second difference operator $\Delta_2$, and the strength of this coupling is quantified by the parameter $d$. The particles are subject to an external, nonlinear, on-site potential $V(u)$, such that $f(u) = V'(u)$, which can be of different
 type depending on the model~\cites{Karachalios,imamat}. Common nonlinearities are shown in \cref{table:V}. (See \cref{sec:DKGbreather} for the definition of hard and soft potentials).
 
@@ -159,22 +162,90 @@ Two major classes of coherent structures in the nonlinear Klein-Gordon equation 
 For discrete systems, the existence and stability of static kinks have been well-studied (see \cites{PEYRARD198488,KevrekidisWeinstein2000,SGchapter}, as well as \cite{Parker2021} for results on multi-kink solutions), and there has also been interest in moving kinks \cites{Aigner2003,Iooss2006,Cisneros2008}. We will concern ourselves herein with discrete breather solutions.
 
 Discrete breathers have been studied in Hamiltonian \cite{Flach1998} and dissipative systems \cite{Flach2008a}, and have applications in areas such as laser scanning microscopy and coupled optical waveguides \cites{Flach2008,LEDERER20081}. Existence and stability of discrete breather solutions in Klein-Gordon lattices were first studied by MacKay and Aubry \cites{MacKay1994,Aubry1997} by considering the system near the anti-continuum (AC) limit ($d=0$), in which the individual sites in the lattice are uncoupled. The advantage of this approach is that the solution for a single site is known at the AC limit, and this can be continued to small $d>0$ using the implicit function theorem. Some results about asymptotic stability of these breathers can be found in \cite{Bambusi2013}. A similar approach has been used for multi-site solitons in the discrete nonlinear Schr\"odinger equation (DNLS) \cites{Pelinovsky2005,KALOSAKAS200644}, which demonstrated that the only 
-potentially stable multi-solitons are those in which adjacent peaks are excited out-of-phase. Analysis of multi-breathers in DKG, in which a finite number of sites in the integer lattice are excited at the AC limit, was done in \cites{Archilla2003,Koukouloyannis2009}, but this was restricted the case where excited sites are adjacent.
+potentially stable multi-solitons are those in which adjacent peaks are excited out-of-phase. Analysis of multi-breathers in DKG, in which a finite number of sites in the integer lattice are excited at the AC limit, was done in \cites{Archilla2003,Koukouloyannis2009}, but this was restricted the case where excited sites are adjacent,
+\revised{
+so that a definite result could be deduced for the dynamics of the relative phases between oscillators at adjacent sites.
+}
 Indeed, the two methods (the Aubry band method~\cite{Aubry1997} and the MacKay
 effective Hamiltonian method~\cite{sepulchre}) explored in the above two publications
 were shown to yield the same results near this limit 
 in~\cite{doi:10.1142/S0218127411029690}.
 In this situation, for small $d>0$, out-of-phase multi-breathers are stable for soft potentials, and in-phase multi-breathers are stable for hard potentials~\cite{Archilla2003}*{Theorem 6}. Results on the existence and spectral stability of multi-breathers were extended in \cite{Pelinovsky2012} to multi-site breathers where any arbitrary, finite set of lattice points is excited at the AC limit; in particular, this allows the excited sites to be separated in the lattice, i.e., there can be ``holes'' in the lattice. However, spectral stability of multi-breathers does not necessarily imply nonlinear stability; even if the multi-breather is spectrally stable, nonlinear instabilities can result from resonance between internal eigenmodes and the continuous spectrum band, as long as the two have opposite Krein signatures \cite{cuevas-maraver2016}
 (see also the simpler case example of the discrete
-nonlinear Schr{\"o}dinger model in~\cite{PhysRevLett.114.214101}). A recent result uses the Schauder fixed point theorem to prove the existence of discrete Klein-Gordon breathers in the setting of a convex on-site potential \cite{hennig2021}. Some other recent work concerns the existence of breathers in infinite FPUT lattices \cites{Arioli2019,yoshimura2021}, in which the nonlinear potential involves inter-site terms.
+nonlinear Schr{\"o}dinger model in~\cite{PhysRevLett.114.214101}). A recent result uses the Schauder fixed point theorem to prove the existence of discrete Klein-Gordon breathers in the setting of a convex on-site potential \cite{hennig2021}. 
+\revised{
+Other related work concerns breather solutions in infinite Fermi-Pasta-Ulam-Tsingou (FPUT) lattices, in which the nonlinear potential involves inter-site terms (see \cite{FPUbook} and the references therein). Results on the existence of time periodic solutions in FPUT lattices can be found in \cite{FPUbook}*{Chapter 2}, as well as the more recent work in \cites{Arioli2019,yoshimura2021}.
+}
 
 In this paper, we take a different approach to multi-breathers. We start with a single-site breather, which we call the primary breather. We take the existence of such a breather for a particular $d>0$ as a hypothesis. We then construct a multi-breather by joining together multiple, well-separated copies of this primary breather. Consecutive copies of the primary breather can be either in-phase or out-of-phase. In effect, we replace the condition that the coupling parameter $d>0$ is small with the condition that the individual copies of the primary breather are well separated. 
-The construction of complex coherent structures from simple building blocks has a rich mathematical history (see \cite{Sandstede1998}, and the references therein). One set of mathematical techniques that can be used to accomplish this is an implementation of the Lyapunov-Schmidt reduction known as Lin's method. This method has been successfully employed in many systems, including semilinear parabolic PDEs \cites{Sandstede1998,doi:10.1137/0150029} and discrete dynamical systems \cite{Knobloch2000}. We used a similar method to construct multi-solitons in DNLS \cite{Parker2020} and multi-kinks in DKG \cite{Parker2021}. Lin's method can also be used to determine spectral stability. For a multi-pulse, multi-kink, or multi-breather, there are specific elements in the point spectrum, which we will 
-hereafter term interaction eigenmodes, since they result from nonlinear interactions between neighboring copies of the primary coherent structure. For breathers, which are periodic in time, these interaction eigenmodes assume the form of Floquet multipliers or Floquet exponents.
-(We note that these are called internal modes in \cite{cuevas-maraver2016}; since we find from numerical simulations that other internal modes split off from the continuous spectrum bands as the coupling parameter $d$ is increased, we use the term interaction eigenmodes to refer to this specific set of internal modes).
-These interaction eigenmodes can be found by constructing the corresponding eigenfunction as a piecewise linear combination of the kernel eigenfunctions associated with the primary coherent structure. This reduces the spectral problem to a finite-dimensional matrix eigenvalue problem, which can then be solved. While the matrix obtained this way has the same form as that in \cites{Pelinovsky2012,cuevas-maraver2016}, its elements are computed using the primary breather solution for a specific $d$ rather than the breather at the AC limit, thus the interaction eigenmodes can be computed more accurately for a greater range of $d$, i.e., further from the AC limit.
+The construction of complex coherent structures from simple building blocks has a rich mathematical history (see \cite{Sandstede1998}, and the references therein). The mathematical technique that we will use to accomplish this is an implementation of the Lyapunov-Schmidt reduction known as Lin's method. This method has been successfully employed in many systems, including semilinear parabolic PDEs \cites{Sandstede1998,doi:10.1137/0150029} and discrete dynamical systems \cite{Knobloch2000}. We used a similar method to construct multi-solitons in DNLS \cite{Parker2020} and multi-kinks in DKG \cite{Parker2021}. 
 
-For the DKG equation, we follow a similar approach to that which we used in \cite{Parker2020}. We reformulate the equation using a spatial dynamics approach, by recasting it as a lattice dynamical system on an appropriate function space, and then we use Lin's method to both construct multi-breathers and determine the interaction eigenmodes associated with these solutions. The major limitation with this method, however, is that for a periodic breather on $[0,T]$, the most appropriate function space is $C^\infty_\per([0,T])$, which is not a closed subspace of $L^2_\per([0,T])$. It is not straightforward to adapt the necessary mathematical tools, such as the stable manifold theorem and exponential dichotomies, to this space. As an alternative, since we are interested in smooth solutions, we formulate Lin's method on a finite-dimensional subspace of $L^2_\per([0,T])$ consisting of the first $N$ Fourier modes of the standard orthonormal basis. Although this means that the results we obtain are only approximate, we believe this is a reasonable approximation, since the Fourier coefficients for smooth functions decay exponentially, and this method is valid for arbitrary, finite $N$. Furthermore, numerical discretization of periodic solutions is often done using a Fourier spectral method, thus this approximation applies directly to this discretization. Finally, the results from this method are in very good agreement with the results obtained by directly computing the Floquet spectrum of the corresponding multi-breather, both for soft sine-Gordon and hard $\phi^4$ potentials. In addition, the spectral pattern agrees qualitatively with that found using the approach in \cites{Pelinovsky2012,cuevas-maraver2016} for small $d$, and the matrix reduction found by using Lin's method and a spatial dynamics approach has the same form as that in those references.
+\revised{
+Heuristically, we use Lin's method to construct a double breather from the primary breather as follows (see \cite{Parker2020}*{Section 1} for a similar construction of double pulses in DNLS). Let $q_n(t)$ be the primary breather solution to \cref{eq:introDKG} with period $T$, i.e. $q_n(t+T) = q_n(t)$ for all integers $n$. Then a $T$-periodic solution $u_n(t)$ is a double breather if there is an integer $N\gg 1$ such that
+\[
+\sup_{n\leq 0,\:t\in[0,T]} |u_n(t) - q_{n+N}(t)| + \sup_{n\geq0,\:t\in[0,T]} |u_n(t) - q_{n-N}(t)|
+\]
+is small, i.e. $u_n(t)$ resembles (to leading order) the sum of two copies of the primary breather $q_n(t)$ translated by $N$ units to the left and right, respectively. We note that $u_n(t)$ must be close to the sum of the two translates of the primary breather for all $t \in [0,T]$. See the top panel of \cref{fig:lin} for an illustration. The double breather (\cref{fig:linb}) resembles two sequential copies of the primary breather (\cref{fig:lina}). Importantly, however, it is not identical to the sum of the two translates of the primary breather; compare the center node $(n=0)$ of the double breather in \cref{fig:linb} to the corresponding node $(n=2)$ in the primary breather in \cref{fig:lina}. For each $N\gg1$, Lin's method yields a piecewise double breather that comprises three pieces
+\begin{equation}\label{eq:piecewisebreather}
+\begin{cases}
+u_n^1(t) & n \in (-\infty, -N] \\
+u_n^2(t) & n \in [-N, N] \\
+u_n^3(t) & n \in [N, \infty)
+\end{cases}
+\end{equation}
+as shown in Figure~\ref{fig:lin}. This piecewise function will be a genuine double breather if and only if these pieces coincide at $n=\pm N$, i.e. $u_{-N}^1(t) = u_{-N}^2(t)$ and $u_{N}^2(t) = u_{N}^3(t)$ for $t \in [0,T]$ (see schematic in \cref{fig:linc}). This approach reduces the existence problem for double breathers to solving these two jump conditions. 
+}
+
+\begin{figure}
+	\begin{center}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{cartoonsingle.eps}
+		\label{fig:lina}
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{cartoondouble.eps}
+		\label{fig:linb}
+	\end{subfigure}
+	\begin{subfigure}{0.9\linewidth}
+		\caption{}
+		\includegraphics[width=16cm]{lincartoon.eps}
+		\label{fig:linc}
+	\end{subfigure}
+	\end{center}
+	\caption{
+	\revised{Top panel plots $\dot{u}_n(t)$ vs. $u_n(t)$ at each lattice site $n$ for primary breather (a) and in-phase double breather (b) for discrete sine-Gordon. Lattice site $n=0$ is located where the axes meet.
+	Period $T=9.8944$, coupling parameter $d=0.25$. (c) is a schematic showing the piecewise construction of a double breather \cref{eq:piecewisebreather} with Lin's method, illustrated at $t=0$. The piecewise double breather $u_n$ comprises three pieces $u_n^1$, $u_n^2$, and $u_n^3$. Two copies of the primary breather $q_n$ are placed at $n=-N$ and $n=N$, respectively. This is a genuine double breather if and only if the two jumps at $n=\pm N$ are zero for all $t \in [0,T].$
+	}
+	}
+	\label{fig:lin}
+\end{figure}
+
+
+Lin's method can also be used to determine spectral stability. For a multi-pulse, multi-kink, or multi-breather, there are specific elements in the point spectrum, which we will hereafter term interaction eigenmodes, since they result from nonlinear interactions between neighboring copies of the primary coherent structure. For breathers, which are periodic in time, these interaction eigenmodes assume the form of Floquet multipliers or Floquet exponents.
+(We note that these are called internal modes in \cite{cuevas-maraver2016}; since we find from numerical simulations that other internal modes split off from the continuous spectrum bands as the coupling parameter $d$ is increased, we use the term interaction eigenmodes to refer to this specific set of internal modes).
+\revised{
+In a similar fashion to how we constructed the multi-breather,
+we can use Lin's method to find these interaction eigenmodes by constructing the corresponding eigenfunction. To leading order, the eigenfunction is a piecewise linear combination of translates of the kernel eigenfunction associated with the primary breather.
+}
+This reduces the spectral problem to a finite-dimensional matrix eigenvalue problem, which can then be solved. While the matrix obtained this way has the same form as that in \cites{Pelinovsky2012,cuevas-maraver2016}, its elements are computed using the primary breather solution for a specific $d$ rather than the breather at the AC limit, thus the interaction eigenmodes can be computed more accurately for a greater range of $d$, i.e. further from the AC limit.
+
+For the DKG equation, we follow a similar approach to that which we used in \cite{Parker2020}. We reformulate the equation using a spatial dynamics approach, by recasting it as a lattice dynamical system on an appropriate function space, and then we use Lin's method to both construct multi-breathers and determine the interaction eigenmodes associated with these solutions. The major limitation with this method, however, is that for a periodic breather on $[0,T]$, the most appropriate function space is $C^\infty_\per([0,T])$, which is not a closed subspace of $L^2_\per([0,T])$. It is not straightforward to adapt the necessary mathematical tools, such as the stable manifold theorem and exponential dichotomies, to this space. As an alternative, since we are interested in smooth solutions, we 
+\revised{
+project the system onto	
+} 
+the finite-dimensional subspace $X_M$ of $L^2_\per([0,T])$ consisting of the first $M$ Fourier modes of the standard orthonormal basis, 
+\revised{
+and consider the problem restricted to this finite-dimensional Hilbert space.
+}
+Although this means that the results we obtain are only approximate, we believe this is a reasonable approximation, since the Fourier coefficients for smooth functions decay exponentially, and this method is valid for arbitrary, finite $M$
+\revised{(see \cref{fig:freqdecay} below)}
+.
+\revised{
+That being said, it is not easy to quantify how good this approximation actually is; as one example, resonances in the system, if they occur, may be affected by this truncation.
+}
+Since numerical discretization of periodic solutions is often done using a Fourier spectral method, this approximation applies directly to this discretization. Finally, the results from this method are in very good agreement with the results obtained by directly computing the Floquet spectrum of the corresponding multi-breather, both for soft sine-Gordon and hard $\phi^4$ potentials. In addition, the spectral pattern agrees qualitatively with that found using the approach in \cites{Pelinovsky2012,cuevas-maraver2016} for small $d$, and the matrix reduction found by using Lin's method and a spatial dynamics approach has the same form as that in those references.
 For both soft and hard potentials, the eigenvalue pattern is determined by the phase differences (in-phase vs. out-of-phase) between adjacent copies of the primary breather. For the hard potential, it also depends on whether these distances are an even or odd number of lattice points.
 
 This paper is organized as follows. In \cref{sec:bg}, we present the mathematical background for the discrete Klein-Gordon equation, including breather solutions, the continuous spectrum, and the reformulation using spatial dynamics. In \cref{sec:findim}, we formulate our finite-dimensional approximation, which we then use in \cref{sec:multi} to prove results about the existence and spectrum of multi-breathers in the approximate system. The proof of the spectral results is deferred to \cref{app:specproof}. Numerical results are presented in \cref{sec:numerics}, which are in excellent agreement with the predictions from the main theorems. Results are presented for both the soft sine-Gordon potential and the hard $\phi^4$ potential. In addition, we present results from timestepping simulations to illustrate the effect of the spectrum on the dynamical evolution of the system. We end with a brief concluding section, which suggests avenues for future research.
@@ -255,7 +326,7 @@ d (\Delta_2 w)_n - f'(u_n)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n
 \end{equation}
 where $\wvec \in \ell^2(\Z, H^2_\per[0,T]) \subset \ell^2(\Z, L^2_\per[0,T])$, and we use the inner product
 \begin{equation}\label{eq:IP1}
-\langle \uvec, \vvec \rangle_{(\ell^2(\Z, L^2_\per[0,T]))} = \sum_{n=-\infty}^\infty \int_0^T u_n(s) \overline{v_n(s)} ds
+\langle \uvec, \vvec \rangle_{\ell^2(\Z, L^2_\per[0,T])} = \sum_{n=-\infty}^\infty \int_0^T u_n(s) \overline{v_n(s)} ds
 \end{equation}
 on $\ell^2(\Z, L^2_\per[0,T])$. We can write equation \cref{eq:DKGeig} as 
 \begin{equation}\label{eq:DKGeigL}
@@ -285,7 +356,11 @@ The continuous spectrum of $\calL(\uvec)$ is the set of all $\lambda$ for which 
 \begin{equation}\label{eq:DKGeigcont}
 d (\Delta_2 w)_n - f'(0)w_n - \ddot{w}_n = 2 \lambda \dot{w}_n + \lambda^2 w_n
 \end{equation}
-has a solution. Following the procedure in \cite{cuevas-maraver2016}*{Section 2.1}, the continuous spectrum is the bands
+has a 
+\revised{
+bounded solution in $n$. 
+}
+Following the procedure in \cite{cuevas-maraver2016}*{Section 2.1}, the continuous spectrum is the bands
 \begin{equation}\label{eq:contspec}
 \begin{aligned}
 \lambda &= i\left( \pm \omega(\theta) - \frac{2 \pi m}{T} \right) && m \in \Z \\
@@ -341,7 +416,7 @@ DF(U(n)) = \begin{pmatrix}
 B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}.
 \end{equation}
 The zero function $U(n) = 0$ is an equilibrium solution to \cref{eq:dynEq}. At this point, the standard procedure (see, for example, \cites{Parker2021,Parker2020,Sandstede1998}) is to consider $U(n)$ as a homoclinic orbit of the equilibrium at 0. The complication here is that for the difference equation \cref{eq:dynEq} to be well-posed, we require $U(n) \in C_\per^\infty([0,T],\R^2)$ for all $n$, rather than just $U(n) \in H^2_\per([0,T], \R^2)$, since each application of $F$ involves differentiating twice with respect to $t$, and equation \cref{eq:dynEq} involves applying $F$ an arbitrary number of times. In essence, the equation \cref{eq:dynEq} is more restrictive than the original system.
-Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Roughly, this subspace consists of the first $N$ Fourier modes of the standard basis for $L_\per^2([0,T])$. Although this is a limited result, we note that since we require $U(n)$ to be smooth, its Fourier coefficients will decay exponentially. Since we can take $N$ as large as we like, this should be a very good approximation. In addition, since many of the numerical simulations are performed using Fourier spectral methods, this theory applies directly to such numerical discretization. Before we formulate our approximation, we prove some important results about the spectrum of $DF(0)$.
+Since $C_\per^\infty([0,T])$ is not a closed subspace of $L^2([0,T])$, it is not straightforward to adapt the stable manifold theorem and results on exponential dichotomies to this problem, even if $DF(0)$ has the desired spectral properties. As an alternative, we will consider a finite-dimensional approximation, where we project the problem onto a finite-dimensional subspace of $L_\per^2([0,T])$. Roughly, this subspace consists of the first $M$ Fourier modes of the standard basis for $L_\per^2([0,T])$. Although this is a limited result, we note that since we require $U(n)$ to be smooth, its Fourier coefficients will decay exponentially. Since we can take $M$ as large as we like, this should be a very good approximation. In addition, since many of the numerical simulations are performed using Fourier spectral methods, this theory applies directly to such numerical discretization. Before we formulate our approximation, we prove some important results about the spectrum of $DF(0)$.
 
 \subsection{Spectrum of \texorpdfstring{$DF(0)$}{DF(0)}}
 
@@ -516,10 +591,17 @@ The first component $q_n$ is a breather solution to \cref{eq:DKGapprox}. As a co
 \|Q_M(n)\|_{L^2_\per([0,T])} \leq C r_M^{-|n|}.
 \end{equation}
 
-We now consider \cref{eq:dynEqM} on $X_M^2$. The spectrum of $DF(0)$ on $X_M^2$ is exactly the same as that on $X_{M,e}^2$, except the eigenvalues corresponding to $k = 1, \dots, M$ have multiplicity of 2. It follows that 0 is also a hyperbolic equilibrium of \cref{eq:dynEqM} on $X_M^2$. Let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds of the equilibrium at 0, which this time are subsets of $X_M^2$. For $M \geq M_0$, $Q_M(n)$ is also a homoclinic orbit connecting these stable and unstable manifolds. In the next hypothesis, we assume that this intersection is non-degenerate.
+We now consider \cref{eq:dynEqM} on $X_M^2$. The spectrum of $DF(0)$ on $X_M^2$ is exactly the same as that on $X_{M,e}^2$, except the eigenvalues corresponding to $k = 1, \dots, M$ have multiplicity of 2. It follows that 0 is also a hyperbolic equilibrium of \cref{eq:dynEqM} on $X_M^2$. Let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds of the equilibrium at 0, which this time are subsets of $X_M^2$. For $M \geq M_0$, $Q_M(n)$ is also a homoclinic orbit connecting these stable and unstable manifolds.  
+\revised{
+This intersection, however, will not be transverse. Due to translational symmetry, these manifolds will have an intersection which is at least one-dimensional.
+In the next hypothesis, we assume that this intersection is non-degenerate, i.e. this intersection is exactly one-dimensional. (We note that systems with higher dimensional intersections do exist; one example is the Ablowitz-Ladik discretization of the DNLS equation \cites{Ablowitz1975,Ablowitz1976,Kapitula2001}).
+}
 
 \begin{hypothesis}\label{hyp:breathernondegen}
-Let $d$ and $T$ be chosen according to \cref{hyp:hyp}, and let $M_0$ and $Q_M(n)$ be as in \cref{hyp:breather}. Then for all $M \geq M_0$, the stable and unstable manifolds $W_M^s(0)$ and $W_M^u(0)$ have a one-dimensional intersection in $Q_M(n)$.
+Let $d$ and $T$ be chosen according to \cref{hyp:hyp}, and let $M_0$ and $Q_M(n)$ be as in \cref{hyp:breather}. Then for all $M \geq M_0$, the stable and unstable manifolds $W_M^s(0)$ and $W_M^u(0)$ have an intersection in $Q_M(n)$ 
+\revised{
+which is exactly one-dimensional.
+}
 \end{hypothesis}
 
 The variational equation is the linearization of \cref{eq:dynEqM} on $X_M^2$ about the homoclinic orbit solution $Q_M(n)$, which is given by
@@ -548,14 +630,18 @@ X_M^2= \R \dot{Q}_M(0) \oplus Y_M^- \oplus Y_M^+ \oplus \R Z_M(0).
 
 \subsection{Existence}
 
-We construct a multi-breather on $X_{M,e}$ by splicing together multiple copies of the primary breather $Q_M(n)$ in a chain. We characterize a multi-breather in the following way. Let $m > 1$ be the total number of copies of the primary breather in the chain. Let $N_i$ ($i = 1, \dots, m-1$) be the distances (in lattice points) between the center point of each breather. We seek to construct a solution $U(n)$ which can be written piecewise in the form
+We construct a multi-breather on $X_{M,e}^2$ by splicing together multiple copies of the primary breather $Q_M(n)$ in a chain. We characterize a multi-breather in the following way. Let $m > 1$ be the total number of copies of the primary breather in the chain. Let $N_i$ ($i = 1, \dots, m-1$) be the distances (in lattice points) between the center point of each breather. We seek to construct a solution $U(n)$ which can be written piecewise in the form
 \begin{equation}\label{eq:Upiecewise}
 \begin{aligned}
 U_i^-(n) &= \sigma_i Q_M(n) + \tilde{U}_i^-(n) && n \in [-N_{i-1}^-, 0] && \quad i = 1, \dots, m\\
 U_i^+(n) &= \sigma_i Q_M(n) + \tilde{U}_i^+(n) && n \in [0, N_i^+] && \quad i = 1, \dots, m,
 \end{aligned}
 \end{equation}
-where $\sigma_i \in \{1, -1\}$ represents the orientation of each copy of the primary breather, $N_i^+ = \lfloor \frac{N_i}{2} \rfloor$, $N_i^- = N_i - N_i^+$, and $N_0^- = N_m^+ = \infty$. Adjacent copies of the primary breather are in-phase if $\sigma_i \sigma_{i+1} = 1$, or out-of-phase if $\sigma_i \sigma_{i+1} = -1$. (As in \cite{Pelinovsky2012}, other phase relations are not considered here; see also~\cite{KOUKOULOYANNIS20132022}). The functions $\tilde{U}_i^\pm$ in \cref{eq:Upiecewise} are remainder terms, which will be small. We also define the characteristic distance
+where $\sigma_i \in \{1, -1\}$ represents the orientation of each copy of the primary breather, $N_i^+ = \lfloor \frac{N_i}{2} \rfloor$, $N_i^- = N_i - N_i^+$, and $N_0^- = N_m^+ = \infty$. Adjacent copies of the primary breather are in-phase if $\sigma_i \sigma_{i+1} = 1$, or out-of-phase if $\sigma_i \sigma_{i+1} = -1$. (As in \cite{Pelinovsky2012}, other phase relations are not considered here; see also~\cite{KOUKOULOYANNIS20132022}). The functions $\tilde{U}_i^\pm$ in \cref{eq:Upiecewise} are remainder terms, which will be small,
+\revised{
+so that the multi-breather resembles a sequence of well-separated copies of the primary breather, to leading order.
+}
+We also define the characteristic distance
 \begin{equation}\label{defN}
 N = \frac{1}{2} \min\{ N_i \},
 \end{equation}
@@ -569,10 +655,21 @@ U_i^+\left( n - \sum_{j=1}^{i-1}N_j \right) & \sum_{j=1}^{i-1}N_j + 1 \leq n \le
 && i = 1, \dots, m,
 \end{aligned}
 \end{equation}
-where we define $\sum_{j=1}^0 N_j = 0$. We have the following existence theorem concerning the existence of multi-breathers on $X_{M,e}$. 
+where we define $\sum_{j=1}^0 N_j = 0$. We have the following existence theorem concerning the existence of multi-breathers on $X_{M,e}^2$. 
+\revised{
+We note that this is a solution to the finite dimensional approximation \cref{eq:dynEqM} on $X_{M}^2$ for arbitrary, fixed $M$.
+}
 
 \begin{theorem}\label{th:multi-breathers}
-Assume \cref{hyp:hyp} and \cref{hyp:breather}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Then there exists a positive integer $N_0$ with the following property. For all $m > 1$ and distances $N_i \geq N_0$, there exists a unique solution $U(n)$ which comprises, to leading order, $m$ sequential copies of the primary breather, and can be written piecewise in the form \cref{eq:Upiecewise}. For the remainder terms $\tilde{U}_i^\pm(n)$, we have the estimates
+Assume \cref{hyp:hyp} and \cref{hyp:breather}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. 
+\revised{
+Let $Q_M(n)$ be the primary breather solution to the discrete dynamical system \cref{eq:dynEqM} on $X_M^2$ from \cref{hyp:breather}.
+}
+Then there exists a positive integer $N_0$ with the following property. For all $m > 1$ and distances $N_i \geq N_0$, 
+\revised{
+there exists a unique solution $U(n)$ to the discrete dynamical system \cref{eq:dynEqM} on $X_M^2$, where $U(n) \in X_{M,e}^2$. This solution comprises, 
+}
+to leading order, $m$ sequential copies of the primary breather $Q_M(n)$, and can be written piecewise in the form \cref{eq:Upiecewise}. For the remainder terms $\tilde{U}_i^\pm(n)$, we have the estimates
 \begin{equation}\label{eq:Uestimates}
 \begin{aligned}
 \tilde{U}_i^+(N_i^+) &= \sigma_{i+1} Q_M(-N_i^-) + \mathcal{O}(r_M^{-2N}) \\
@@ -592,11 +689,22 @@ The proof is a straightforward adaptation of the proofs of theorems 1 and 3 in \
 \subsection{Spectral stability}
 
 For a multi-breather consisting of $m$ components, as long as the individual copies of the primary breather are sufficiently well separated, there will be $2(m-1)$ eigenvalues in spectrum of \cref{eq:DKGMeig}, i.e., one pair per additional copy of the primary breather, which will be located near the origin. We call these interaction eigenmodes, since they result from nonlinear interactions between the tails of adjacent copies of the primary breather.
-As in \cites{Parker2020,Sandstede1998}, we locate these eigenmodes by using Lin's method to construct the corresponding eigenfunctions. We note that this theorem gives the Floquet exponents $\lambda$, which are the eigenvalues of \cref{eq:DKGMeig}. The Floquet multipliers $\mu$ are related to these by $\mu = e^{\lambda T}$. The proof is given in \cref{app:specproof}.
+As in \cites{Parker2020,Sandstede1998}, we locate these eigenmodes by using Lin's method to construct the corresponding eigenfunctions (see \cref{app:specproof} for details). We note that this theorem gives the Floquet exponents $\lambda$, which are the eigenvalues of \cref{eq:DKGMeig}. The Floquet multipliers $\mu$ are related to these by $\mu = e^{\lambda T}$. 
+\revised{
+We also note that the eigenvalues found this way are for the finite dimensional approximation \cref{eq:dynEqM} on $X_{M}^2$ for arbitrary, fixed $M$.
+}
+The proof is given in \cref{app:specproof}.
 
 \begin{theorem}\label{th:spectrum}
-Assume \cref{hyp:hyp}, \cref{hyp:breather}, and \cref{hyp:breathernondegen}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Let $Q_M(n) = (q_n, q_{n-1})$ be the primary breather solution from \cref{hyp:breather}, and let $Y(n) = (y_n, y_{n-1}) = \omega \partial_\omega Q_M(n)$.
-Let $U(n)$ be an $m$-component multi-breather constructed as in \cref{th:multi-breathers} with distances $N_i$ and orientation parameters $\sigma_i$. Then there exists $\delta > 0$ with the following property. There exists a bounded, nonzero solution $W(n)$ of the eigenvalue problem \cref{eq:dynEVPM} on $X_M^2$ for $|\lambda| < \delta$ if and only if $E(\lambda) = 0$, where
+Assume \cref{hyp:hyp}, \cref{hyp:breather}, and \cref{hyp:breathernondegen}, and let $M \geq M_0$, where $M_0$ is defined in \cref{hyp:breather}. Let $Q_M(n) = (q_n, q_{n-1})$ be the primary breather solution 
+\revised{
+to the discrete dynamical system \cref{eq:dynEqM} on $X_M^2$
+}
+from \cref{hyp:breather}, and let $Y(n) = (y_n, y_{n-1}) = \omega \partial_\omega Q_M(n)$.
+Let $U(n)$ be an $m$-component multi-breather constructed as in \cref{th:multi-breathers} with distances $N_i$ and orientation parameters $\sigma_i$. Then there exists $\delta > 0$ with the following property. There exists a bounded, nonzero solution $W(n)$ of the eigenvalue problem \cref{eq:dynEVPM} 
+\revised{on $X_M^2$
+}
+ for $|\lambda| < \delta$ if and only if $E(\lambda) = 0$, where
 \begin{equation}\label{Elambda}
 E(\lambda) = \det\left(A + \frac{1}{d}K \lambda^2 I + R(\lambda)\right).
 \end{equation}
@@ -713,7 +821,10 @@ where $u_k^\text{old}$ refers to the function at the previous continuation step.
 We first consider the discrete sine-Gordon equation, where the nonlinearity is given by $f(u) = \sin u$. For all of the plots in the section, unless otherwise noted, we use a lattice size $L = 15$, and the energy at the AC limit is $E = 0.25$, which corresponds to a period of $T = 7.91$. We note that $2 \pi < T < 3 \pi$, thus the upper continuous spectrum band has positive Krein signature, and the lower band has negative Krein signature (see \cref{fig:bands}, left).
 \cref{fig:singlea} shows the primary breather solution for $d = 0.25$ at $t = 0$, which is symmetric on the spatial lattice. The corresponding Floquet spectrum is shown in \cref{fig:singleb}. There is a single Floquet multiplier (with multiplicity 2) at 1, which is from translation symmetry in $t$. The continuous spectrum bands are a discrete set of points, which is a result of the finiteness
 of the lattice and of the spatial discretization, and have effectively merged into a single band by this value of $d$. 
-\cref{fig:singlec} shows the exponential decay of the $L^2$ norm on $[0,T]$ of the breather solution $u_n(t)$ at lattice site $n$, as $n$ is increased. \cref{fig:singled} plots the relative error of this decay rate compared to $r_M$, which is defined in \cref{eq:defrM}. The exponential decay of the Fourier frequencies (in $t$) of the primary breather is shown in \cref{fig:freqdecay}. As expected, since the breather is even in $t$, only even frequencies are represented in the frequency spectrum. Furthermore, the scaled amplitudes for all frequencies $k\geq 20$ are below $10^{-10}$, suggesting that the finite dimensional approximation is reasonable.
+\cref{fig:singlec} shows the exponential decay of the $L^2$ norm on $[0,T]$ of the primary breather solution $u_n(t)$ at lattice site $n$, as $n$ is increased. \cref{fig:singled} plots the relative error of this decay rate compared to $r_M$, which is defined in \cref{eq:defrM}. The exponential decay of the Fourier frequencies (in $t$) of the primary breather is shown in \cref{fig:freqdecaya}. As expected, since the breather is even in $t$, only even frequencies are represented in the frequency spectrum. Furthermore, the scaled amplitudes for all frequencies $k\geq 20$ are below $10^{-10}$, suggesting that the finite dimensional approximation is reasonable. 
+\revised{
+\cref{fig:freqdecayb} shows the exponential decay of the $L^2$ norm difference $\| Q_M(n) - Q_{512}(n) \|_{\ell^2(\Z, L^2_\per[0,T])}$ between the solution $Q_M(n)$ truncated after $M$ Fourier nodes and the solution $Q_{512}(n)$ with 512 Fourier nodes, suggesting that an approximation with 32 Fourier nodes is more than adequate for this set of parameters.
+}
 
 \begin{figure}
 	\begin{center}
@@ -738,15 +849,26 @@ of the lattice and of the spatial discretization, and have effectively merged in
 		\label{fig:singled}
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Initial condition $u_n(0)$, and (b) Floquet spectrum, for primary breather for $d = 0.25$. (c) Semilog plot of $L^2$ norm of solution $u_n(t)$ over one period $[0,T]$ vs. the lattice index $n$ for varying coupling parameter $d$. (d) Relative error of exponential decay rate seen in (c) versus that predicted by equation \cref{eq:U1decayest}. }
+	\caption{(a) Initial condition $u_n(0)$, and (b) Floquet spectrum, for primary breather for $d = 0.25$ for discrete sine-Gordon. (c) Semilog plot of $L^2$ norm of solution $u_n(t)$ over one period $[0,T]$ vs. the lattice index $n$ for varying coupling parameter $d$. (d) Relative error of exponential decay rate seen in (c) versus that predicted by equation \cref{eq:U1decayest}. }
 	\label{fig:single}
 \end{figure}
 
 \begin{figure}
 	\begin{center}
-	\includegraphics[width=8cm]{freqdecay.eps} 
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{freqdecay.eps}
+		\label{fig:freqdecaya}
+	\end{subfigure}
+	\begin{subfigure}{0.45\linewidth}
+		\caption{}
+		\includegraphics[width=7.5cm]{truncdecay.eps}
+		\label{fig:freqdecayb}
+	\end{subfigure}
 	\end{center}
-	\caption{Semilog plot showing the decay of Fourier frequencies for a single-site breather with $d=0.25$ at the center site $u_0(t)$ and neighboring site $u_1(t)$. The vertical axis is rescaled so that the fundamental frequency has amplitude of 1.}
+	\caption{(a) Semilog plot showing the decay of Fourier frequencies for a single-site breather at the center site $u_0(t)$ and neighboring site $u_1(t)$ for discrete sine-Gordon. The vertical axis is rescaled so that the fundamental frequency has amplitude of 1. 
+	\revised{(b) Semilog plot showing the $L^2$ norm difference between the solution $Q_M$ truncated after $M$ Fourier nodes and the solution $Q_{512}(n)$ with 512 Fourier nodes. Coupling parameter $d=0.25$ in both cases.}
+	}
 	\label{fig:freqdecay}
 \end{figure}
 
@@ -814,7 +936,7 @@ described above.
 	% 	\label{fig:doublef} 
 	% \end{subfigure}
 	\end{center}
-	\caption{Initial condition $u_n(0)$ with Floquet spectrum in inset (top) and eigenfunction $(v_n, w_n)$ corresponding to interaction eigenmode (bottom) for out-of-phase double breather (left) and in-phase double breather (right). Orange solid line in Floquet spectrum plot corresponds to unit circle. Coupling parameter $d = 0.25$, breather distance $N_1 = 6$.}
+	\caption{Initial condition $u_n(0)$ with Floquet spectrum in inset (top) and eigenfunction $(v_n, w_n)$ corresponding to interaction eigenmode (bottom) for out-of-phase double breather (left) and in-phase double breather (right) for discrete sine-Gordon. Orange solid line in Floquet spectrum plot corresponds to unit circle. Coupling parameter $d = 0.25$, breather distance $N_1 = 6$.}
 	\label{fig:double}
 \end{figure}
 
@@ -841,7 +963,7 @@ described above.
 		\label{fig:eigerrord} 
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Semilog plot of magnitude of Floquet exponents $\lambda$ vs. $N$ for in-phase double breather with $d = 0.1, 0.15, 0.2, 0.25$. (b) Semilog plot of the relative error Floquet multipliers of double breathers vs. $N$ for the case of 
+	\caption{(a) Semilog plot of magnitude of Floquet exponents $\lambda$ vs. $N$ for in-phase double breather with $d = 0.1, 0.15, 0.2, 0.25$ for discrete sine-Gordon. (b) Semilog plot of the relative error Floquet multipliers of double breathers vs. $N$ for the case of 
 	coupling parameter $d = 0.25$.
 	Semilog plot of the relative error of interaction eigenmode computation vs. $d$ for out-of-phase double breathers (c) and in-phase double breathers (d) for breather distance $N_1 = 4,5,6,7$.}
 	\label{fig:eigerror}
@@ -860,7 +982,7 @@ described above.
 		\label{fig:SGintersiteb} 
 	\end{subfigure}
 	\end{center}
-	\caption{Initial condition $u_n(0)$ and Floquet spectrum (inset) for out-of-phase inter-site centered breather (a), and in-phase inter-site centered breather (b). Coupling parameter $d=0.1$.}
+	\caption{Initial condition $u_n(0)$ and Floquet spectrum (inset) for out-of-phase inter-site centered breather (a), and in-phase inter-site centered breather (b) for discrete sine-Gordon. Coupling parameter $d=0.1$.}
 	\label{fig:SGintersite}
 \end{figure}
 
@@ -913,7 +1035,7 @@ breather (see inset in \cref{fig:bifdiagSGip1}). A plot of the turning point $d_
 	\begin{center}
 	\includegraphics[width=8cm]{doubled0vsN.eps} 
 	\end{center}
-	\caption{Turning point of parameter continuation $d_0$ vs separation distance $N$ for out-of-phase and in-phase double breathers.}
+	\caption{Turning point of parameter continuation $d_0$ vs separation distance $N$ for out-of-phase and in-phase double breathers for discrete sine-Gordon.}
 	\label{fig:SGd0}
 \end{figure}
 
@@ -953,7 +1075,7 @@ A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates tha
 		\label{fig:timestepSGstablec}
 	\end{subfigure}
 	\end{center}
-	\caption{(a) out-of-phase double breather with the Floquet spectrum shown in the inset. Time evolution of the perturbation of the out-of-phase breather, showing the amplitude of the peaks of $u_L$ and $u_R$ vs. $t$ (b), and difference in this amplitude from the unperturbed breather (c).  
+	\caption{(a) Out-of-phase double breather with the Floquet spectrum shown in the inset for discrete sine-Gordon. Time evolution of the perturbation of the out-of-phase breather, showing the amplitude of the peaks of $u_L$ and $u_R$ vs. $t$ (b), and difference in this amplitude from the unperturbed breather (c).  
 	Coupling parameter $d=0.2$, separation distance $N_1 = 4$, perturbation parameter $\delta = 0.01$.}
 	\label{fig:timestepSGstable}
 \end{figure}
@@ -991,7 +1113,7 @@ A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates tha
 		\label{fig:timestepSGunstablef}
 	\end{subfigure}
 	\end{center}
-	\caption{Time evolution of the perturbation for an in-phase breather. (a) colormap showing $u_n$ vs. $t$ for sites -5 to 5; breathers start in-phase (top) and are out-of-phase at approximately $t = 215$ (bottom). (b) phase difference between two breathers vs $t$; 0 is in-phase, $\pi$ is out-of-phase. (c) period of two breathers vs. $t$; the period $T$ is measured as the distance between consecutive peaks. (d) time evolution of $u_L$ and $u_R$ for unperturbed breather (dotted blue lines) and perturbed breather (solid orange lines). (e) maximum amplitude of $u_L$ and $u_R$ vs. $t$. (f) semilog plot showing time evolution in difference of $\ell^2$ norm of perturbed and unperturbed breather, together with least squares regression line. Coupling parameter $d=0.25$, separation distance $N_1 = 6$, perturbation parameter $\delta = 0.005$.}
+	\caption{Time evolution of the perturbation for an in-phase breather for discrete sine-Gordon. (a) colormap showing $u_n$ vs. $t$ for sites -5 to 5; breathers start in-phase (top) and are out-of-phase at approximately $t = 215$ (bottom). (b) phase difference between two breathers vs $t$; 0 is in-phase, $\pi$ is out-of-phase. (c) period of two breathers vs. $t$; the period $T$ is measured as the distance between consecutive peaks. (d) time evolution of $u_L$ and $u_R$ for unperturbed breather (dotted blue lines) and perturbed breather (solid orange lines). (e) maximum amplitude of $u_L$ and $u_R$ vs. $t$. (f) semilog plot showing time evolution in difference of $\ell^2$ norm of perturbed and unperturbed breather, together with least squares regression line. Coupling parameter $d=0.25$, separation distance $N_1 = 6$, perturbation parameter $\delta = 0.005$.}
 	\label{fig:timestepSGunstable}
 \end{figure}
 
@@ -1018,7 +1140,7 @@ A plot of the total energy vs. time (\cref{fig:timestepSGpplongb}) indicates tha
 		\label{fig:timestepSGpplongd}
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Colormap showing the evolution in $t$ of $|u_n|$. (b) Total energy $H(\uvec(t))$ vs. $t$ ($H$ is given by \cref{eq:H}). (c) and (d) Energy density vs. time for central sites of breather. Labels of sites correspond to those in (a). Separation distance $N_1 = 4$
+	\caption{(a) Colormap showing the evolution in $t$ of $|u_n|$ for discrete sine-Gordon. (b) Total energy $H(\uvec(t))$ vs. $t$ ($H$ is given by \cref{eq:H}). (c) and (d) Energy density vs. time for central sites of breather. Labels of sites correspond to those in (a). Separation distance $N_1 = 4$
 	, coupling parameter $d=0.25$, perturbation parameter $\delta = 0.01$, lattice size parameter $L=150$.}
 	\label{fig:timestepSGpplong}
 \end{figure}
@@ -1111,7 +1233,7 @@ solitons in the defocusing DNLS model of~\cite{Pelinovsky_2008}).
 
 Avenues of further research include exploring breathers and multi-breathers either in Klein-Gordon lattices with asymmetric potentials, such as the Morse potential, or in other models 
 involving beyond-nearest-neighbor interactions, discussed, e.g., in~\cite{PENATI201992} and references therein. One class of models which would be interesting to study is equations in which the potential involves off-site terms, such as the FPUT lattice. A natural extension of this would be to look at higher dimensional lattices, both for on-site potentials such as in a higher dimensional Klein-Gordon model, and more complex potentials, such as higher dimensional FPUT lattices. In two dimensions, there are many possible regular lattice models, including square, triangular, and honeycomb, and these different geometries may exhibit qualitatively different behavior. Another possibility would be to look at more complex solutions. One class of solutions which remains unexplored is asymmetric multi-breathers, solutions comprising breathers which have different, but commensurate, fundamental periods. \cref{fig:brka} shows an example of a asymmetric double breather solution to the discrete sine-Gordon equation; the left breather has a fundamental period of 8, and the right breather has a fundamental period of 16, so the overall breather has a period of 16. While these solutions can be constructed numerically by parameter continuation from the AC limit, preliminary numerical experiments suggest that they only exist for small values of the coupling parameter $d$, and that they are spectrally unstable.
-In addition, preliminary numerical experiments suggest that there are solutions comprising of both breathers and kinks. See \cref{fig:brkb} for an example for a solution to the discrete sine-Gordon equation in which a breather is connected to a kink. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction and prove the results for the full system. For the existence problem, it may be possible, for example, to show that the finite-dimensional approximations are uniformly bounded in an appropriate Hilbert space, extract a weakly convergent subsequence, and show the subsequential limit solves the original system (similar to \cite{evansPDE}*{Chapter 7}), but it would likely involve an entirely different approach.
+In addition, preliminary numerical experiments suggest that there are solutions comprising of both breathers and kinks. See \cref{fig:brkb} for an example for a solution to the discrete sine-Gordon equation in which a breather is connected to a kink. Finally, although the finite-dimensional approximation used in the paper yields results which are in excellent agreement with those found numerically, it may be still possible to remove this restriction and prove the results for the full system, although this would most likely involve an entirely different approach.
 
 \begin{figure}
 	\begin{center}
@@ -1126,7 +1248,7 @@ In addition, preliminary numerical experiments suggest that there are solutions 
 		\label{fig:brkb} 
 	\end{subfigure}
 	\end{center}
-	\caption{(a) Initial condition for asymmetric double breather solution with Floquet spectrum in inset, coupling parameter $d = 0.075$. (b) Colormap showing solution to discrete sine-Gordon equation comprising one breather (on left) and one kink (on right), coupling parameter $d = 0.25$. Time evolution is over one period $T$ of the breather.}
+	\caption{(a) Initial condition for asymmetric double breather solution with Floquet spectrum in inset for discrete sine-Gordon, coupling parameter $d = 0.075$. (b) Colormap showing solution to discrete sine-Gordon equation comprising one breather (on left) and one kink (on right), coupling parameter $d = 0.25$. Time evolution is over one period $T$ of the breather.}
 	\label{fig:brk}
 \end{figure}
 

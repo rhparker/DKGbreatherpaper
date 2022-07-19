@@ -1,0 +1,58 @@
+\documentclass[11pt]{letter}
+
+\usepackage[hmargin={1.0in,1.0in},%
+            vmargin={1.0in,1.0in},%
+            nohead,%
+            nofoot,%
+            ]{geometry}                                 % the page layout without fancyhdr
+\pagestyle{empty}
+
+\begin{document}
+\address{Ross Parker \\
+Department of Mathematics \\
+Southern Methodist University \\
+Dallas, TX 75275 \\
+\texttt{rhparker@smu.edu}}%
+\signature{Ross Parker}
+\begin{letter}{Editor, Nonlinearity}
+
+\opening{Dear Editor,}
+
+On behalf of my co-authors, Jes\'us Cuevas-Maraver, Alejandro Aceves, and Panos Kevrekidis, I would like to submit revisions to the article ``Revisiting Multi-breathers in the discrete Klein-Gordon equation: A Spatial Dynamics Approach'' for consideration of publication in Nonlinearity. We are grateful to the referees for their careful reading of the original manuscript, and their comments and suggestions regarding how we could improve it. All the suggestions for improvement have been systematically taken into careful consideration and incorporated into the revision, as noted below. The portions of the manuscript which have been revised or added are indicated using red text. Given the improvements made in accordance with the requests of the referees, we hope that you will now find the manuscript to be suitable for publication. We will be sincerely looking forward to your editorial decision.
+
+
+Reviewer 1:
+\begin{enumerate}
+    \item \emph{For completeness, I would add the review by Pankov entitled ``Travelling Waves and Periodic Oscillations in Fermi-Pasta-Ulam Lattices'', The Imperial College Press, London, 2005, where many more references are available.} 
+    This reference is now cited on the top of page 3.
+    \vspace{4mm}
+
+    \item \emph{The only perplexity I have concerns the finite dimensional approximation introduced in Section 3. It is of course true that ``since the Fourier coefficients of a smooth, $T$-periodic function $u(t)$ decay exponentially, equation (32) should be a reasonable approximation to (1) for large $M$.'' But it is not easy to estimate how good that approximation actually is, or what is the impact of the terms that are neglected on the finite approximation. For example, when resonances occur, then truncations are very tricky. Also, when Floquet methods are employed, truncations may simplify the proofs significantly. I do not think that this simplification undermines the value of the paper, but I think that it should be made more clear, e.g. in the abstract, rather than being hidden at the end of page 3, and not clear from the statements of the theorems. Of course, the space $X_M$ are used, but only in Section 3 it is mentioned that such space is finite dimensional.}
+    This approximation is now made much clearer in the abstract, as well as on page 5, where we say (at the recommendation of the reviewer) that it is unclear how good this approximation is, and mention the potential effect of the truncation on resonances. In addition, we reference Figure 4 on page 5, and added Figure 4b to show the exponential decay in $L^2$ norm of the Fourier truncations. Finally, we clarify in the theorems that this solutions and eigenvalues are for the problem on the truncated space $X_M^2$. In addition, we note before the statement of each theorem that the result applies to the finite dimensional approximation on $X_{M}^2$ for arbitrary, fixed $M$
+    \vspace{4mm}
+
+    \item \emph{I also point out that in the statement of Theorem 1 it is written that ``there exists a unique solution $U(n)$'', but it is not written of what equation $U(n)$ is a solution.} 
+    This is now mentioned clearly in the statement of Theorem 1. In addition, for further clarity, we add before the statement of the theorem that this is a solution to the finite dimensional approximation on $X_{M}^2$. for arbitrary, fixed $M$.
+\end{enumerate}
+
+Reviewer 2:
+\begin{enumerate}
+    \item \emph{p.2, middle: I think the restriction to adjacent sites was so that a definite result could be deduced for the dynamics of the relative phases, in particular to determine the stability of the resulting multibreathers.} We have added this text to this reference on page 2.
+    \vspace{4mm}
+
+    \item \emph{p.6, sec 2.3: probably you have to say a bounded solution in $n$.} This change has been made.
+    \vspace{4mm}
+
+    \item \emph{p.11, sec 4: It would be useful (at least to me) if a brief description of Lin’s method were given. ``construct the interaction eigenfunctions as piecewise linear combinations of the eigenfunction corresponding to translation symmetry'' does not inspire confidence in the outcome. I see there is a remainder term in Theorem 2.} 
+    Lin's method constructs multi-breathers as a sequence of well-separated copies of the primary breather, to leading order. There will be a remainder term, but this will be small. This was not clear in the original manuscript. We have added a paragraph on page 2, as well as schematics in Figure 1, as a high-level explanation of Lin's method. This is also clarified in the first paragraph of Section 4.2. We also added a few sentences on page 4 regarding the application Lin's method to the construction of eigenfunctions.
+    \vspace{4mm}
+
+    \item \emph{p.12: I don’t understand the purpose of Hypothesis 3. Isn’t it automatic from Hypotheses 1 and 2?}
+    This is now explained before Hypotheses 3, and Hypothesis 3 has been slightly reworded to emphasize this. Briefly, due to translational symmetry, the stable and unstable manifolds will have an intersection which is at least one-dimensional. Hypothesis 3 states that this intersection is non-degenerate, i.e. is \emph{exactly} one-dimensional. We briefly mention that higher dimensional intersections do exist in other models, and cite Ablowitz-Ladik DNLS as an example.
+\end{enumerate}
+
+
+\closing{Sincerely,}
+
+\end{letter}
+\end{document}
