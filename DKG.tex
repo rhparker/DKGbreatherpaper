@@ -215,8 +215,9 @@ as shown in Figure~\ref{fig:lin}. This piecewise function will be a genuine doub
 	\end{subfigure}
 	\end{center}
 	\caption{
-	\revised{Top panel plots $\dot{u}_n(t)$ vs. $u_n(t)$ at each lattice site $n$ for primary breather (a) and in-phase double breather (b) for discrete sine-Gordon. Lattice site $n=0$ is located where the axes meet.
+	\revised{Top panel plots $\dot{u}_n(t)$ vs. $u_n(t)$ at each lattice site $n$ for a primary breather (a) and an in-phase double breather (b) for discrete sine-Gordon. Lattice site $n=0$ is located where the axes meet.
 	Period $T=9.8944$, coupling parameter $d=0.25$. (c) is a schematic showing the piecewise construction of a double breather \cref{eq:piecewisebreather} with Lin's method, illustrated at $t=0$. The piecewise double breather $u_n$ comprises three pieces $u_n^1$, $u_n^2$, and $u_n^3$. Two copies of the primary breather $q_n$ are placed at $n=-N$ and $n=N$, respectively. This is a genuine double breather if and only if the two jumps at $n=\pm N$ are zero for all $t \in [0,T].$
+	{\bf Ross: I think you need to *explain* the different colors and symbols in (1c).}
 	}
 	}
 	\label{fig:lin}
@@ -240,8 +241,7 @@ the finite-dimensional subspace $X_M$ of $L^2_\per([0,T])$ consisting of the fir
 and consider the problem restricted to this finite-dimensional Hilbert space.
 }
 Although this means that the results we obtain are only approximate, we believe this is a reasonable approximation, since the Fourier coefficients for smooth functions decay exponentially, and this method is valid for arbitrary, finite $M$
-\revised{(see \cref{fig:freqdecay} below)}
-.
+\revised{(see \cref{fig:freqdecay} below)}.
 \revised{
 That being said, it is not easy to quantify how good this approximation actually is; as one example, resonances in the system, if they occur, may be affected by this truncation.
 }
@@ -594,7 +594,9 @@ The first component $q_n$ is a breather solution to \cref{eq:DKGapprox}. As a co
 We now consider \cref{eq:dynEqM} on $X_M^2$. The spectrum of $DF(0)$ on $X_M^2$ is exactly the same as that on $X_{M,e}^2$, except the eigenvalues corresponding to $k = 1, \dots, M$ have multiplicity of 2. It follows that 0 is also a hyperbolic equilibrium of \cref{eq:dynEqM} on $X_M^2$. Let $W_M^s(0)$ and $W_M^u(0)$ be the $(2M+1)$-dimensional stable and unstable manifolds of the equilibrium at 0, which this time are subsets of $X_M^2$. For $M \geq M_0$, $Q_M(n)$ is also a homoclinic orbit connecting these stable and unstable manifolds.  
 \revised{
 This intersection, however, will not be transverse. Due to translational symmetry, these manifolds will have an intersection which is at least one-dimensional.
-In the next hypothesis, we assume that this intersection is non-degenerate, i.e. this intersection is exactly one-dimensional. (We note that systems with higher dimensional intersections do exist; one example is the Ablowitz-Ladik discretization of the DNLS equation \cites{Ablowitz1975,Ablowitz1976,Kapitula2001}).
+In the next hypothesis, we assume that this intersection is non-degenerate, i.e. this intersection is exactly one-dimensional. (We note that systems with higher dimensional intersections do exist; one example is the Ablowitz-Ladik discretization of the 
+nonlinear Schr{\"o}dinger equation, where it stems from the existence of
+exact single soliton solutions~\cites{Ablowitz1975,Ablowitz1976,Kapitula2001}).
 }
 
 \begin{hypothesis}\label{hyp:breathernondegen}
